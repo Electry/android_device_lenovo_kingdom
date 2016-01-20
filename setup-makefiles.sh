@@ -1,7 +1,7 @@
 #!/bin/sh
 
-VENDOR=zuk
-DEVICE=ham
+VENDOR=lenovo
+DEVICE=kingdom_row
 OUTDIR=vendor/$VENDOR/$DEVICE
 MAKEFILE=../../../$OUTDIR/$DEVICE-vendor-blobs.mk
 PROPRIETARY_FILES=proprietary-files*.txt

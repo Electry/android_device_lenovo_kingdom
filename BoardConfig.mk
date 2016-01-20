@@ -15,10 +15,10 @@
 #
 
 # TODO: shouldn't be here
-BOARD_VENDOR := zuk
+BOARD_VENDOR := lenovo
 
 #Include path
-TARGET_SPECIFIC_HEADER_PATH += device/zuk/ham/include
+TARGET_SPECIFIC_HEADER_PATH += device/lenovo/kingdom_row/include
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8974
@@ -46,8 +46,8 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 BOARD_DTBTOOL_ARGS := -2
 TARGET_KERNEL_ARCH := arm
 BOARD_KERNEL_CMDLINE := console=tty60,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3b7 ehci-hcd.park=3 androidboot.bootdevice=msm_sdcc.1 vmalloc=480M
-TARGET_KERNEL_SOURCE := kernel/cyanogen/msm8974
-TARGET_KERNEL_CONFIG := cyanogenmod_k9_defconfig
+TARGET_KERNEL_SOURCE := kernel/lenovo/msm8974
+TARGET_KERNEL_CONFIG := cyanogenmod_kingdom_row_defconfig
 
 # Enable DIAG on debug builds
 ifneq ($(TARGET_BUILD_VARIANT),user)
@@ -70,7 +70,7 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 QCOM_BT_USE_SMD_TTY := true
 BLUETOOTH_HCI_USE_MCT := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/zuk/ham/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lenovo/kingdom_row/bluetooth
 
 # Camera
 TARGET_USE_VENDOR_CAMERA_EXT := true
@@ -81,7 +81,7 @@ USE_DEVICE_SPECIFIC_GPS := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
 # CM Hardware
-BOARD_HARDWARE_CLASS += device/zuk/ham/cmhw
+BOARD_HARDWARE_CLASS += device/lenovo/kingdom_row/cmhw
 
 # Filesystem
 BOARD_BOOTIMAGE_PARTITION_SIZE     := 20971520
@@ -95,7 +95,7 @@ BOARD_USERDATAEXTRAIMAGE_PARTITION_NAME := 64G
 BOARD_OEMIMAGE_PARTITION_SIZE      := 133169152
 
 # Graphics
-BOARD_EGL_CFG := device/zuk/ham/configs/egl.cfg
+BOARD_EGL_CFG := device/lenovo/kingdom_row/configs/egl.cfg
 USE_OPENGL_RENDERER := true
 TARGET_CONTINUOUS_SPLASH_ENABLED := true
 TARGET_USES_C2D_COMPOSITION := true
@@ -148,17 +148,17 @@ TARGET_PROVIDES_LIBLIGHT := true
 TARGET_NO_RPC := true
 
 # GPS HAL lives here
-TARGET_GPS_HAL_PATH := device/zuk/ham/gps
+TARGET_GPS_HAL_PATH := device/lenovo/kingdom_row/gps
 TARGET_PROVIDES_GPS_LOC_API := true
 
 # QCRIL
 TARGET_RIL_VARIANT := caf
 
 # Recovery
-TARGET_RECOVERY_FSTAB := device/zuk/ham/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB := device/lenovo/kingdom_row/rootdir/etc/fstab.qcom
 
 # Releasetools
-TARGET_RELEASETOOLS_EXTENSIONS := device/zuk/ham
+TARGET_RELEASETOOLS_EXTENSIONS := device/lenovo/kingdom_row
 
 # Use HW crypto for ODE
 TARGET_HW_DISK_ENCRYPTION := true
@@ -194,6 +194,6 @@ endif
 include device/qcom/sepolicy/sepolicy.mk
 
 BOARD_SEPOLICY_DIRS += \
-    device/zuk/ham/sepolicy
+    device/lenovo/kingdom_row/sepolicy
 
--include vendor/zuk/ham/BoardConfigVendor.mk
+-include vendor/lenovo/kingdom_row/BoardConfigVendor.mk

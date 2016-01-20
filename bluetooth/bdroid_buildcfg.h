@@ -19,7 +19,7 @@
 
 #define BLUETOOTH_QTI_SW TRUE
 
-#define BTM_DEF_LOCAL_NAME   "Zuk Z1"
+#define BTM_DEF_LOCAL_NAME   "Lenovo Vibe Z2 Pro"
 #define MAX_ACL_CONNECTIONS 7
 #define MAX_L2CAP_CHANNELS  16
 

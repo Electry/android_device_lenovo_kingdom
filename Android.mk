@@ -16,7 +16,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifeq ($(TARGET_DEVICE),ham)
+ifeq ($(TARGET_DEVICE),kingdom_row)
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
 # Create a link for the WCNSS config file, which ends up as a writable
