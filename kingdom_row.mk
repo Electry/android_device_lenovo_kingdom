@@ -25,9 +25,13 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay vendor/extra/overlays/phone-108
 TARGET_SCREEN_HEIGHT := 2560
 TARGET_SCREEN_WIDTH := 1440
 
+# Haters gonna hate..
+PRODUCT_CHARACTERISTICS := nosdcard
+
 # Ramdisk
 PRODUCT_PACKAGES += \
     init.qcom.bt.sh \
+    init.qcom.fm.sh \
     init.qcom-common.rc \
     ueventd.qcom.rc \
     fstab.qcom \
@@ -104,6 +108,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     gps.msm8974
 
+# FM
+PRODUCT_PACKAGES += \
+    FM2 \
+    FMRecord \
+    libqcomfm_jni \
+    qcom.fmradio
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \
     $(LOCAL_PATH)/gps/izat.conf:system/etc/izat.conf \
@@ -143,6 +154,21 @@ PRODUCT_COPY_FILES += \
     libOmxVenc \
     libstagefrighthw \
     qcmediaplayer
+
+# NFC
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
+    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
+    frameworks/native/data/etc/android.hardware.nfc.hce.xml:system/etc/permissions/android.hardware.nfc.hce.xml \
+    $(LOCAL_PATH)/configs/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
+    $(LOCAL_PATH)/configs/libnfc-nxp.conf:system/etc/libnfc-nxp.conf \
+    $(LOCAL_PATH)/configs/nfcee_access.xml:system/etc/nfcee_access.xml
+
+PRODUCT_PACKAGES += \
+    nfc_nci.pn54x.default \
+    com.android.nfc_extras \
+    NfcNci \
+    Tag
 
 # Power
 PRODUCT_PACKAGES += \
@@ -222,7 +248,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.isUsbOtgEnabled=true
 
 # Enable Bluetooth HFP
-PRODUCT_PROPERTY_OVERRIDES +=
+PRODUCT_PROPERTY_OVERRIDES += \
     bluetooth.hfp.client=1
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \

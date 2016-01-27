@@ -180,8 +180,11 @@
 /dev/wcnss_wlan           0660   system     system
 /dev/wcnss_ctrl           0660   system     system
 #nfc permissions
+/dev/pn547                0660    nfc         nfc
 /dev/nfc-nci              0660    nfc         nfc
 /dev/assd                 0660    nfc         nfc
+
+/sys/devices/virtual/touch/tp_dev/0dbutton 0664   system     system
 
 # UIO devices
 /dev/uio0                 0660   system     system

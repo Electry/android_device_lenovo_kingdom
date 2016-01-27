@@ -126,7 +126,7 @@ EOF
 
 LOCAL_PATH := \$(call my-dir)
 
-ifeq (\$(TARGET_DEVICE),ham)
+ifeq (\$(TARGET_DEVICE),kingdom_row)
 
 ifeq (\$(QCPATH),)
 include \$(CLEAR_VARS)

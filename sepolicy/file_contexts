@@ -15,8 +15,8 @@
 /dev/tfa9890                                    u:object_r:audio_device:s0
 
 # Touch Panel
-/sys/devices/virtual/touch/tp_dev/key_enable    u:object_r:touchpanel_sysfs:s0
-/sys/devices/gpio_keys.83/disabled_keys         u:object_r:touchpanel_sysfs:s0
+/sys/devices/virtual/touch/tp_dev/0dbutton            u:object_r:touchpanel_sysfs:s0
+/sys/devices/gpio_keys.84/disabled_keys               u:object_r:touchpanel_sysfs:s0
 
 # FRP
 /dev/block/bootdevice/by-name/frp               u:object_r:frp_block_device:s0

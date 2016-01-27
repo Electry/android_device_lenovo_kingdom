@@ -162,8 +162,12 @@ on boot
     chown system system /sys/class/leds/led:rgb_blue/blink
 
     # KeyDisabler
-    chown root system /sys/devices/virtual/touch/tp_dev/key_enable
-    chmod 0660 /sys/devices/virtual/touch/tp_dev/key_enable
+    chown root system /sys/devices/virtual/touch/tp_dev/0dbutton
+    chmod 0660 /sys/devices/virtual/touch/tp_dev/0dbutton
+
+    # HighTouchSensitivity
+    chown root system /sys/devices/virtual/touch/tp_dev/glove_on
+    chmod 0660 /sys/devices/virtual/touch/tp_dev/glove_on
 
 # msm specific files that need to be created on /data
 on post-fs-data
@@ -230,6 +234,15 @@ on post-fs-data
     mkdir /data/time/ 0700 system system
 
     mkdir /data/audio/ 0770 media audio
+
+    chown system system /sys/class/timed_output/vibrator/enable
+    chown system system /sys/class/timed_output/vibrator/vtg_level
+    chown system system /sys/class/timed_output/vibrator/vtg_max
+    chown system system /sys/class/timed_output/vibrator/vtg_min
+    chmod 0644 /sys/class/timed_output/vibrator/enable
+    chmod 0644 /sys/class/timed_output/vibrator/vtg_level
+    chmod 0644 /sys/class/timed_output/vibrator/vtg_max
+    chmod 0644 /sys/class/timed_output/vibrator/vtg_min
 
     # Touchscreen
     chown system system /sys/devices/virtual/touch/tp_dev/gesture_on
@@ -425,6 +438,13 @@ service loc_launcher /system/bin/loc_launcher
     #loc_launcher will start as root and set its uid to gps
     class late_start
     group gps qcom_oncrpc inet net_raw qcom_diag net_admin wifi
+
+service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
+    class late_start
+    user root
+    group system fm_radio
+    disabled
+    oneshot
 
 service qseecomd /system/bin/qseecomd
     class core
