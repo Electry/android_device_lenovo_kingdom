@@ -81,10 +81,6 @@
 -etc/firmware/cpp_firmware_v1_1_6.fw
 -etc/firmware/cpp_firmware_v1_2_0.fw
 
-# Fingerprint
--lib/hw/fingerprint.msm8974.so
--lib/lib_fpc_tac_shared.so
-
 # Custom ECC
 vendor/etc/qcril.db
 
