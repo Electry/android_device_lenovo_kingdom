@@ -1,4 +1,4 @@
-# Copyright (C) 2015 The CyanogenMod Project
+# Copyright (C) 2016 The CyanogenMod Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -36,3 +36,5 @@ TARGET_VENDOR := lenovo
 TARGET_VENDOR_PRODUCT_NAME := kingdom_row
 TARGET_VENDOR_DEVICE_NAME := kingdom_row
 PRODUCT_BUILD_PROP_OVERRIDES += TARGET_DEVICE=kingdom_row PRODUCT_NAME=kingdom_row
+
+TARGET_UNOFFICIAL_BUILD_ID := frantisheq

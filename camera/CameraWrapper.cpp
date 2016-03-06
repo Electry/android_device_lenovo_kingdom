@@ -43,6 +43,8 @@ using namespace android;
 static Mutex gCameraWrapperLock;
 static camera_module_t *gVendorModule = 0;
 
+static bool gClearImageEnabled = false;
+
 static int camera_device_open(const hw_module_t *module, const char *name,
         hw_device_t **device);
 static int camera_get_number_of_cameras(void);
@@ -337,7 +339,7 @@ static int camera_cancel_picture(struct camera_device *device)
 }
 
 static int camera_set_parameters(struct camera_device *device,
-        const char *params)
+        const char *parameters)
 {
     ALOGV("%s->%08X->%08X", __FUNCTION__, (uintptr_t)device,
             (uintptr_t)(((wrapper_camera_device_t*)device)->vendor));
@@ -345,7 +347,23 @@ static int camera_set_parameters(struct camera_device *device,
     if (!device)
         return -EINVAL;
 
-    return VENDOR_CALL(device, set_parameters, params);
+	const char *tmpParams = strdup(parameters);
+
+    CameraParameters2 params;
+	params.unflatten(String8(tmpParams));
+
+    gClearImageEnabled = strcmp(params.get("clear-image"), "on") == 0;
+    if (gClearImageEnabled) {
+        params.set("high-resolution", "1300");
+        params.set("superzoom", "0");
+    } else {
+        params.set("high-resolution", "0");
+        params.remove("superzoom");
+    }
+
+    delete tmpParams;
+
+    return VENDOR_CALL(device, set_parameters, strdup(params.flatten().string()));
 }
 
 static char *camera_get_parameters(struct camera_device *device)
@@ -373,7 +391,7 @@ static char *camera_get_parameters(struct camera_device *device)
     if (CAMERA_ID(device) == BACK_CAMERA_ID) {
         /* Disable 352x288 preview sizes, the combination of this preview size and larger resolutions stalls the HAL */
         params.set(CameraParameters::KEY_SUPPORTED_PREVIEW_SIZES,
-            "1920x1080,1280x720,720x480,640x480,320x240");
+            "1920x1080,1440x1080,1280x720,720x480,640x480,320x240");
         params.set(CameraParameters::KEY_SUPPORTED_VIDEO_SIZES,
             "4096x2160,3840x2160,1920x1080,1280x720,864x480,800x480,720x480,640x480,320x240,176x144");
         params.set(CameraParameters::KEY_SUPPORTED_PICTURE_SIZES,
@@ -382,12 +400,14 @@ static char *camera_get_parameters(struct camera_device *device)
         params.set("supported-live-snapshot-sizes",
             "3200x2400,2592x1944,2048x1536,1920x1080,1600x1200,1280x768,1280x720,1024x768,800x600,864x480,800x480,720x480,640x480,320x240");
         params.set(CameraParameters::KEY_HORIZONTAL_VIEW_ANGLE, "60.0");
+        params.set("min-focus-pos-index", "0");
+        params.set("max-focus-pos-index", "300");
     } else if (CAMERA_ID(device) == FRONT_CAMERA_ID) { 
         /* Inject all supported resolutions */
         params.set(CameraParameters::KEY_SUPPORTED_VIDEO_SIZES,
             "1280x720,864x480,800x480,720x480,640x480,320x240,176x144");
         params.set(CameraParameters::KEY_SUPPORTED_PREVIEW_SIZES,
-            "1280x720,720x480,640x480,576x432,320x240");
+            "1280x960,1280x720,720x480,640x480,576x432,320x240");
         params.set("preview-fps-range-values", "(7500,30000),(8000,30000),(30000,30000)");
         if(strcmp(params.get(CameraParameters::KEY_PICTURE_SIZE), "352x288") == 0 ||
            strcmp(params.get(CameraParameters::KEY_PICTURE_SIZE), "176x144") == 0) {
@@ -396,6 +416,12 @@ static char *camera_get_parameters(struct camera_device *device)
             params.set(CameraParameters::KEY_HORIZONTAL_VIEW_ANGLE, "65.5");
         }
     }
+
+    params.set("clear-image-values", "off,on");
+    params.set("clear-image", gClearImageEnabled ? "on" : "off");
+
+    params.remove("high-resolution");
+    params.remove("superzoom");
 
     return strdup(params.flatten().string());
 }
