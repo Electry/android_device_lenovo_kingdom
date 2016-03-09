@@ -79,7 +79,7 @@ PRODUCT_PACKAGES += \
 
 # Camera
 PRODUCT_PACKAGES += \
-    camera.kingdom_row \
+    camera.msm8974 \
     Snap
 
 # Charger
