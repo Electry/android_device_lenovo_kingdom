@@ -9,6 +9,7 @@ persist.radio.add_power_save=1
 persist.radio.apm_sim_not_pwdn=1
 ro.ril.ecclist=112,911,999,110,122,119,120,000,08,118,100,101,102,103
 persist.radio.custom_ecc=1
+persist.data.qmi.adb_logmask=0
 
 # enable multisim
 persist.radio.multisim.config=dsda
