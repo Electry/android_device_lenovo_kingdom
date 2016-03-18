@@ -116,6 +116,9 @@ VSYNC_EVENT_PHASE_OFFSET_NS := 7500000
 SF_VSYNC_EVENT_PHASE_OFFSET_NS := 5000000
 TARGET_USE_COMPAT_GRALLOC_PERFORM := true
 
+# Keymaster
+TARGET_KEYMASTER_WAIT_FOR_QSEE := true
+
 # Shader cache config options
 # Maximum size of the  GLES Shaders that can be cached for reuse.
 # Increase the size if shaders of size greater than 12KB are used.
