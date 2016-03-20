@@ -4297,10 +4297,6 @@ int32_t QCameraParameters::initDefaultParameters()
     set(KEY_QC_SUPPORTED_MEM_COLOR_ENHANCE_MODES, enableDisableValues);
     setMCEValue(VALUE_ENABLE);
 
-    // Set DIS
-    set(KEY_QC_SUPPORTED_DIS_MODES, enableDisableValues);
-    setDISValue(VALUE_DISABLE);
-
     // Set Histogram
     set(KEY_QC_SUPPORTED_HISTOGRAM_MODES,
         m_pCapability->histogram_supported ? enableDisableValues : "");
