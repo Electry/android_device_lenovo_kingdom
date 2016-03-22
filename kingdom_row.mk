@@ -84,7 +84,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
      tunnel.audio.encode=true \
      media.aac_51_output_enabled=true \
      audio.offload.pcm.16bit.enable=true \
-     audio.offload.pcm.24bit.enable=true
+     audio.offload.pcm.24bit.enable=true \
+     dalvik.vm.heapstartsize=12m \
+     dalvik.vm.heapgrowthlimit=288m \
+     dalvik.vm.heapsize=768m \
+     dalvik.vm.heaptargetutilization=0.75 \
+     dalvik.vm.heapminfree=16m \
+     dalvik.vm.heapmaxfree=32m
 
 # Camera
 PRODUCT_PACKAGES += \
