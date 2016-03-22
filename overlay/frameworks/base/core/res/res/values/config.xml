@@ -200,7 +200,7 @@
 
          Must be overridden in platform specific overlays -->
     <integer-array name="config_autoBrightnessLevels">
-        <item>5</item>
+        <item>10</item>
         <item>54</item>
         <item>109</item>
         <item>163</item>
@@ -309,12 +309,47 @@
     <!--  Whether Multiuser UI should be shown -->
     <bool name="config_enableMultiUserUI">true</bool>
 
-    <!-- Enable Doze and App Standby -->
-    <bool name="config_enableAutoPowerModes">true</bool>
-
     <!-- Support double tap to wake -->
     <bool name="config_supportDoubleTapWake">true</bool>
 
     <!-- Enable doze powersaving -->
     <bool name="config_enableAutoPowerModes">true</bool>
+
+    <!-- Screen brightness when dozing. -->
+    <integer name="config_screenBrightnessDoze">20</integer>
+
+    <!-- Dream of notifications -->
+    <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
+    <bool name="config_dozeAfterScreenOff">true</bool>
+
+<!-- Power Management: Specifies whether to decouple the auto-suspend state of the
+ device from the display on/off state.
+ When false, autosuspend_disable() will be called before the display is turned on
+ and autosuspend_enable() will be called after the display is turned off.
+ This mode provides best compatibility for devices using legacy power management
+ features such as early suspend / late resume.
+ When true, autosuspend_display() and autosuspend_enable() will be called
+ independently of whether the display is being turned on or off.  This mode
+ enables the power manager to suspend the application processor while the
+ display is on.
+ This resource should be set to "true" when a doze component has been specified
+ to maximize power savings but not all devices support it.
+ Refer to autosuspend.h for details.
+ -->
+<bool name="config_powerDecoupleAutoSuspendModeFromDisplay">true</bool>
+
+<!-- Power Management: Specifies whether to decouple the interactive state of the
+ device from the display on/off state.
+ When false, setInteractive(..., true) will be called before the display is turned on
+ and setInteractive(..., false) will be called after the display is turned off.
+ This mode provides best compatibility for devices that expect the interactive
+ state to be tied to the display state.
+ When true, setInteractive(...) will be called independently of whether the display
+ is being turned on or off.  This mode enables the power manager to reduce
+ clocks and disable the touch controller while the display is on.
+ This resource should be set to "true" when a doze component has been specified
+ to maximize power savings but not all devices support it.
+ Refer to power.h for details.
+ -->
+<bool name="config_powerDecoupleInteractiveModeFromDisplay">true</bool>
 </resources>
