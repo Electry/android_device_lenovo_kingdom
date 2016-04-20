@@ -55,6 +55,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/audio/acdb/MTP_Speaker_cal.acdb:system/etc/acdbdata/MTP/MTP_Speaker_cal.acdb \
     $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
     $(LOCAL_PATH)/audio/mixer_paths.xml:system/etc/mixer_paths.xml \
+    $(LOCAL_PATH)/audio/mixer_paths_auxpcm.xml:system/etc/mixer_paths_auxpcm.xml \
     $(LOCAL_PATH)/audio/audio_platform_info.xml:system/etc/audio_platform_info.xml
 
 PRODUCT_PACKAGES += \
@@ -190,6 +191,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/keylayout/atmel_mxt_ts.kl:system/usr/keylayout/atmel_mxt_ts.kl \
+    $(LOCAL_PATH)/keylayout/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
+    $(LOCAL_PATH)/keylayout/synaptics_rmi4_i2c.kl:system/usr/keylayout/synaptics_rmi4_i2c.kl \
+    $(LOCAL_PATH)/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl:system/usr/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl \
     $(LOCAL_PATH)/keylayout/hall-switch.kl:system/usr/keylayout/hall-switch.kl \
     $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
     $(LOCAL_PATH)/keylayout/qpnp_pon.kl:system/usr/keylayout/qpnp_pon.kl \
