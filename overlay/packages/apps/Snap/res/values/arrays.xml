@@ -16,6 +16,29 @@
  -->
 
 <resources>
+    <!-- Camera Preferences Video Quality entries -->
+    <string-array name="pref_video_quality_entries" translatable="false">
+        <item>@string/pref_video_quality_entry_4kdci</item>
+        <item>@string/pref_video_quality_entry_2160p</item>
+        <item>@string/pref_video_quality_entry_1080p</item>
+        <item>@string/pref_video_quality_entry_720p</item>
+        <item>@string/pref_video_quality_entry_480p</item>
+        <item>@string/pref_video_quality_entry_vga</item>
+        <item>@string/pref_video_quality_entry_qvga</item>
+        <item>@string/pref_video_quality_entry_qcif</item>
+    </string-array>
+    
+    <string-array name="pref_video_quality_entryvalues" translatable="false">
+        <item>4096x2160</item>
+        <item>3840x2160</item>
+        <item>1920x1080</item>
+        <item>1280x720</item>
+        <item>720x480</item>
+        <item>640x480</item>
+        <item>320x240</item>
+        <item>176x144</item>
+    </string-array>
+    
     <!-- When launching the camera app first time, we will set the picture
          size to the first one in the list that is also supported by the
          driver -->
