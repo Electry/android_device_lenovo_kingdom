@@ -406,9 +406,9 @@ static char *camera_get_parameters(struct camera_device *device)
     } else if (CAMERA_ID(device) == FRONT_CAMERA_ID) { 
         /* Inject all supported resolutions */
         params.set(CameraParameters::KEY_SUPPORTED_VIDEO_SIZES,
-            "1280x720,864x480,800x480,720x480,640x480,320x240,176x144");
+            "1920x1080,1280x720,864x480,800x480,720x480,640x480,480x320,352x288,320x240,176x144");
         params.set(CameraParameters::KEY_SUPPORTED_PREVIEW_SIZES,
-            "1280x960,1280x720,720x480,640x480,576x432,320x240");
+            "1920x1080,1440x1080,1280x960,1280x720,960x720,960x540,864x480,800x480,768x432,720x480,640x480,640x360,576x432,480x320,384x288,352x288,320x240,240x160,176x144");
         params.set("preview-fps-range-values", "(7500,30000),(8000,30000),(30000,30000)");
         if(strcmp(params.get(CameraParameters::KEY_PICTURE_SIZE), "352x288") == 0 ||
            strcmp(params.get(CameraParameters::KEY_PICTURE_SIZE), "176x144") == 0) {
