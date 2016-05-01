@@ -39,4 +39,4 @@ ro.ril.em_redial_vt_failover=true
 ro.frp.pst=/dev/block/bootdevice/by-name/frp
 
 # OTA Server URL
-# cm.updater.uri=http://download.ambriel.net/cyanogenmod/api
+cm.updater.uri=http://185.122.58.22/CyanogenModOTA
