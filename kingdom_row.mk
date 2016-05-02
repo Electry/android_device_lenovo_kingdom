@@ -124,7 +124,7 @@ PRODUCT_PACKAGES += \
 
 # FM
 PRODUCT_PACKAGES += \
-    FM2 \
+    FMRadio \
     libqcomfm_jni \
     qcom.fmradio
 
