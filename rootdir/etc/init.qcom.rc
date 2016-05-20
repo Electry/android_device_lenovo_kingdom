@@ -481,7 +481,7 @@ on property:sys.qbcharger.enable=false
     stop qbcharger
 
 service qcamerasvr /system/bin/mm-qcamera-daemon
-    class late_start
+    class main
     user camera
     group camera system inet input graphics
 
