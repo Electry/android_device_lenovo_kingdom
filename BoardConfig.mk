@@ -14,11 +14,13 @@
 # limitations under the License.
 #
 
+DEVICE_PATH := device/lenovo/kingdom_row
+
 # TODO: shouldn't be here
 BOARD_VENDOR := lenovo
 
 #Include path
-TARGET_SPECIFIC_HEADER_PATH += device/lenovo/kingdom_row/include
+TARGET_SPECIFIC_HEADER_PATH += $(DEVICE_PATH)/include
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8974
@@ -84,7 +86,7 @@ BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_QCOM := true
 QCOM_BT_USE_SMD_TTY := true
 BLUETOOTH_HCI_USE_MCT := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lenovo/kingdom_row/bluetooth
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 
 # Camera
 TARGET_USE_VENDOR_CAMERA_EXT := true
@@ -100,7 +102,7 @@ COMMON_GLOBAL_CFLAGS += \
     -DBOARD_CHARGING_CMDLINE_VALUE='"usb_cable"'
 
 # CM Hardware
-BOARD_HARDWARE_CLASS += device/lenovo/kingdom_row/cmhw
+BOARD_HARDWARE_CLASS += $(DEVICE_PATH)/cmhw
 
 # Filesystem
 BOARD_BOOTIMAGE_PARTITION_SIZE     := 20971520
@@ -121,7 +123,7 @@ USE_DEVICE_SPECIFIC_LOC_API := true
 USE_DEVICE_SPECIFIC_GPS := true
 
 # Graphics
-BOARD_EGL_CFG := device/lenovo/kingdom_row/configs/egl.cfg
+BOARD_EGL_CFG := $(DEVICE_PATH)/configs/egl.cfg
 USE_OPENGL_RENDERER := true
 TARGET_CONTINUOUS_SPLASH_ENABLED := true
 TARGET_USES_C2D_COMPOSITION := true
@@ -182,17 +184,17 @@ BOARD_NFC_DEVICE := /dev/pn547
 TARGET_NO_RPC := true
 
 # GPS HAL lives here
-TARGET_GPS_HAL_PATH := device/lenovo/kingdom_row/gps
+TARGET_GPS_HAL_PATH := $(DEVICE_PATH)/gps
 TARGET_PROVIDES_GPS_LOC_API := true
 
 # QCRIL
 TARGET_RIL_VARIANT := caf
 
 # Recovery
-TARGET_RECOVERY_FSTAB := device/lenovo/kingdom_row/rootdir/etc/fstab.qcom
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 
 # Releasetools
-TARGET_RELEASETOOLS_EXTENSIONS := device/lenovo/kingdom_row
+TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
 
 # Use HW crypto for ODE
 TARGET_HW_DISK_ENCRYPTION := true
@@ -229,6 +231,6 @@ endif
 include device/qcom/sepolicy/sepolicy.mk
 
 BOARD_SEPOLICY_DIRS += \
-    device/lenovo/kingdom_row/sepolicy
+    $(DEVICE_PATH)/sepolicy
 
 -include vendor/lenovo/kingdom_row/BoardConfigVendor.mk
