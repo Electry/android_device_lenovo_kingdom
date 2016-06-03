@@ -517,6 +517,19 @@
         <ctl name="MultiMedia5 Mixer SLIM_0_TX" value="1" />
     </path>
 
+    <path name="low-latency-record usb-headset-mic">
+        <ctl name="MultiMedia5 Mixer AFE_PCM_TX" value="1" />
+    </path>
+
+    <path name="low-latency-record bt-sco">
+        <ctl name="MultiMedia5 Mixer INTERNAL_BT_SCO_TX" value="1" />
+    </path>
+
+    <path name="low-latency-record bt-sco-wb">
+        <ctl name="Internal BTSCO SampleRate" value="16000" />
+        <path name="audio-record bt-sco" />
+    </path>
+
     <path name="voice-call">
         <ctl name="SLIM_0_RX_Voice Mixer CSVoice" value="1" />
         <ctl name="Voice_Tx Mixer SLIM_0_TX_Voice" value="1" />
