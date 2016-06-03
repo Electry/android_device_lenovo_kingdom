@@ -182,10 +182,6 @@ BOARD_NFC_DEVICE := /dev/pn547
 # No old RPC for prop
 TARGET_NO_RPC := true
 
-# GPS HAL lives here
-TARGET_GPS_HAL_PATH := $(DEVICE_PATH)/gps
-TARGET_PROVIDES_GPS_LOC_API := true
-
 # QCRIL
 TARGET_RIL_VARIANT := caf
 
@@ -203,9 +199,6 @@ PROTOBUF_SUPPORTED := true
 
 # ANT+ - TODO: Confirm this - TODO: Confirm this - TODO: Confirm this - TODO: Confirm this
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
-
-# Include an expanded selection of fonts
-EXTENDED_FONT_FOOTPRINT := true
 
 ifeq ($(HOST_OS),linux)
   ifeq ($(call match-word-in-list,$(TARGET_BUILD_VARIANT),user),true)
