@@ -181,6 +181,10 @@ BOARD_NFC_DEVICE := /dev/pn547
 # No old RPC for prop
 TARGET_NO_RPC := true
 
+# GPS HAL lives here
+TARGET_GPS_HAL_PATH := $(DEVICE_PATH)/gps
+TARGET_PROVIDES_GPS_LOC_API := true
+
 # QCRIL
 TARGET_RIL_VARIANT := caf
 
@@ -210,12 +214,11 @@ endif
 # inherit from the proprietary version
 ifneq ($(QCPATH),)
 -include $(QCPATH)/common/msm8974/BoardConfigVendor.mk
-endif
 
-BOARD_USES_QCNE := true
-
+# QCNE
 ifeq ($(BOARD_USES_QCNE),true)
 TARGET_LDPRELOAD := libNimsWrap.so
+endif
 endif
 
 # SELinux policies
