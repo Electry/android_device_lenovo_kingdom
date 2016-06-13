@@ -21,6 +21,10 @@ LOCAL_CFLAGS = -Wall -Werror
 # Debug logs are disabled
 LOCAL_CFLAGS += -DDISABLE_DEBUG_LOG
 
+ifeq ($(TARGET_USES_MEDIA_EXTENSIONS), true)
+LOCAL_CFLAGS += -DUSE_MEDIA_EXTENSIONS
+endif
+
 LOCAL_C_INCLUDES := \
         $(LOCAL_PATH)/../stack/common \
         frameworks/native/include/media/openmax \
