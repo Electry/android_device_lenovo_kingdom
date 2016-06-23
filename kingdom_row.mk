@@ -94,7 +94,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
      dalvik.vm.heapsize=768m \
      dalvik.vm.heaptargetutilization=0.75 \
      dalvik.vm.heapminfree=16m \
-     dalvik.vm.heapmaxfree=32m
+     dalvik.vm.heapmaxfree=32m \
+     ro.sys.fw.bg_apps_limit=32
 
 # Camera
 PRODUCT_PACKAGES += \
