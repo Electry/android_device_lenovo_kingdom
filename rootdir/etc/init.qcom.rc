@@ -122,6 +122,7 @@ on boot
     # Lights
     chown system system /sys/class/leds/button-backlight/brightness
     chown system system /sys/class/leds/button-backlight2/brightness
+    chown system system /sys/class/leds/torch-light0/brightness
     chown system system /sys/class/leds/torch-light1/brightness
 
     # RGB
