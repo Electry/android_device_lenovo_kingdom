@@ -184,16 +184,17 @@
 /dev/nfc-nci              0660    nfc         nfc
 /dev/assd                 0660    nfc         nfc
 
-/sys/devices/virtual/touch/tp_dev/0dbutton 0664   system     system
+/sys/devices/virtual/touch/tp_dev/0dbutton      0664   system     system
+/sys/devices/virtual/touch/tp_dev/glove_on      0664   system     system
+/sys/devices/virtual/touch/tp_dev/gesture_on    0664   system     system
 
 # UIO devices
 /dev/uio0                 0660   system     system
 /dev/uio1                 0660   system     system
 /dev/uio2                 0660   system     system
 
-# ShenQi specifics
+# Device specifics
 /dev/tfa9890              0660   media      media
-/dev/fpc1020              0666   system     system
 /sys/devices/virtual/input/input* range 0660 system input
 /sys/devices/virtual/input/input* bandwidth 0660 system input
 /sys/devices/virtual/input/input* op_mode 0660 system input
