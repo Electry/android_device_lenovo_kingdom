@@ -90,18 +90,6 @@ on boot
     write /proc/sys/net/ipv6/conf/rmnet5/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet6/accept_ra 2
     write /proc/sys/net/ipv6/conf/rmnet7/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio0/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio1/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio2/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio3/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio4/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio5/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio6/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_sdio7/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_usb0/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_usb1/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_usb2/accept_ra 2
-    write /proc/sys/net/ipv6/conf/rmnet_usb3/accept_ra 2
 
     # To prevent out of order acknowledgements from making
     # connection tracking to treat them as not belonging to
@@ -156,6 +144,10 @@ on boot
     chown root system /sys/devices/virtual/touch/tp_dev/glove_on
     chmod 0660 /sys/devices/virtual/touch/tp_dev/glove_on
 
+    # Tap2Wake
+    chown system system /sys/devices/virtual/touch/tp_dev/gesture_on
+    chmod 0660 /sys/devices/virtual/touch/tp_dev/gesture_on
+
 # msm specific files that need to be created on /data
 on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
@@ -187,13 +179,6 @@ on post-fs-data
     # Create the directories used by CnE subsystem
     mkdir /data/connectivity 0771 system system
     chown system system /data/connectivity
-
-    # Create the directories used by DPM subsystem
-    mkdir /data/dpm 0771 system system
-    chown system system /data/dpm
-
-    mkdir /data/dpm/nsrm 0771 system system
-    chown system system /data/dpm/nsrm
 
     # Create directory used by the DASH client
     mkdir /data/misc/dash 0770 media audio
@@ -231,10 +216,6 @@ on post-fs-data
     chmod 0644 /sys/class/timed_output/vibrator/vtg_max
     chmod 0644 /sys/class/timed_output/vibrator/vtg_min
 
-    # Touchscreen
-    chown system system /sys/devices/virtual/touch/tp_dev/gesture_on
-    chmod 0660 /sys/devices/virtual/touch/tp_dev/gesture_on
-
     setprop vold.post_fs_data_done 1
 
     #Create PERFD deamon related dirs
@@ -248,7 +229,7 @@ on post-fs-data
 
     # custom ECC
     mkdir /data/misc/radio 0700 radio radio
-    exec /system/xbin/cp /vendor/etc/qcril.db /data/misc/radio/qcril.db
+    exec /system/bin/cp /vendor/etc/qcril.db /data/misc/radio/qcril.db
     chown radio radio /data/misc/radio/qcril.db
     chmod 700 /data/misc/radio/qcril.db
 
@@ -257,7 +238,6 @@ on fs
     mkdir /dev/usb-ffs 0770 shell shell
     mkdir /dev/usb-ffs/adb 0770 shell shell
     mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
-    write /sys/class/android_usb/android0/f_ffs/aliases adb
     mkdir /dev/bus 0755 root root
     mkdir /dev/bus/usb 0755 root root
 
@@ -305,14 +285,6 @@ on property:ro.data.large_tcp_window_size=true
 
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
-
-service cnd /system/bin/cnd
-    class late_start
-    socket cnd stream 660 root inet
-
-service dpmd /system/bin/dpmd
-    class late_start
-    socket dpmd stream 660 root system
 
 service irsc_util /system/bin/irsc_util "/etc/sec_config"
     class main
@@ -430,17 +402,6 @@ service charger /sbin/healthd -c
     critical
     seclabel u:r:healthd:s0
 
-service hvdcp /system/bin/hvdcp
-    class core
-    user root
-    disabled
-
-on property:persist.usb.hvdcp.detect=true
-    start hvdcp
-
-on property:persist.usb.hvdcp.detect=false
-    stop hvdcp
-
 service qbcharger /charger -m 1
     disabled
     oneshot
@@ -549,16 +510,6 @@ service diag_mdlog_stop /system/bin/diag_mdlog -k
     disabled
     oneshot
 
-service qlogd /system/xbin/qlogd
-    class main
-    disabled
-
-on property:persist.sys.qlogd=1
-    start qlogd
-
-on property:persist.sys.qlogd=0
-    stop qlogd
-
 service ril-daemon1 /system/bin/rild -c 2
     class main
     socket rild2 stream 660 root radio
@@ -574,15 +525,3 @@ service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw
 service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbdisk /storage/usbdisk
     class late_start
     disabled
-
-service ssr_diag /system/bin/ssr_diag
-    class late_start
-    user system
-    group system
-    disabled
-
-service testmode /sbin/testmode
-     seclabel u:r:testmode:s0
-     class late_start
-     user root
-     oneshot
