@@ -34,4 +34,4 @@ ro.qualcomm.cabl=0
 ro.ril.em_redial_vt_failover=true
 
 # Factory reset protection
-ro.frp.pst=/dev/block/bootdevice/by-name/frp
+ro.frp.pst=/dev/block/bootdevice/by-name/persist
