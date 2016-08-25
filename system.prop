@@ -10,7 +10,7 @@ persist.radio.custom_ecc=1
 persist.data.qmi.adb_logmask=0
 
 # enable multisim
-persist.radio.multisim.config=dsda
+persist.radio.multisim.config=dsds
 
 # sensors
 ro.qc.sdk.camera.facialproc=true
