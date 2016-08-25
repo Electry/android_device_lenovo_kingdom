@@ -322,20 +322,7 @@ static int camera_set_parameters(struct camera_device *device,
     if (!device)
         return -EINVAL;
 
-    const char *tmpParams = strdup(parameters);
-
-    CameraParameters2 params;
-    params.unflatten(String8(tmpParams));
-
-    delete tmpParams;
-
-    /* Use 13.3 MP instead of 16 MP for HDR */
-    if ((strcmp(params.get(CameraParameters::KEY_SCENE_MODE), "hdr") == 0)
-       && (strcmp(params.get(CameraParameters::KEY_PICTURE_SIZE), "5328x2997") == 0)) {
-        params.set(CameraParameters::KEY_PICTURE_SIZE, "4864x2736");
-    }
-
-    return VENDOR_CALL(device, set_parameters, strdup(params.flatten().string()));
+    return VENDOR_CALL(device, set_parameters, strdup(parameters));
 }
 
 static char *camera_get_parameters(struct camera_device *device)
