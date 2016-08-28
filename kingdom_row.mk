@@ -102,10 +102,6 @@ PRODUCT_PACKAGES += \
     camera.msm8974 \
     Snap
 
-# Charger
-PRODUCT_PACKAGES += \
-    charger_res_images
-
 # Filesystem
 PRODUCT_PACKAGES += \
     make_ext4fs \
