@@ -333,7 +333,17 @@ static char *camera_get_parameters(struct camera_device *device)
     if (!device)
         return NULL;
 
-    return VENDOR_CALL(device, get_parameters);
+    char *parameters = VENDOR_CALL(device, get_parameters);
+
+    CameraParameters2 params;
+    params.unflatten(String8(parameters));
+
+    /* HSR, DIS & longshot are not supported */
+    params.remove("video-hsr");
+    params.set("dis-values", "disable");
+    params.set("longshot-supported", "false");
+
+    return strdup(params.flatten().string());
 }
 
 static void camera_put_parameters(struct camera_device *device, char *params)
