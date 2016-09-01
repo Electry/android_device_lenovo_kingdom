@@ -23,7 +23,7 @@
         <item>2K (1440p) (4:3)</item>
         <item>FHD (1080p)</item>
         <item>HD (720p)</item>
-        <item>WVGA (480p)</item>
+        <item>WVGA (480p) (15:10)</item>
         <item>VGA (480p) (4:3)</item>
         <item>HVGA (320p) (4:3)</item>
         <item>QVGA (240p) (4:3)</item>
@@ -37,8 +37,8 @@
         <item>1920x1080</item>
         <item>1280x720</item>
     <!--<item>864x480</item>-->
-        <item>800x480</item>
-    <!--<item>720x480</item>-->
+    <!--<item>800x480</item>-->
+        <item>720x480</item>
         <item>640x480</item>
         <item>480x320</item>
     <!--<item>352x288</item>-->
