@@ -98,9 +98,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
      ro.sys.fw.bg_apps_limit=32
 
 # Camera
-PRODUCT_PACKAGES += \
-    camera.msm8974 \
-    Snap
+#PRODUCT_PACKAGES += \
+#    camera.msm8974 \
+#    Snap
 
 # Filesystem
 PRODUCT_PACKAGES += \
@@ -108,8 +108,8 @@ PRODUCT_PACKAGES += \
     setup_fs
 
 # Gello
-PRODUCT_PACKAGES += \
-    Gello
+#PRODUCT_PACKAGES += \
+#    Gello
 
 # Graphics
 PRODUCT_PACKAGES += \
@@ -120,8 +120,8 @@ PRODUCT_PACKAGES += \
     liboverlay
 
 # GPS
-PRODUCT_PACKAGES += \
-    gps.msm8974
+#PRODUCT_PACKAGES += \
+#    gps.msm8974
 
 # FM
 PRODUCT_PACKAGES += \
@@ -150,8 +150,8 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
-    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
+    $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml
+#    $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
 
 # Media
  PRODUCT_PACKAGES += \

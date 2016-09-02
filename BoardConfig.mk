@@ -47,7 +47,7 @@ BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 BOARD_DTBTOOL_ARGS := -2
 TARGET_KERNEL_ARCH := arm
-BOARD_KERNEL_CMDLINE := console=tty60,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3b7 ehci-hcd.park=3 androidboot.bootdevice=msm_sdcc.1 vmalloc=480M
+BOARD_KERNEL_CMDLINE := console=tty60,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3b7 ehci-hcd.park=3 androidboot.bootdevice=msm_sdcc.1 vmalloc=480M androidboot.selinux=permissive
 TARGET_KERNEL_SOURCE := kernel/lenovo/msm8974
 TARGET_KERNEL_CONFIG := cyanogenmod_k920_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
@@ -81,11 +81,11 @@ QCOM_FM_ENABLED := true
 BOARD_USES_SEPERATED_FM := true
 
 # Bluetooth
-BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_QCOM := true
-QCOM_BT_USE_SMD_TTY := true
-BLUETOOTH_HCI_USE_MCT := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
+#BOARD_HAVE_BLUETOOTH := true
+#BOARD_HAVE_BLUETOOTH_QCOM := true
+#QCOM_BT_USE_SMD_TTY := true
+#BLUETOOTH_HCI_USE_MCT := true
+#BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := $(DEVICE_PATH)/bluetooth
 
 # Camera
 TARGET_USE_VENDOR_CAMERA_EXT := true
@@ -96,9 +96,9 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
 # Offmode charging
-COMMON_GLOBAL_CFLAGS += \
-    -DBOARD_CHARGING_CMDLINE_NAME='"androidboot.mode"' \
-    -DBOARD_CHARGING_CMDLINE_VALUE='"usb_cable"'
+#COMMON_GLOBAL_CFLAGS += \
+#    -DBOARD_CHARGING_CMDLINE_NAME='"androidboot.mode"' \
+#    -DBOARD_CHARGING_CMDLINE_VALUE='"usb_cable"'
 
 # CM Hardware
 BOARD_USES_CYANOGEN_HARDWARE := true
@@ -148,22 +148,22 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 
 # Wifi
-BOARD_HAS_QCOM_WLAN              := true
-BOARD_HAS_QCOM_WLAN_SDK          := true
-BOARD_WLAN_DEVICE                := qcwcn
-WPA_SUPPLICANT_VERSION           := VER_0_8_X
-BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
-BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
-BOARD_HOSTAPD_DRIVER             := NL80211
-BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_qcwcn
-WIFI_DRIVER_FW_PATH_STA          := "sta"
-WIFI_DRIVER_FW_PATH_AP           := "ap"
-TARGET_USES_WCNSS_CTRL           := true
-TARGET_USES_QCOM_WCNSS_QMI       := true
-TARGET_USES_WCNSS_MAC_ADDR_REV   := true
+#BOARD_HAS_QCOM_WLAN              := true
+#BOARD_HAS_QCOM_WLAN_SDK          := true
+#BOARD_WLAN_DEVICE                := qcwcn
+#WPA_SUPPLICANT_VERSION           := VER_0_8_X
+#BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+#BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
+#BOARD_HOSTAPD_DRIVER             := NL80211
+#BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_qcwcn
+#WIFI_DRIVER_FW_PATH_STA          := "sta"
+#WIFI_DRIVER_FW_PATH_AP           := "ap"
+#TARGET_USES_WCNSS_CTRL           := true
+#TARGET_USES_QCOM_WCNSS_QMI       := true
+#TARGET_USES_WCNSS_MAC_ADDR_REV   := true
 
 # Wifi - EAP-SIM
-CONFIG_EAP_PROXY                 := qmi
+CONFIG_EAP_PROXY                 := dummy
 CONFIG_EAP_PROXY_DUAL_SIM        := true
 
 # Filesystem
@@ -197,7 +197,7 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
 
 # Use HW crypto for ODE
-TARGET_HW_DISK_ENCRYPTION := true
+TARGET_HW_DISK_ENCRYPTION := false #N
 
 # Added to indicate that protobuf-c is supported in this build
 PROTOBUF_SUPPORTED := true
