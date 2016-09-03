@@ -16,10 +16,7 @@
 
 DEVICE_PATH := device/lenovo/kingdom_row
 
-# TODO: shouldn't be here
-BOARD_VENDOR := lenovo
-
-#Include path
+# Include path
 TARGET_SPECIFIC_HEADER_PATH += $(DEVICE_PATH)/include
 
 # Bootloader
@@ -43,11 +40,11 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 # Kernel
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
+BOARD_KERNEL_CMDLINE := console=tty60,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3b7 ehci-hcd.park=3 androidboot.bootdevice=msm_sdcc.1 vmalloc=480M androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 BOARD_DTBTOOL_ARGS := -2
 TARGET_KERNEL_ARCH := arm
-BOARD_KERNEL_CMDLINE := console=tty60,115200,n8 androidboot.hardware=qcom user_debug=31 msm_rtb.filter=0x3b7 ehci-hcd.park=3 androidboot.bootdevice=msm_sdcc.1 vmalloc=480M androidboot.selinux=permissive
 TARGET_KERNEL_SOURCE := kernel/lenovo/msm8974
 TARGET_KERNEL_CONFIG := cyanogenmod_k920_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
@@ -57,14 +54,8 @@ ifneq ($(TARGET_BUILD_VARIANT),user)
 TARGET_KERNEL_ADDITIONAL_CONFIG:= cyanogenmod_debug_config
 endif
 
-# DT2W
-TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/touch/tp_dev/gesture_on"
-
-# QCOM Power (required for DT2W)
-TARGET_POWERHAL_VARIANT := qcom
-
-# QCOM
-BOARD_USES_QCOM_HARDWARE := true
+# ANT+
+BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
 # Audio
 USE_CUSTOM_AUDIO_POLICY := 1
@@ -73,12 +64,6 @@ AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 AUDIO_FEATURE_ENABLED_HWDEP_CAL := true
 AUDIO_FEATURE_ENABLED_LOW_LATENCY_CAPTURE := true
 AUDIO_FEATURE_ENABLED_FM := true
-
-# Enable QCOM FM feature
-AUDIO_FEATURE_ENABLED_FM_POWER_OPT := true
-TARGET_QCOM_NO_FM_FIRMWARE := true
-QCOM_FM_ENABLED := true
-BOARD_USES_SEPERATED_FM := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -95,7 +80,6 @@ USE_DEVICE_SPECIFIC_CAMERA := true
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGER_DISABLE_INIT_BLANK := true
 
-# Offmode charging
 BOARD_GLOBAL_CFLAGS += \
     -DBOARD_CHARGING_CMDLINE_NAME='"androidboot.mode"' \
     -DBOARD_CHARGING_CMDLINE_VALUE='"usb_cable"'
@@ -106,21 +90,41 @@ BOARD_HARDWARE_CLASS := \
     hardware/cyanogen/cmhw
 #    $(DEVICE_PATH)/cmhw
 
-# Filesystem
-BOARD_BOOTIMAGE_PARTITION_SIZE     := 20971520
-BOARD_CACHEIMAGE_PARTITION_SIZE    := 134217728
-BOARD_PERSISTIMAGE_PARTITION_SIZE  := 33554432
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 20971520
-BOARD_SYSTEMIMAGE_PARTITION_SIZE   := 2147483648
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 12815659008
-BOARD_OEMIMAGE_PARTITION_SIZE      := 133169152
+# DT2W
+TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/touch/tp_dev/gesture_on"
 
-# Enable F2FS for Cache and Data
+# Encryption
+TARGET_HW_DISK_ENCRYPTION := false #N
+
+# Filesystem
+BOARD_FLASH_BLOCK_SIZE                  := 131072
+BOARD_BOOTIMAGE_PARTITION_SIZE          := 20971520
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE       := ext4
+BOARD_CACHEIMAGE_PARTITION_SIZE         := 134217728
+BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE     := ext4
+BOARD_PERSISTIMAGE_PARTITION_SIZE       := 33554432
+BOARD_RECOVERYIMAGE_PARTITION_SIZE      := 20971520
+BOARD_SYSTEMIMAGE_PARTITION_SIZE        := 2147483648
+BOARD_USERDATAIMAGE_PARTITION_SIZE      := 12815659008
+BOARD_OEMIMAGE_FILE_SYSTEM_TYPE         := ext4
+BOARD_OEMIMAGE_PARTITION_SIZE           := 133169152
+
+TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
+
+# FM
+AUDIO_FEATURE_ENABLED_FM_POWER_OPT := true
+TARGET_QCOM_NO_FM_FIRMWARE := true
+QCOM_FM_ENABLED := true
+BOARD_USES_SEPERATED_FM := true
 
 # GPS
 USE_DEVICE_SPECIFIC_LOC_API := true
 USE_DEVICE_SPECIFIC_GPS := true
+
+# GPS HAL
+TARGET_GPS_HAL_PATH := $(DEVICE_PATH)/gps
+TARGET_PROVIDES_GPS_LOC_API := true
 
 # Graphics
 USE_OPENGL_RENDERER := true
@@ -132,9 +136,6 @@ HAVE_ADRENO_SOURCE:= false
 NUM_FRAMEBUFFER_SURFACE_BUFFERS := 3
 TARGET_USE_COMPAT_GRALLOC_PERFORM := true
 
-# Keymaster
-TARGET_KEYMASTER_WAIT_FOR_QSEE := true
-
 # Shader cache config options
 # Maximum size of the  GLES Shaders that can be cached for reuse.
 # Increase the size if shaders of size greater than 12KB are used.
@@ -144,6 +145,40 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 # binaries. Decrease the size if RAM or Flash Storage size is a limitation
 # of the device.
 MAX_EGL_CACHE_SIZE := 2048*1024
+
+# Keymaster
+TARGET_KEYMASTER_WAIT_FOR_QSEE := true
+
+# Lights
+TARGET_PROVIDES_LIBLIGHT := true
+
+# NFC
+BOARD_NFC_CHIPSET := pn547
+BOARD_NFC_DEVICE := /dev/pn547
+
+# Power HAL
+TARGET_POWERHAL_VARIANT := qcom
+
+# QCOM hardware
+BOARD_USES_QCOM_HARDWARE := true
+
+# Radio
+TARGET_RIL_VARIANT := caf
+
+# Recovery
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
+
+# Releasetools
+TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
+
+# RPC
+TARGET_NO_RPC := true
+
+# SELinux
+include device/qcom/sepolicy/sepolicy.mk
+
+BOARD_SEPOLICY_DIRS += \
+    $(DEVICE_PATH)/sepolicy
 
 # Wifi
 BOARD_HAS_QCOM_WLAN              := true
@@ -164,44 +199,8 @@ TARGET_USES_WCNSS_MAC_ADDR_REV   := true
 CONFIG_EAP_PROXY                 := qmi
 CONFIG_EAP_PROXY_DUAL_SIM        := true
 
-# Filesystem
-TARGET_USERIMAGES_USE_EXT4 := true
-BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_PERSISTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_OEMIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_FLASH_BLOCK_SIZE := 131072
-
-# Lights
-TARGET_PROVIDES_LIBLIGHT := true
-
-# NFC
-BOARD_NFC_CHIPSET := pn547
-BOARD_NFC_DEVICE := /dev/pn547
-
-# No old RPC for prop
-TARGET_NO_RPC := true
-
-# GPS HAL lives here
-TARGET_GPS_HAL_PATH := $(DEVICE_PATH)/gps
-TARGET_PROVIDES_GPS_LOC_API := true
-
-# QCRIL
-TARGET_RIL_VARIANT := caf
-
-# Recovery
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
-
-# Releasetools
-TARGET_RELEASETOOLS_EXTENSIONS := $(DEVICE_PATH)
-
-# Use HW crypto for ODE
-TARGET_HW_DISK_ENCRYPTION := false #N
-
 # Added to indicate that protobuf-c is supported in this build
 PROTOBUF_SUPPORTED := true
-
-# ANT+ - TODO: Confirm this - TODO: Confirm this - TODO: Confirm this - TODO: Confirm this
-BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
 ifeq ($(HOST_OS),linux)
   ifeq ($(call match-word-in-list,$(TARGET_BUILD_VARIANT),user),true)
@@ -211,7 +210,7 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 
-# inherit from the proprietary version
+# inherit from QC proprietary
 ifneq ($(QCPATH),)
 -include $(QCPATH)/common/msm8974/BoardConfigVendor.mk
 
@@ -220,12 +219,5 @@ ifeq ($(BOARD_USES_QCNE),true)
 TARGET_LDPRELOAD := libNimsWrap.so
 endif
 endif
-
-# SELinux policies
-# qcom sepolicy
-include device/qcom/sepolicy/sepolicy.mk
-
-BOARD_SEPOLICY_DIRS += \
-    $(DEVICE_PATH)/sepolicy
 
 -include vendor/lenovo/kingdom_row/BoardConfigVendor.mk
