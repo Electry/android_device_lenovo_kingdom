@@ -18,30 +18,21 @@ ifneq ($(QCPATH),)
 $(call inherit-product-if-exists, $(QCPATH)/common/config/device-vendor.mk)
 endif
 
-# Set CM_BUILDTYPE
+# Build type
 CM_BUILDTYPE := NIGHTLY
 
-# overlays
+# Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay vendor/extra/overlays/phone-1080p
-
-# Boot animation
-TARGET_SCREEN_HEIGHT := 2560
-TARGET_SCREEN_WIDTH := 1440
 
 # Haters gonna hate..
 PRODUCT_CHARACTERISTICS := nosdcard
 
-# Ramdisk
+
+# ANT+
 PRODUCT_PACKAGES += \
-    init.qcom.bt.sh \
-    init.qcom.fm.sh \
-    init.qcom-common.rc \
-    ueventd.qcom.rc \
-    fstab.qcom \
-    init.qcom.rc \
-    init.qcom.power.rc \
-    init.qcom.usb.rc \
-    init.recovery.qcom.rc
+    AntHalService \
+    com.dsi.ant.antradio_library \
+    libantradio
 
 # Audio
 PRODUCT_COPY_FILES += \
@@ -88,28 +79,63 @@ PRODUCT_PROPERTY_OVERRIDES += \
      tunnel.audio.encode=true \
      media.aac_51_output_enabled=true \
      audio.offload.pcm.16bit.enable=true \
-     audio.offload.pcm.24bit.enable=true \
-     dalvik.vm.heapstartsize=12m \
-     dalvik.vm.heapgrowthlimit=288m \
-     dalvik.vm.heapsize=768m \
-     dalvik.vm.heaptargetutilization=0.75 \
-     dalvik.vm.heapminfree=16m \
-     dalvik.vm.heapmaxfree=32m \
-     ro.sys.fw.bg_apps_limit=32
+     audio.offload.pcm.24bit.enable=true
+
+# Bluetooth
+PRODUCT_PROPERTY_OVERRIDES += \
+    bluetooth.hfp.client=1 \
+    ro.qualcomm.bt.hci_transport=smd
+
+# Boot animation
+TARGET_SCREEN_HEIGHT := 2560
+TARGET_SCREEN_WIDTH := 1440
 
 # Camera
 #PRODUCT_PACKAGES += \
 #    camera.msm8974 \
 #    Snap
 
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    camera2.portability.force_api=1
+
+# Dalvik/HWUI
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxxhdpi-3072-dalvik-heap.mk)
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxxhdpi-3072-hwui-memory.mk)
+
+# Data
+PRODUCT_PACKAGES += \
+    librmnetctl
+
+# Display
+PRODUCT_AAPT_CONFIG := normal
+PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
+
 # Filesystem
 PRODUCT_PACKAGES += \
     make_ext4fs \
     setup_fs
 
+# FM
+PRODUCT_PACKAGES += \
+    FMRadio \
+    libqcomfm_jni \
+    qcom.fmradio
+
 # Gello
 #PRODUCT_PACKAGES += \
 #    Gello
+
+# GPS
+PRODUCT_PACKAGES += \
+    gps.msm8974
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \
+    $(LOCAL_PATH)/gps/izat.conf:system/etc/izat.conf \
+    $(LOCAL_PATH)/gps/quipc.conf:system/etc/quipc.conf \
+    $(LOCAL_PATH)/gps/sap.conf:system/etc/sap.conf \
+    $(LOCAL_PATH)/gps/flp.conf:system/etc/flp.conf
+
 
 # Graphics
 PRODUCT_PACKAGES += \
@@ -119,30 +145,29 @@ PRODUCT_PACKAGES += \
     memtrack.msm8974 \
     liboverlay
 
-# GPS
-PRODUCT_PACKAGES += \
-    gps.msm8974
-
-# FM
-PRODUCT_PACKAGES += \
-    FMRadio \
-    libqcomfm_jni \
-    qcom.fmradio
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf \
-    $(LOCAL_PATH)/gps/izat.conf:system/etc/izat.conf \
-    $(LOCAL_PATH)/gps/quipc.conf:system/etc/quipc.conf \
-    $(LOCAL_PATH)/gps/sap.conf:system/etc/sap.conf \
-    $(LOCAL_PATH)/gps/flp.conf:system/etc/flp.conf
-
-# Lights
-PRODUCT_PACKAGES += \
-    lights.msm8974
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.opengles.version=196608 \
+    persist.hwc.mdpcomp.enable=true
 
 # IPC Security config
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sec_config:system/etc/sec_config
+
+# Keylayouts
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/keylayout/synaptics_rmi4_i2c.kl:system/usr/keylayout/synaptics_rmi4_i2c.kl \
+    $(LOCAL_PATH)/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl:system/usr/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl \
+    $(LOCAL_PATH)/keylayout/hall-switch.kl:system/usr/keylayout/hall-switch.kl \
+    $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+    $(LOCAL_PATH)/keylayout/qpnp_pon.kl:system/usr/keylayout/qpnp_pon.kl
+
+# Keystore
+PRODUCT_PACKAGES += \
+    keystore.msm8974
+
+# Lights
+PRODUCT_PACKAGES += \
+    lights.msm8974
 
 # Media profile
 PRODUCT_COPY_FILES += \
@@ -150,7 +175,7 @@ PRODUCT_COPY_FILES += \
     frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
     frameworks/av/media/libstagefright/data/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
     $(LOCAL_PATH)/configs/media_codecs.xml:system/etc/media_codecs.xml \
-    $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml
+    $(LOCAL_PATH)/configs/media_codecs_performance.xml:system/etc/media_codecs_performance.xml \
     $(LOCAL_PATH)/configs/media_profiles.xml:system/etc/media_profiles.xml
 
 # Media
@@ -169,6 +194,17 @@ PRODUCT_COPY_FILES += \
     libstagefrighthw \
     qcmediaplayer
 
+# Misc dependencies
+PRODUCT_PACKAGES += \
+    ebtables \
+    ethertypes \
+    curl \
+    libnl_2 \
+    libbson \
+    libcnefeatureconfig \
+    libtinyxml \
+    libxml2
+
 # NFC
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
@@ -184,106 +220,10 @@ PRODUCT_PACKAGES += \
     NfcNci \
     Tag
 
-# Power
-PRODUCT_PACKAGES += \
-    power.msm8974
-
-# Keylayouts
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/keylayout/synaptics_rmi4_i2c.kl:system/usr/keylayout/synaptics_rmi4_i2c.kl \
-    $(LOCAL_PATH)/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl:system/usr/keylayout/msm8974-taiko-mtp-snd-card_Button_Jack.kl \
-    $(LOCAL_PATH)/keylayout/hall-switch.kl:system/usr/keylayout/hall-switch.kl \
-    $(LOCAL_PATH)/keylayout/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
-    $(LOCAL_PATH)/keylayout/qpnp_pon.kl:system/usr/keylayout/qpnp_pon.kl
-
-# Keystore
-PRODUCT_PACKAGES += \
-    keystore.msm8974
-
-# Thermal
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine-8974.conf
-
-# USB
-PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
-
-# Data
-PRODUCT_PACKAGES += \
-    librmnetctl
-
-# WiFi
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)//wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
-    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
-    $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
-
-PRODUCT_PACKAGES += \
-    dhcpcd.conf \
-    libwpa_client \
-    hostapd \
-    wpa_supplicant \
-    wpa_supplicant.conf \
-    wpa_supplicant_overlay.conf \
-    p2p_supplicant_overlay.conf \
-    hostapd_default.conf \
-    hostapd.accept \
-    hostapd.deny
-
-PRODUCT_PACKAGES += \
-    wcnss_service
-
-# Misc dependencies
-PRODUCT_PACKAGES += \
-    ebtables \
-    ethertypes \
-    curl \
-    libnl_2 \
-    libbson \
-    libcnefeatureconfig \
-    libtinyxml \
-    libxml2
-
-# ANT+
-PRODUCT_PACKAGES += \
-    AntHalService \
-    com.dsi.ant.antradio_library \
-    libantradio
-
-# Enable USB OTG interface
+# Performance
 PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.isUsbOtgEnabled=true
-
-# Enable Bluetooth HFP
-PRODUCT_PROPERTY_OVERRIDES += \
-    bluetooth.hfp.client=1
-
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    camera2.portability.force_api=1
-
-# System properties
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.hwc.mdpcomp.enable=true \
-    persist.timed.enable=true \
-    ro.opengles.version=196608 \
-    ro.qualcomm.bt.hci_transport=smd \
-    ro.telephony.default_network=9 \
-    ro.use_data_netmgrd=true \
-    persist.data.netmgrd.qos.enable=true \
-    persist.data.tcpackprio.enable=true \
-    ro.data.large_tcp_window_size=true \
-    telephony.lteOnCdmaDevice=1 \
-    wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=15 \
     ro.qualcomm.perf.cores_online=2 \
-    ro.vendor.extension_library=libqti-perfd-client.so \
-    ro.telephony.call_ring.multiple=0
-    dalvik.vm.heapstartsize=12m \
-    dalvik.vm.heapgrowthlimit=288m \
-    dalvik.vm.heapsize=768m \
-    dalvik.vm.heaptargetutilization=0.75 \
-    dalvik.vm.heapminfree=16m \
-    dalvik.vm.heapmaxfree=32m
+    ro.sys.fw.bg_apps_limit=32
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -310,17 +250,75 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml
 
-# Device uses high-density artwork where available
-PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
+# Power
+PRODUCT_PACKAGES += \
+    power.msm8974
 
-# call dalvik heap config
-$(call inherit-product-if-exists, frameworks/native/build/phone-xxxhdpi-3072-dalvik-heap.mk)
+# Ramdisk
+PRODUCT_PACKAGES += \
+    init.qcom.bt.sh \
+    init.qcom.fm.sh \
+    init.qcom-common.rc \
+    ueventd.qcom.rc \
+    fstab.qcom \
+    init.qcom.rc \
+    init.qcom.power.rc \
+    init.qcom.usb.rc \
+    init.recovery.qcom.rc
 
-# call hwui memory config
-$(call inherit-product-if-exists, frameworks/native/build/phone-xxxhdpi-3072-hwui-memory.mk)
+# RIL
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.default_network=9 \
+    ro.use_data_netmgrd=true \
+    persist.data.netmgrd.qos.enable=true \
+    persist.data.tcpackprio.enable=true \
+    ro.data.large_tcp_window_size=true \
+    telephony.lteOnCdmaDevice=1 \
+    ro.telephony.call_ring.multiple=0
 
-# call the proprietary setup
+# Thermal
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine-8974.conf
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.extension_library=libqti-perfd-client.so
+
+# Time services
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.timed.enable=true
+
+# USB
+PRODUCT_PACKAGES += \
+    com.android.future.usb.accessory
+
+# USB OTG
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.isUsbOtgEnabled=true
+
+# WiFi
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)//wifi/WCNSS_cfg.dat:system/etc/firmware/wlan/prima/WCNSS_cfg.dat \
+    $(LOCAL_PATH)/wifi/WCNSS_qcom_cfg.ini:system/etc/wifi/WCNSS_qcom_cfg.ini \
+    $(LOCAL_PATH)/wifi/WCNSS_qcom_wlan_nv.bin:system/etc/firmware/wlan/prima/WCNSS_qcom_wlan_nv.bin
+
+PRODUCT_PACKAGES += \
+    dhcpcd.conf \
+    libwpa_client \
+    hostapd \
+    wpa_supplicant \
+    wpa_supplicant.conf \
+    wpa_supplicant_overlay.conf \
+    p2p_supplicant_overlay.conf \
+    hostapd_default.conf \
+    hostapd.accept \
+    hostapd.deny \
+    wcnss_service
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    wifi.interface=wlan0 \
+    wifi.supplicant_scan_interval=15
+
+# Call the proprietary setup
 $(call inherit-product-if-exists, vendor/lenovo/kingdom_row/kingdom_row-vendor.mk)
 
 ifneq ($(QCPATH),)
