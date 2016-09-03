@@ -30,15 +30,16 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 PRODUCT_NAME := cm_kingdom_row
 PRODUCT_DEVICE := kingdom_row
-PRODUCT_MANUFACTURER := Lenovo
+PRODUCT_BRAND := Lenovo
 PRODUCT_MODEL := K920
+PRODUCT_MANUFACTURER := Lenovo
 
 PRODUCT_GMS_CLIENTID_BASE := android-lenovo
 
-PRODUCT_BRAND := Lenovo
 TARGET_VENDOR := lenovo
 TARGET_VENDOR_PRODUCT_NAME := kingdom_row
 TARGET_VENDOR_DEVICE_NAME := kingdom_row
-PRODUCT_BUILD_PROP_OVERRIDES += TARGET_DEVICE=kingdom_row PRODUCT_NAME=kingdom_row
 
-TARGET_UNOFFICIAL_BUILD_ID := frantisheq
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    TARGET_DEVICE=kingdom_row \
+    PRODUCT_NAME=kingdom_row
