@@ -35,7 +35,7 @@
 /persist                 ext4        /dev/block/platform/msm_sdcc.1/by-name/persist     flags=display="Persist";backup;fsflags=ro
 /preload                 ext4        /dev/block/platform/msm_sdcc.1/by-name/preload     flags=display="Preload";backup;canbewiped;wipeingui
 
-/firmware                vfat        /dev/block/platform/msm_sdcc.1/by-name/modem       flags=display="Firmware";backup;mounttodecrypt
+/firmware                vfat        /dev/block/platform/msm_sdcc.1/by-name/modem       flags=display="Firmware";backup
 
 /aboot                   emmc        /dev/block/platform/msm_sdcc.1/by-name/aboot       flags=display="Bootloader";backup
 /boot                    emmc        /dev/block/platform/msm_sdcc.1/by-name/boot        flags=display="Boot (kernel)";backup;flashimg
