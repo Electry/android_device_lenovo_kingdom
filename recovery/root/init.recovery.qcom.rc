@@ -23,6 +23,21 @@ on late-init
 
     trigger boot
 
+service sbinqseecomd /sbin/qseecomd
+    class core
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
+on fs
+    chmod 0664 /dev/qseecom
+    chown system drmrpc /dev/qseecom
+    chmod 0664 /dev/ion
+    chown system system /dev/ion
+
+on property:ro.crypto.state=encrypted
+    start sbinqseecomd
+
 on boot
     # Enable Power modes and set the CPU Freq Sampling rates
     write /sys/module/lpm_levels/enable_low_power/l2 4
