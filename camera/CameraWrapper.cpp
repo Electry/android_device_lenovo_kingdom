@@ -38,6 +38,9 @@
 #define BACK_CAMERA_ID 0
 #define FRONT_CAMERA_ID 1
 
+#define OPEN_RETRIES    10
+#define OPEN_RETRY_MSEC 40
+
 using namespace android;
 
 static Mutex gCameraWrapperLock;
@@ -466,9 +469,16 @@ static int camera_device_open(const hw_module_t *module, const char *name,
         memset(camera_device, 0, sizeof(*camera_device));
         camera_device->id = cameraid;
 
-        rv = gVendorModule->common.methods->open(
-                (const hw_module_t*)gVendorModule, name,
-                (hw_device_t**)&(camera_device->vendor));
+        int retries = OPEN_RETRIES;
+        bool retry;
+        do {
+            rv = gVendorModule->common.methods->open(
+                    (const hw_module_t*)gVendorModule, name,
+                    (hw_device_t**)&(camera_device->vendor));
+            retry = --retries > 0 && rv;
+            if (retry)
+                usleep(OPEN_RETRY_MSEC * 1000);
+        } while (retry);
         if (rv) {
             ALOGE("vendor camera open fail");
             goto fail;
