@@ -103,8 +103,8 @@ BOARD_GLOBAL_CFLAGS += \
 # CM Hardware
 BOARD_USES_CYANOGEN_HARDWARE := true
 BOARD_HARDWARE_CLASS := \
-    hardware/cyanogen/cmhw \
-    $(DEVICE_PATH)/cmhw
+    hardware/cyanogen/cmhw
+#    $(DEVICE_PATH)/cmhw
 
 # Filesystem
 BOARD_BOOTIMAGE_PARTITION_SIZE     := 20971520
