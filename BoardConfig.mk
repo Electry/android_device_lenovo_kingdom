@@ -146,22 +146,22 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 MAX_EGL_CACHE_SIZE := 2048*1024
 
 # Wifi
-#BOARD_HAS_QCOM_WLAN              := true
-#BOARD_HAS_QCOM_WLAN_SDK          := true
-#BOARD_WLAN_DEVICE                := qcwcn
-#WPA_SUPPLICANT_VERSION           := VER_0_8_X
-#BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
-#BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
-#BOARD_HOSTAPD_DRIVER             := NL80211
-#BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_qcwcn
-#WIFI_DRIVER_FW_PATH_STA          := "sta"
-#WIFI_DRIVER_FW_PATH_AP           := "ap"
-#TARGET_USES_WCNSS_CTRL           := true
-#TARGET_USES_QCOM_WCNSS_QMI       := true
-#TARGET_USES_WCNSS_MAC_ADDR_REV   := true
+BOARD_HAS_QCOM_WLAN              := true
+BOARD_HAS_QCOM_WLAN_SDK          := true
+BOARD_WLAN_DEVICE                := qcwcn
+WPA_SUPPLICANT_VERSION           := VER_0_8_X
+BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
+BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_qcwcn
+BOARD_HOSTAPD_DRIVER             := NL80211
+BOARD_HOSTAPD_PRIVATE_LIB        := lib_driver_cmd_qcwcn
+WIFI_DRIVER_FW_PATH_STA          := "sta"
+WIFI_DRIVER_FW_PATH_AP           := "ap"
+TARGET_USES_WCNSS_CTRL           := true
+TARGET_USES_QCOM_WCNSS_QMI       := true
+TARGET_USES_WCNSS_MAC_ADDR_REV   := true
 
 # Wifi - EAP-SIM
-CONFIG_EAP_PROXY                 := dummy
+CONFIG_EAP_PROXY                 := qmi
 CONFIG_EAP_PROXY_DUAL_SIM        := true
 
 # Filesystem
