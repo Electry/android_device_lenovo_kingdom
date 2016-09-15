@@ -13,11 +13,7 @@
 # limitations under the License.
 
 # Inherit from those products. Most specific first.
-#$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-PRODUCT_PROPERTY_OVERRIDES := \
-    keyguard.no_require_sim=true
-
-$(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Inherit from kingdom_row device
 $(call inherit-product, device/lenovo/kingdom_row/kingdom_row.mk)
