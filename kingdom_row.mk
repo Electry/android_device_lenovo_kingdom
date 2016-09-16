@@ -223,8 +223,7 @@ PRODUCT_PACKAGES += \
 
 # Performance
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qualcomm.perf.cores_online=2 \
-    ro.sys.fw.bg_apps_limit=32
+    ro.qualcomm.perf.cores_online=2
 
 # Permissions
 PRODUCT_COPY_FILES += \
