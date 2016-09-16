@@ -92,9 +92,9 @@ TARGET_SCREEN_HEIGHT := 2560
 TARGET_SCREEN_WIDTH := 1440
 
 # Camera
-#PRODUCT_PACKAGES += \
-#    camera.msm8974 \
-#    Snap
+PRODUCT_PACKAGES += \
+    camera.msm8974 \
+    Snap
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1
