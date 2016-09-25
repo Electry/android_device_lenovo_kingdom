@@ -16,6 +16,7 @@ import /init.qcom.usb.rc
 import /init.qcom.power.rc
 
 on early-init
+    mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
     chown system system /sys/kernel/debug/kgsl/proc
 
 on init
