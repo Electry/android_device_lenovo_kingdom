@@ -14,10 +14,6 @@
 # limitations under the License.
 #
 
-ifneq ($(QCPATH),)
-$(call inherit-product-if-exists, $(QCPATH)/common/config/device-vendor.mk)
-endif
-
 # Build type
 CM_BUILDTYPE := NIGHTLY
 
@@ -327,7 +323,3 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Call the proprietary setup
 $(call inherit-product-if-exists, vendor/lenovo/kingdom_row/kingdom_row-vendor.mk)
-
-ifneq ($(QCPATH),)
-$(call inherit-product-if-exists, $(QCPATH)/prebuilt_HY11/target/product/msm8974/prebuilt.mk)
-endif

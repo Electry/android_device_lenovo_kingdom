@@ -211,14 +211,4 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 
-# inherit from QC proprietary
-ifneq ($(QCPATH),)
--include $(QCPATH)/common/msm8974/BoardConfigVendor.mk
-
-# QCNE
-ifeq ($(BOARD_USES_QCNE),true)
-TARGET_LDPRELOAD := libNimsWrap.so
-endif
-endif
-
 -include vendor/lenovo/kingdom_row/BoardConfigVendor.mk
