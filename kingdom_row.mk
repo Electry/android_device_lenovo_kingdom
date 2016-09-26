@@ -305,8 +305,7 @@ PRODUCT_PACKAGES += \
     wcnss_service
 
 PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=15
+    wifi.interface=wlan0
 
 # Call the proprietary setup
 $(call inherit-product-if-exists, vendor/lenovo/kingdom_row/kingdom_row-vendor.mk)
