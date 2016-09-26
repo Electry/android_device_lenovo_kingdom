@@ -28,18 +28,17 @@ import org.cyanogenmod.internal.util.FileUtils;
  */
 
 public class KeyDisabler {
-    private static final String CONTROL_PATH =
-    "/sys/devices/virtual/touch/tp_dev/0dbutton";
-    
+
+    private static String CONTROL_PATH = "/sys/devices/virtual/touch/tp_dev/0dbutton";
+
     public static boolean isSupported() {
-        return FileUtils.isFileReadable(CONTROL_PATH) &&
-        FileUtils.isFileWritable(CONTROL_PATH);
+        return FileUtils.isFileWritable(CONTROL_PATH);
     }
-    
+
     public static boolean isActive() {
-        return "0".equals(FileUtils.readOneLine(CONTROL_PATH));
+        return FileUtils.readOneLine(CONTROL_PATH).equals("0");
     }
-    
+
     public static boolean setActive(boolean state) {
         return FileUtils.writeLine(CONTROL_PATH, state ? "0" : "1");
     }

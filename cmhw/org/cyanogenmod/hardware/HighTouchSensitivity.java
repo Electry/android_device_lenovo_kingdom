@@ -16,15 +16,14 @@
 
 package org.cyanogenmod.hardware;
 
-import java.io.File;
-import org.cyanogenmod.hardware.util.FileUtils;
+import org.cyanogenmod.internal.util.FileUtils;
 
 /**
  * Glove mode / high touch sensitivity
  */
 public class HighTouchSensitivity {
 
-    private static String GLOVE_PATH = "/sys/devices/virtual/touch/tp_dev/glove_on";
+    private static String CONTROL_PATH = "/sys/devices/virtual/touch/tp_dev/glove_on";
 
     /**
      * Whether device supports high touch sensitivity.
@@ -32,8 +31,7 @@ public class HighTouchSensitivity {
      * @return boolean Supported devices must return always true
      */
     public static boolean isSupported() {
-        File f = new File(GLOVE_PATH);
-        return f.exists();
+        return FileUtils.isFileWritable(CONTROL_PATH);
     }
 
     /**
@@ -43,10 +41,7 @@ public class HighTouchSensitivity {
      * or the operation failed while reading the status; true in any other case.
      */
     public static boolean isEnabled() {
-        int i;
-        i = Integer.parseInt(FileUtils.readOneLine(GLOVE_PATH));
-
-        return i == 1 ? true : false;
+        return FileUtils.readOneLine(CONTROL_PATH).equals("1");
     }
 
     /**
@@ -57,7 +52,7 @@ public class HighTouchSensitivity {
      * failed; true in any other case.
      */
     public static boolean setEnabled(boolean status) {
-        return FileUtils.writeLine(GLOVE_PATH, String.valueOf(status ? 1 : 0));
+        return FileUtils.writeLine(CONTROL_PATH, status ? "1" : "0");
     }
 
 }
