@@ -59,29 +59,6 @@ PRODUCT_PACKAGES += \
     libtfa98xx \
     tinymix
 
-PRODUCT_PROPERTY_OVERRIDES += \
-     mm.enable.smoothstreaming=true \
-     mm.enable.qcom_parser=37491 \
-     ro.qc.sdk.audio.fluencetype=fluence \
-     persist.audio.fluence.voicecall=true \
-     persist.audio.fluence.voicerec=false \
-     persist.audio.fluence.speaker=false \
-     audio.offload.buffer.size.kb=32 \
-     av.offload.enable=true \
-     av.streaming.offload.enable=true \
-     use.voice.path.for.pcm.voip=true \
-     audio.offload.multiple.enabled=false \
-     audio.offload.gapless.enabled=true \
-     tunnel.audio.encode=true \
-     media.aac_51_output_enabled=true \
-     audio.offload.pcm.16bit.enable=true \
-     audio.offload.pcm.24bit.enable=true
-
-# Bluetooth
-PRODUCT_PROPERTY_OVERRIDES += \
-    bluetooth.hfp.client=1 \
-    ro.qualcomm.bt.hci_transport=smd
-
 # Boot animation
 TARGET_BOOTANIMATION_HALF_RES := true
 TARGET_SCREEN_HEIGHT := 2560
@@ -91,9 +68,6 @@ TARGET_SCREEN_WIDTH := 1440
 PRODUCT_PACKAGES += \
     camera.msm8974 \
     Snap
-
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    camera2.portability.force_api=1
 
 # Dalvik/HWUI
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxxhdpi-3072-dalvik-heap.mk)
@@ -140,10 +114,6 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8974 \
     memtrack.msm8974 \
     liboverlay
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=196608 \
-    persist.hwc.mdpcomp.enable=true
 
 # IPC Security config
 PRODUCT_COPY_FILES += \
@@ -216,10 +186,6 @@ PRODUCT_PACKAGES += \
     NfcNci \
     Tag
 
-# Performance
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.qualcomm.perf.cores_online=1
-
 # Permissions
 PRODUCT_COPY_FILES += \
     external/ant-wireless/antradio-library/com.dsi.ant.antradio_library.xml:system/etc/permissions/com.dsi.ant.antradio_library.xml \
@@ -261,16 +227,6 @@ PRODUCT_PACKAGES += \
     init.qcom.usb.rc \
     init.recovery.qcom.rc
 
-# RIL
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.telephony.default_network=9 \
-    ro.use_data_netmgrd=true \
-    persist.data.netmgrd.qos.enable=true \
-    persist.data.tcpackprio.enable=true \
-    ro.data.large_tcp_window_size=true \
-    telephony.lteOnCdmaDevice=1 \
-    ro.telephony.call_ring.multiple=0
-
 # Telephony-ext
 PRODUCT_PACKAGES += \
     telephony-ext
@@ -281,9 +237,6 @@ PRODUCT_BOOT_JARS += \
 # Thermal
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/thermal-engine.conf:system/etc/thermal-engine-8974.conf
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.vendor.extension_library=libqti-perfd-client.so
 
 # WiFi
 PRODUCT_COPY_FILES += \
@@ -303,9 +256,6 @@ PRODUCT_PACKAGES += \
     hostapd.accept \
     hostapd.deny \
     wcnss_service
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0
 
 # Call the proprietary setup
 $(call inherit-product-if-exists, vendor/lenovo/kingdom_row/kingdom_row-vendor.mk)
