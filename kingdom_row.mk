@@ -81,6 +81,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
 
+# Doze
+PRODUCT_PACKAGES += \
+    LenovoDoze
+
 # Filesystem
 PRODUCT_PACKAGES += \
     setup_fs
