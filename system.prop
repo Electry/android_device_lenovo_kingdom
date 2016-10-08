@@ -27,6 +27,7 @@ ro.qualcomm.bt.hci_transport=smd
 # Camera
 camera2.portability.force_api=1
 camera.cts.test=0
+media.stagefright.legacyencoder=true
 
 # Display & Graphics
 ro.sf.lcd_density=480
