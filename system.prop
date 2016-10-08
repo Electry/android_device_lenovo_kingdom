@@ -22,7 +22,7 @@ audio.offload.pcm.24bit.enable=true
 
 # Bluetooth
 bluetooth.hfp.client=1
-ro.qualcomm.bt.hci_transport=smd
+qcom.bluetooth.soc=smd
 
 # Camera
 camera2.portability.force_api=1
