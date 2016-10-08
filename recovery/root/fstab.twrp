@@ -32,7 +32,7 @@
 /system                  ext4        /dev/block/platform/msm_sdcc.1/by-name/system      flags=display="System";backup;flashimg;canbewiped;wipeingui
 /data                    ext4        /dev/block/platform/msm_sdcc.1/by-name/userdata    flags=display="Data";storage;storagename="Internal storage";backup;canbewiped;wipeingui;wipeduringfactoryreset;encryptable=footer;length=-16384
 /cache                   ext4        /dev/block/platform/msm_sdcc.1/by-name/cache       flags=display="Cache";backup;canbewiped;wipeingui;wipeduringfactoryreset;
-/persist                 ext4        /dev/block/platform/msm_sdcc.1/by-name/persist     flags=display="Persist";backup;fsflags=ro
+/persist                 ext4        /dev/block/platform/msm_sdcc.1/by-name/persist     flags=display="Persist";backup
 /preload                 ext4        /dev/block/platform/msm_sdcc.1/by-name/preload     flags=display="Preload";backup;canbewiped;wipeingui
 
 /firmware                vfat        /dev/block/platform/msm_sdcc.1/by-name/modem       flags=display="Firmware";backup
