@@ -43,7 +43,6 @@ BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom \
 			androidboot.bootdevice=msm_sdcc.1 \
 			ehci-hcd.park=3 \
-			vmalloc=480M \
 			androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
