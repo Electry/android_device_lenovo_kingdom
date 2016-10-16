@@ -20,6 +20,7 @@ import org.cyanogenmod.internal.util.FileUtils;
 import java.io.File;
 
 public class VibratorHW {
+    private static String DEFAULT_PATH = "/sys/class/timed_output/vibrator/vtg_default";
     private static String LEVEL_PATH = "/sys/class/timed_output/vibrator/vtg_level";
     private static String MAX_PATH = "/sys/class/timed_output/vibrator/vtg_max";
     private static String MIN_PATH = "/sys/class/timed_output/vibrator/vtg_min";
@@ -45,7 +46,7 @@ public class VibratorHW {
     }
 
     public static int getDefaultIntensity() {
-        return getMaxIntensity();
+        return Integer.parseInt(FileUtils.readOneLine(DEFAULT_PATH));
     }
 
     public static boolean setIntensity(int intensity) {
