@@ -162,6 +162,24 @@ on boot
     chmod 0644 /sys/class/timed_output/vibrator/vtg_max
     chmod 0644 /sys/class/timed_output/vibrator/vtg_min
 
+    # Display
+    chown system graphics /sys/class/graphics/fb0/dynamic_fps
+    chown system graphics /sys/class/graphics/fb0/idle_notify
+    chown system graphics /sys/class/graphics/fb0/idle_time
+    chown system graphics /sys/class/graphics/fb0/aco
+    chown system graphics /sys/class/graphics/fb0/cta
+    chown system graphics /sys/class/graphics/fb0/cabc
+    chown system graphics /sys/class/graphics/fb0/sre
+    chown system graphics /sys/class/graphics/fb0/rgb
+    chmod 0664 /sys/class/graphics/fb0/dynamic_fps
+    chmod 0664 /sys/class/graphics/fb0/idle_notify
+    chmod 0664 /sys/class/graphics/fb0/idle_time
+    chmod 0664 /sys/class/graphics/fb0/aco
+    chmod 0664 /sys/class/graphics/fb0/cta
+    chmod 0664 /sys/class/graphics/fb0/cabc
+    chmod 0664 /sys/class/graphics/fb0/sre
+    chmod 0664 /sys/class/graphics/fb0/rgb
+
 # msm specific files that need to be created on /data
 on post-fs-data
     mkdir /data/media 0770 media_rw media_rw
