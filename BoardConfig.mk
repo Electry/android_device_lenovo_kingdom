@@ -94,7 +94,7 @@ BOARD_HARDWARE_CLASS := \
 TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/touch/tp_dev/gesture_on"
 
 # Encryption
-TARGET_HW_DISK_ENCRYPTION := false #N
+TARGET_HW_DISK_ENCRYPTION := true
 
 # Filesystem
 BOARD_FLASH_BLOCK_SIZE                  := 131072
