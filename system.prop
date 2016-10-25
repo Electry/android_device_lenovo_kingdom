@@ -24,10 +24,11 @@ audio.offload.pcm.24bit.enable=true
 bluetooth.hfp.client=1
 qcom.bluetooth.soc=smd
 
-# Camera
+# Camera & Media
 camera2.portability.force_api=1
 camera.cts.test=0
 media.stagefright.legacyencoder=true
+media.stagefright.less-secure=true
 
 # Display & Graphics
 ro.sf.lcd_density=480
