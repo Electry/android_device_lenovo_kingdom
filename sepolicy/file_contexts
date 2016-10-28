@@ -1,28 +1,8 @@
-# Camera
-/data/cam_socket.*                                 u:object_r:camera_socket:s0
-
-# Vibrator
-/sys/devices/virtual/timed_output/vibrator/vtg_level   u:object_r:vibeamp_sysfs:s0
-
-# MAC Addresses
-/persist/.genmac                                u:object_r:wifi_data_file:s0
-/persist/.bt_nv.bin                             u:object_r:bluetooth_data_file:s0
-
-# Sensors
-/persist/sns.reg                                u:object_r:sensors_persist_file:s0
+# NFC
+/dev/pn547				u:object_r:nfc_device:s0
 
 # NXP Amplifier
-/dev/tfa9890                                    u:object_r:audio_device:s0
+/dev/tfa9890				u:object_r:audio_device:s0
 
-# NFC
-/dev/pn547                                              u:object_r:nfc_device:s0
-
-# Touch Panel
-/sys/devices/virtual/touch/tp_dev/0dbutton            u:object_r:touchpanel_sysfs:s0
-/sys/devices/virtual/touch/tp_dev/glove_on            u:object_r:touchpanel_sysfs:s0
-/sys/devices/virtual/touch/tp_dev/gesture_on          u:object_r:touchpanel_sysfs:s0
-/sys/devices/gpio_keys.84/disabled_keys               u:object_r:touchpanel_sysfs:s0
-
-# Old camera socket
-/data/cam_socket1                                       u:object_r:camera_socket:s0
-/data/cam_socket2                                       u:object_r:camera_socket:s0
+# Sensors
+/persist/sns.reg			u:object_r:sensors_persist_file:s0
