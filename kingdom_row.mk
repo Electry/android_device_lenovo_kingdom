@@ -221,15 +221,14 @@ PRODUCT_PACKAGES += \
 
 # Ramdisk
 PRODUCT_PACKAGES += \
-    init.qcom.bt.sh \
-    init.qcom.fm.sh \
-    init.qcom-common.rc \
     ueventd.qcom.rc \
     fstab.qcom \
     init.qcom.rc \
     init.qcom.power.rc \
     init.qcom.usb.rc \
-    init.recovery.qcom.rc
+    init.recovery.qcom.rc \
+    init.qcom.bt.sh \
+    init.qcom.fm.sh
 
 # Thermal
 PRODUCT_COPY_FILES += \

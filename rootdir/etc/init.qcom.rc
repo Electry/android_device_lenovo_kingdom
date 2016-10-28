@@ -1,5 +1,6 @@
-# Copyright (c) 2015 The CyanogenMod Project
-
+#
+# Copyright (c) 2016 The CyanogenMod Project
+#
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
@@ -11,22 +12,98 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-import /init.qcom.usb.rc
-import /init.qcom.power.rc
+#
+import init.qcom.usb.rc
+import init.qcom.power.rc
 
 on early-init
-    mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
+    mount debugfs debugfs /sys/kernel/debug
     chown system system /sys/kernel/debug/kgsl/proc
 
 on init
     # Set permissions for persist partition
     mkdir /persist 0771 system system
-    mkdir /oem 0550 root root
+    mkdir /firmware 0771 system system
+
+    # Support legacy paths
+    symlink /sdcard /storage/sdcard0
+
+on fs
+    mount_all ./fstab.qcom
+
+    restorecon_recursive /persist
+    mkdir /persist/data 0700 system system
+
+on post-fs-data
+    mkdir /persist/data/sfs 0700 system system
+    mkdir /persist/data/tz 0700 system system
+
+    # Create directory used by the sensor subsystem
+    mkdir /persist/sensors 0775 system root
+    write /persist/sensors/sensors_settings 1
+    chmod 0644 /persist/sensors/sensors_settings
+    chown system root /persist/sensors/sensors_settings
+
+    mkdir /data/misc/sensors 0775 system system
+    restorecon_recursive /data/misc/sensors
+
+    # We chown/chmod /persist again so because mount is run as root + defaults
+    chown system system /persist
+    chmod 0771 /persist
+
+    # Create directories used by the audio subsystem
+    mkdir /data/audio/ 0770 media audio
+    mkdir /data/misc/audio 0770 audio audio
+
+    # Create directory used by the display clients
+    mkdir /data/misc/display 0770 root system
+
+    # Custom ECC
+    mkdir /data/misc/radio 0770 system radio
+
+    # Create directory for TZ Apps
+    mkdir /data/misc/qsee 0770 system system
+
+    # Create directory for mm-qcamera-daemon
+    mkdir /data/misc/camera 0770 camera camera
+
+    # Create the directories used by the Wireless subsystem
+    mkdir /data/misc/wifi 0770 wifi wifi
+    mkdir /data/misc/wifi/sockets 0770 wifi wifi
+    mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
+    mkdir /data/misc/dhcp 0770 dhcp dhcp
+
+    # Create directory used by the DASH client
+    mkdir /data/misc/dash 0770 media audio
+
+    # Create directories for Location services
+    mkdir /data/misc/location 0770 gps gps
+    mkdir /data/misc/location/mq 0770 gps gps
+    mkdir /data/misc/location/xtwifi 0770 gps gps
+    mkdir /data/misc/location/gpsone_d 0770 system gps
+    mkdir /data/misc/location/quipc 0770 gps system
+    mkdir /data/misc/location/gsiff 0770 gps gps
+
+    # NFC local data and nfcee xml storage
+    mkdir /data/nfc 0770 nfc nfc
+    mkdir /data/nfc/param 0770 nfc nfc
+
+    # Create directory from IMS services
+    mkdir /data/shared 0755 system system
+
+    # Create /data/time folder for time-services
+    mkdir /data/time/ 0700 system system
+
+    # Create PERFD deamon related dirs
+    mkdir /data/misc/perfd 02755 root system
+    mkdir /data/system/perfd 02770 root system
+
+    setprop vold.post_fs_data_done 1
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
     setrlimit 8 67108864 67108864
+
     write /sys/kernel/boot_adsp/boot 1
 
 on boot
@@ -55,28 +132,11 @@ on boot
     chown bluetooth bluetooth /dev/ttyHS2
 
     # Create QMUX deamon socket area
-    mkdir /dev/socket/qmux_radio 0770 radio radio
-    chmod 2770 /dev/socket/qmux_radio
-    mkdir /dev/socket/netmgr 0770 radio radio
-    chmod 2770 /dev/socket/netmgr
-    mkdir /dev/socket/qmux_audio 0770 media audio
-    chmod 2770 /dev/socket/qmux_audio
-    mkdir /dev/socket/qmux_bluetooth 0770 bluetooth bluetooth
-    chmod 2770 /dev/socket/qmux_bluetooth
-    mkdir /dev/socket/qmux_gps 0770 gps gps
-    chmod 2770 /dev/socket/qmux_gps
-
-    # For setting tcp delayed ack
-    chown system system /sys/kernel/ipv4/tcp_delack_seg
-    chown system system /sys/kernel/ipv4/tcp_use_userconfig
-
-    # Define TCP delayed ack settings for WiFi & LTE
-    setprop net.tcp.delack.default     1
-    setprop net.tcp.delack.wifi        20
-    setprop net.tcp.delack.lte         8
-    setprop net.tcp.usercfg.default    0
-    setprop net.tcp.usercfg.wifi       1
-    setprop net.tcp.usercfg.lte        1
+    mkdir /dev/socket/qmux_radio 02770 radio radio
+    mkdir /dev/socket/netmgr 02770 radio radio
+    mkdir /dev/socket/qmux_audio 02770 media audio
+    mkdir /dev/socket/qmux_bluetooth 02770 bluetooth bluetooth
+    mkdir /dev/socket/qmux_gps 02770 gps gps
 
     # Assign TCP buffer thresholds to be ceiling value of technology maximums
     # Increased technology maximums should be reflected here.
@@ -100,10 +160,6 @@ on boot
     # connections on high-throughput links get dropped when
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
-
-    # NFC local data and nfcee xml storage
-    mkdir /data/nfc 0770 nfc nfc
-    mkdir /data/nfc/param 0770 nfc nfc
 
     # Set the console loglevel to < KERN_INFO
     # Set the default message loglevel to KERN_INFO
@@ -180,106 +236,15 @@ on boot
     chmod 0664 /sys/class/graphics/fb0/sre
     chmod 0664 /sys/class/graphics/fb0/rgb
 
-# msm specific files that need to be created on /data
-on post-fs-data
-    mkdir /data/media 0770 media_rw media_rw
-
-    # Create directory for TZ Apps
-    mkdir /data/misc/qsee 0770 system system
-
-    # Bluetooth
-    mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
-
-    # Create directory used by audio subsystem
-    mkdir /data/misc/audio 0770 audio audio
-
-    # Create directory used by sensor subsystem
-    mkdir /persist/sensors 0775 system root
-    write /persist/sensors/sensors_settings 1
-    chmod 0644 /persist/sensors/sensors_settings
-    chown system root /persist/sensors/sensors_settings
-    mkdir /data/misc/sensors 0775 system system
-    restorecon_recursive /data/misc/sensors
-
-    # Create the directories used by the Wireless subsystem
-    mkdir /data/misc/wifi 0770 wifi wifi
-    mkdir /data/misc/wifi/sockets 0770 wifi wifi
-    mkdir /data/misc/wifi/wpa_supplicant 0770 wifi wifi
-    mkdir /data/misc/dhcp 0770 dhcp dhcp
-    chown dhcp dhcp /data/misc/dhcp
-
-    # Create the directories used by CnE subsystem
-    mkdir /data/connectivity 0771 system system
-    chown system system /data/connectivity
-
-    # Create directory used by the DASH client
-    mkdir /data/misc/dash 0770 media audio
-
-    # Create directory used by display clients
-    mkdir /data/misc/display 0770 root system
-
-    # We chown/chmod /persist again so because mount is run as root + defaults
-    chown system system /persist
-    chmod 0771 /persist
-
-    # Create directories for Location services
-    mkdir /data/misc/location 0770 gps gps
-    mkdir /data/misc/location/mq 0770 gps gps
-    mkdir /data/misc/location/xtwifi 0770 gps gps
-    mkdir /data/misc/location/gpsone_d 0770 system gps
-    mkdir /data/misc/location/quipc 0770 gps system/
-    mkdir /data/misc/location/gsiff 0770 gps gps
-
-    # Create directory from IMS services
-    mkdir /data/shared 0755
-    chown system system /data/shared
-
-    # Create /data/time folder for time-services
-    mkdir /data/time/ 0700 system system
-
-    mkdir /data/audio/ 0770 media audio
-
-    setprop vold.post_fs_data_done 1
-
-    # Create PERFD deamon related dirs
-    mkdir /data/misc/perfd 0755 root system
-    chmod 2755 /data/misc/perfd
-    mkdir /data/system/perfd 0770 root system
-    chmod 2770 /data/system/perfd
-
-    # camera sockets
-    mkdir /data/misc/camera 0770 camera camera
-
-    # custom ECC
-    mkdir /data/misc/radio 0700 radio radio
-    exec /system/bin/cp /vendor/etc/qcril.db /data/misc/radio/qcril.db
-    chown radio radio /data/misc/radio/qcril.db
-    chmod 700 /data/misc/radio/qcril.db
-
-on fs
-    mount_all ./fstab.qcom
-    mkdir /dev/usb-ffs 0770 shell shell
-    mkdir /dev/usb-ffs/adb 0770 shell shell
-    mount functionfs adb /dev/usb-ffs/adb uid=2000,gid=2000
-    mkdir /dev/bus 0755 root root
-    mkdir /dev/bus/usb 0755 root root
-
-    restorecon_recursive   /persist
-    mkdir /persist/data 0700 system system
-    mkdir /persist/data/sfs 0700 system system
-    mkdir /persist/data/tz 0700 system system
-
-#    mount ext4 /dev/block/bootdevice/by-name/mrd /oem ro nosuid nodev context=u:object_r:oemfs:s0
-
 service rmt_storage /system/bin/rmt_storage
     class core
     user root
     group system
 
 service rfs_access /system/bin/rfs_access
-   class core
-   user system
-   group system net_raw
+    class core
+    user system
+    group system net_raw
 
 # QMUX must be in multiple groups to support external process connections
 service qmuxd /system/bin/qmuxd
@@ -342,13 +307,6 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     disabled
     oneshot
 
-service fm_dl /system/bin/sh /system/etc/init.qcom.fm.sh
-    class late_start
-    user root
-    group system fm_radio
-    disabled
-    oneshot
-
 service qseecomd /system/bin/qseecomd
     class core
     user root
@@ -376,27 +334,27 @@ service qcamerasvr /system/bin/mm-qcamera-daemon
     group camera system inet input graphics
 
 service mpdecision /system/bin/mpdecision --avg_comp
-   class main
-   user root
-   group system
-   disabled
+    class main
+    user root
+    group system
+    disabled
 
 service thermal-engine /system/vendor/bin/thermal-engine
-   class main
-   user root
-   group root
-   socket thermal-send-client stream 0666 system system
-   socket thermal-recv-client stream 0660 system system
-   socket thermal-recv-passive-client stream 0666 system system
+    class main
+    user root
+    group root
+    socket thermal-send-client stream 0666 system system
+    socket thermal-recv-client stream 0660 system system
+    socket thermal-recv-passive-client stream 0666 system system
 
 service time_daemon /system/bin/time_daemon
-   class late_start
-   user root
-   group root
+    class late_start
+    user root
+    group root
 
 on property:vold.decrypt=trigger_restart_framework
-   start config_bluetooth
-   start wcnss-service
+    start config_bluetooth
+    start wcnss-service
 
 service config_bt_addr /system/bin/btnvtool -O
     class core
@@ -474,10 +432,6 @@ service ril-daemon1 /system/bin/rild -c 2
     user root
     group radio cache inet misc audio sdcard_r sdcard_rw diag qcom_diag log
     group radio cache inet misc audio sdcard_r sdcard_rw diag qcom_diag log
-
-service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
-    class late_start
-    disabled
 
 service fuse_usbdisk /system/bin/sdcard -u 1023 -g 1023 -w 1023 -d /mnt/media_rw/usbdisk /storage/usbdisk
     class late_start
