@@ -90,8 +90,8 @@ BOARD_GLOBAL_CFLAGS += \
 # CM Hardware
 BOARD_USES_CYANOGEN_HARDWARE := true
 BOARD_HARDWARE_CLASS := \
-    hardware/cyanogen/cmhw
-#    $(DEVICE_PATH)/cmhw
+    hardware/cyanogen/cmhw \
+    $(DEVICE_PATH)/cmhw
 
 # DT2W
 TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/touch/tp_dev/gesture_on"
