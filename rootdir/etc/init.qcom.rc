@@ -236,10 +236,6 @@ on boot
     chmod 0664 /sys/class/graphics/fb0/sre
     chmod 0664 /sys/class/graphics/fb0/rgb
 
-on property:sys.boot_completed=1
-    # Temp hack to fix torch not being registered on boot
-    restart media
-
 service rmt_storage /system/bin/rmt_storage
     class core
     user root
