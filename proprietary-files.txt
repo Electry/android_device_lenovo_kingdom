@@ -129,7 +129,6 @@ vendor/lib/libflp.so
 vendor/lib/libgeofence.so
 vendor/lib/libizat_core.so
 vendor/lib/liblbs_core.so
-vendor/lib/libquipc_os_api.so
 
 # Graphics
 vendor/lib/egl/eglsubAndroid.so
