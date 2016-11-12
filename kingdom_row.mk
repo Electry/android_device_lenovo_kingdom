@@ -175,6 +175,10 @@ PRODUCT_PACKAGES += \
     libxml2
 
 # NFC
+# See https://github.com/CyanogenMod/android_external_libnfc-nci/blob/cm-14.1/halimpl/pn54x/Android.mk#L21
+# for magic values of NXP_CHIP_TYPE.
+NXP_CHIP_TYPE := 1
+
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
