@@ -177,6 +177,9 @@ etc/firmware/venus.b04
 etc/firmware/venus.mbn
 etc/firmware/venus.mdt
 
+# NFC Firmware
+vendor/firmware/libpn547_fw.so
+
 # Perf
 bin/mpdecision
 vendor/lib/libqti-perfd-client.so
