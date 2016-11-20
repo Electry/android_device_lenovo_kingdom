@@ -88,6 +88,3 @@ ro.qti.sensors.scrn_ortn=true
 
 # Wifi
 wifi.interface=wlan0
-
-# OTA Server URL
-cm.updater.uri=http://89.203.248.193/cyanogenmod/api
