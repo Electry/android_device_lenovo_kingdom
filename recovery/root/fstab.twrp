@@ -39,7 +39,7 @@
 
 /aboot                   emmc        /dev/block/platform/msm_sdcc.1/by-name/aboot       flags=display="Bootloader";backup
 /boot                    emmc        /dev/block/platform/msm_sdcc.1/by-name/boot        flags=display="Boot (kernel)";backup;flashimg
-/recovery                emmc        /dev/block/platform/msm_sdcc.1/by-name/recovery    flags=display="Recovery";backup
+/recovery                emmc        /dev/block/platform/msm_sdcc.1/by-name/recovery    flags=display="Recovery";backup;flashimg
 /splash                  emmc        /dev/block/platform/msm_sdcc.1/by-name/splash      flags=display="Splash";backup
 /misc                    emmc        /dev/block/platform/msm_sdcc.1/by-name/misc        flags=display="Misc";backup
 /fsg                     emmc        /dev/block/platform/msm_sdcc.1/by-name/fsg         flags=display="FS Golden";backup
