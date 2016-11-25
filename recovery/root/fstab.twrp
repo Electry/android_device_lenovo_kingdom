@@ -44,7 +44,7 @@
 /misc                    emmc        /dev/block/platform/msm_sdcc.1/by-name/misc        flags=display="Misc";backup
 /fsg                     emmc        /dev/block/platform/msm_sdcc.1/by-name/fsg         flags=display="FS Golden";backup
 /esf1                    emmc        /dev/block/platform/msm_sdcc.1/by-name/modemst1    flags=display="ESF (NV Data)";backup
-/esf2                    emmc        /dev/block/platform/msm_sdcc.1/by-name/modemst2    flags=subpartitionof=/esf1;backup
+/esf2                    emmc        /dev/block/platform/msm_sdcc.1/by-name/modemst2    flags=display="ESF2 (NV Data)";subpartitionof=/esf1;backup
 /mrd                     emmc        /dev/block/platform/msm_sdcc.1/by-name/mrd         flags=display="MRD Data";backup
 
 /usbotg                  auto        /dev/block/sda1	/dev/block/sda                  flags=display="USB-OTG";storage;storagename="USB-OTG";canbewiped;wipeingui;removable
