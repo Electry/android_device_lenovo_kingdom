@@ -150,6 +150,11 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 # of the device.
 MAX_EGL_CACHE_SIZE := 2048*1024
 
+# Init
+TARGET_UNIFIED_DEVICE := true
+TARGET_INIT_VENDOR_LIB := libinit_kingdom
+TARGET_RECOVERY_DEVICE_MODULES := libinit_kingdom
+
 # Keymaster
 TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 
