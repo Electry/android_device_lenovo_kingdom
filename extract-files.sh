@@ -1,7 +1,7 @@
 #!/bin/sh
 
 VENDOR=lenovo
-DEVICE=kingdom_row
+DEVICE=kingdom
 PROPRIETARY_FILES=proprietary-files*.txt
 
 BASE=../../../vendor/$VENDOR/$DEVICE/proprietary

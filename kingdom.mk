@@ -256,4 +256,4 @@ PRODUCT_PACKAGES += \
     wcnss_service
 
 # Call the proprietary setup
-$(call inherit-product-if-exists, vendor/lenovo/kingdom_row/kingdom_row-vendor.mk)
+$(call inherit-product-if-exists, vendor/lenovo/kingdom/kingdom-vendor.mk)

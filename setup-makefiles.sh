@@ -1,7 +1,7 @@
 #!/bin/sh
 
 VENDOR=lenovo
-DEVICE=kingdom_row
+DEVICE=kingdom
 OUTDIR=vendor/$VENDOR/$DEVICE
 MAKEFILE=../../../$OUTDIR/$DEVICE-vendor-blobs.mk
 PROPRIETARY_FILES=proprietary-files*.txt
@@ -125,7 +125,7 @@ EOF
 
 LOCAL_PATH := \$(call my-dir)
 
-ifeq (\$(TARGET_DEVICE),kingdom_row)
+ifeq (\$(TARGET_DEVICE),kingdom)
 
 ifeq (\$(QCPATH),)
 

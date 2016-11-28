@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-DEVICE_PATH := device/lenovo/kingdom_row
+DEVICE_PATH := device/lenovo/kingdom
 
 # Include path
 TARGET_SPECIFIC_HEADER_PATH += $(DEVICE_PATH)/include
@@ -49,7 +49,7 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 BOARD_DTBTOOL_ARGS := -2
 TARGET_KERNEL_ARCH := arm
 TARGET_KERNEL_SOURCE := kernel/lenovo/msm8974
-TARGET_KERNEL_CONFIG := kingdom_row_defconfig
+TARGET_KERNEL_CONFIG := kingdom_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
 
 # ANT+
@@ -211,4 +211,4 @@ ifeq ($(HOST_OS),linux)
   endif
 endif
 
--include vendor/lenovo/kingdom_row/BoardConfigVendor.mk
+-include vendor/lenovo/kingdom/BoardConfigVendor.mk
