@@ -58,14 +58,11 @@ ro.vendor.extension_library=libqti-perfd-client.so
 
 # RIL & Data
 telephony.lteOnCdmaDevice=1
-ro.telephony.default_network=9,1
 ro.telephony.call_ring.multiple=0
 ro.use_data_netmgrd=true
 ro.data.large_tcp_window_size=true
 persist.data.netmgrd.qos.enable=true
 persist.data.tcpackprio.enable=true
-
-persist.radio.multisim.config=dsds
 
 rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
 persist.radio.add_power_save=1
