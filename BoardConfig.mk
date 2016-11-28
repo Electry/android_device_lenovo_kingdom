@@ -21,6 +21,8 @@ TARGET_OTA_ASSERT_DEVICE := kingdom,kingdom_row,kingdomt
 
 # Init
 TARGET_UNIFIED_DEVICE := true
+TARGET_INIT_VENDOR_LIB := libinit_kingdom
+TARGET_RECOVERY_DEVICE_MODULES := libinit_kingdom
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8974
