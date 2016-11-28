@@ -16,6 +16,9 @@
 
 DEVICE_PATH := device/lenovo/kingdom
 
+# Assert compatibility
+TARGET_OTA_ASSERT_DEVICE := kingdom,kingdom_row,kingdomt
+
 # Init
 TARGET_UNIFIED_DEVICE := true
 
