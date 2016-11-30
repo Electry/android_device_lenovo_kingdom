@@ -32,6 +32,14 @@ service sbinqseecomd /sbin/qseecomd
     group root
     seclabel u:r:recovery:s0
 
+# Init kingdom variant
+service init_kingdom /system/bin/init_kingdom
+    class late_start
+    user root
+    group root
+    oneshot
+    seclabel u:r:init:s0
+
 on fs
     chmod 0664 /dev/qseecom
     chown system drmrpc /dev/qseecom

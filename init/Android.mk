@@ -17,9 +17,13 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE_TAGS := optional
-LOCAL_C_INCLUDES := system/core/init
+LOCAL_MODULE := init_kingdom
 LOCAL_SRC_FILES := init_kingdom.cpp
-LOCAL_MODULE := libinit_kingdom
+LOCAL_CFLAGS := -Os
+LOCAL_STATIC_LIBRARIES := libc libcutils
+LOCAL_FORCE_STATIC_EXECUTABLE := true
+LOCAL_MODULE_PATH := $(TARGET_RECOVERY_OUT)/root/sbin
+LOCAL_MODULE_TAGS := optional
 
-include $(BUILD_STATIC_LIBRARY)
+
+include $(BUILD_EXECUTABLE)

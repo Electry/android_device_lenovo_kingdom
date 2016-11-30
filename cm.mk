@@ -29,3 +29,6 @@ PRODUCT_GMS_CLIENTID_BASE := android-lenovo
 # Set via init library
 PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
     ro.product.name
+
+PRODUCT_PACKAGES += \
+    init_kingdom

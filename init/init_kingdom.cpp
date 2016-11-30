@@ -30,16 +30,16 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <string.h>
+#include <cutils/klog.h>
+#include <cutils/properties.h>
 
-#include "vendor_init.h"
-#include "property_service.h"
-#include "log.h"
-#include "util.h"
-
-#define LOG_TAG	"libinit_kingdom"
+#define LOG_TAG	"init_kingdom"
 
 #define HWID_PATH       "/sys/class/lenovo/nv/nv_hwid"
 #define HWID_SIZE       4
+
+#define PROP_SIZE	64
 
 static int read_file2(const char *fname, char *data, int max_size)
 {
@@ -50,7 +50,7 @@ static int read_file2(const char *fname, char *data, int max_size)
 
     fd = open(fname, O_RDONLY);
     if (fd < 0) {
-        ERROR("%s: Failed to open '%s'\n", LOG_TAG, fname);
+        KLOG_ERROR(LOG_TAG, "Failed to open '%s'\n", fname);
         return 0;
     }
 
@@ -64,22 +64,24 @@ static int read_file2(const char *fname, char *data, int max_size)
     return 1;
 }
 
-void vendor_load_properties()
+int main()
 {
     char hwid[HWID_SIZE];
+    char device[PROP_SIZE];
 
     if (!read_file2(HWID_PATH, hwid, HWID_SIZE)) {
-        ERROR("%s: Failed to read hwid, defaulting to ROW variant\n",
-                LOG_TAG);
+        KLOG_ERROR(LOG_TAG, "Failed to read hwid, defaulting to ROW variant\n");
         goto set_variant_row;
     }
 
     if (strncmp(hwid, "0001", HWID_SIZE) == 0) {
         /* China */
-        property_set("ro.build.product", "kingdomt");
+        strncpy(device, "kingdomt", PROP_SIZE);
+
+        property_set("ro.build.product", device);
         property_set("ro.product.model", "K920 (CN)");
-        property_set("ro.product.device", "kingdomt");
-        property_set("ro.product.name", "kingdomt");
+        property_set("ro.product.device", device);
+        property_set("ro.product.name", device);
 
         property_set("ro.build.description",
             "kingdomt-user 5.0.2 LRX22G VIBEUI_V2.5_1627_5.1894.1_ST_K920 release-keys");
@@ -89,10 +91,12 @@ void vendor_load_properties()
     } else if (strncmp(hwid, "0100", HWID_SIZE) == 0) {
 set_variant_row:
         /* Rest of the World */
-        property_set("ro.build.product", "kingdom_row");
+        strncpy(device, "kingdom_row", PROP_SIZE);
+
+        property_set("ro.build.product", device);
         property_set("ro.product.model", "K920 (ROW)");
-        property_set("ro.product.device", "kingdom_row");
-        property_set("ro.product.name", "kingdom_row");
+        property_set("ro.product.device", device);
+        property_set("ro.product.name", device);
 
         property_set("ro.build.description",
             "kingdom_row-user 5.0.2 LRX22G K920_S288_160224_ROW release-keys");
@@ -100,12 +104,14 @@ set_variant_row:
             "Lenovo/kingdom_row/kingdom_row:5.0.2/LRX22G/K920_S288_160224_ROW:user/release-keys");
 
     } else {
-        ERROR("%s: Unknown hwid [%s], defaulting to ROW variant\n",
-                LOG_TAG, hwid);
+        KLOG_ERROR(LOG_TAG, "Unknown hwid [%s], defaulting to ROW variant\n",
+                    hwid);
         goto set_variant_row;
     }
 
-    INFO("%s: Found hwid [%s] setting build properties for [%s] device\n",
-            LOG_TAG, hwid, property_get("ro.product.device").c_str());
+    KLOG_INFO(LOG_TAG, "Found hwid [%s] setting build properties for [%s] device\n",
+                hwid, device);
+
+    return 0;
 }
 
