@@ -23,6 +23,9 @@ DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay vendor/extra/overlays/phone-108
 # Haters gonna hate..
 PRODUCT_CHARACTERISTICS := nosdcard
 
+# Init
+PRODUCT_PACKAGES += init_kingdom
+
 
 # ANT+
 PRODUCT_PACKAGES += \
@@ -69,7 +72,7 @@ PRODUCT_PACKAGES += \
     camera.msm8974 \
     Snap
 
-# Dalvik/HWUI
+# Dalvik/HWUI
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxxhdpi-3072-dalvik-heap.mk)
 $(call inherit-product-if-exists, frameworks/native/build/phone-xxxhdpi-3072-hwui-memory.mk)
 
@@ -77,7 +80,7 @@ $(call inherit-product-if-exists, frameworks/native/build/phone-xxxhdpi-3072-hwu
 PRODUCT_PACKAGES += \
     librmnetctl
 
-# Display
+# Display
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
 

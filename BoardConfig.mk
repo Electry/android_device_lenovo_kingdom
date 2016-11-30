@@ -19,6 +19,9 @@ DEVICE_PATH := device/lenovo/kingdom
 # Assert compatibility
 TARGET_OTA_ASSERT_DEVICE := kingdom,kingdom_row,kingdomt
 
+# Init
+TARGET_UNIFIED_DEVICE := true
+
 # Include path
 TARGET_SPECIFIC_HEADER_PATH += $(DEVICE_PATH)/include
 
@@ -149,11 +152,6 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 # binaries. Decrease the size if RAM or Flash Storage size is a limitation
 # of the device.
 MAX_EGL_CACHE_SIZE := 2048*1024
-
-# Init
-TARGET_UNIFIED_DEVICE := true
-TARGET_INIT_VENDOR_LIB := libinit_kingdom
-TARGET_RECOVERY_DEVICE_MODULES := libinit_kingdom
 
 # Keymaster
 TARGET_KEYMASTER_WAIT_FOR_QSEE := true
