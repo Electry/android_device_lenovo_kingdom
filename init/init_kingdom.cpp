@@ -41,6 +41,9 @@
 
 #define PROP_SIZE	64
 
+#define RETRY_MS	500
+#define RETRY_COUNT	10
+
 static int read_file2(const char *fname, char *data, int max_size)
 {
     int fd, rc;
@@ -54,7 +57,7 @@ static int read_file2(const char *fname, char *data, int max_size)
         return 0;
     }
 
-    rc = read(fd, data, max_size - 1);
+    rc = read(fd, data, max_size);
     if ((rc > 0) && (rc < max_size))
         data[rc] = '\0';
     else
@@ -68,8 +71,16 @@ int main()
 {
     char hwid[HWID_SIZE];
     char device[PROP_SIZE];
+    int retry = RETRY_COUNT;
 
-    if (!read_file2(HWID_PATH, hwid, HWID_SIZE)) {
+    while (retry && (!read_file2(HWID_PATH, hwid, HWID_SIZE)
+                                        || strlen(hwid) == 0))
+    {
+        usleep(RETRY_MS * 1000);
+        retry--;
+    }
+
+    if (!retry) {
         KLOG_ERROR(LOG_TAG, "Failed to read hwid, defaulting to ROW variant\n");
         goto set_variant_row;
     }
