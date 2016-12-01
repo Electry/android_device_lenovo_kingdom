@@ -41,6 +41,9 @@
 #define HWID_PATH       "/sys/class/lenovo/nv/nv_hwid"
 #define HWID_SIZE       4
 
+#define RETRY_MS	500
+#define RETRY_COUNT	20
+
 #define PROP_SIZE	64
 
 static int read_file2(const char *fname, char *data, int max_size)
@@ -71,7 +74,17 @@ void vendor_load_properties()
     char hwid[HWID_SIZE];
     char device[PROP_SIZE];
 
-    if (!read_file2(HWID_PATH, hwid, HWID_SIZE + 1)) {
+    int retry = RETRY_COUNT;
+    int rc = read_file2(HWID_PATH, hwid, HWID_SIZE + 1);
+
+    while (retry && (!rc || strlen(hwid) == 0)) {
+        retry--;
+        ERROR("%s: Waiting for nv_hwid...\n", LOG_TAG);
+        usleep(RETRY_MS * 1000);
+        rc = read_file2(HWID_PATH, hwid, HWID_SIZE + 1);
+    }
+
+    if (!retry) {
         ERROR("%s: Failed to read hwid [%s], defaulting to ROW variant\n",
                 LOG_TAG, hwid);
         goto set_variant_row;
@@ -116,7 +129,8 @@ set_variant_row:
     property_set("ro.product.device", device);
     property_set("ro.product.name", device);
 
-    ERROR("%s: Found hwid [%s] setting build properties for [%s] device\n",
-            LOG_TAG, hwid, device);
+    ERROR("%s: Found hwid [%s]\n", LOG_TAG, hwid);
+    ERROR("%s: Setting build properties for [%s] device\n",
+            LOG_TAG, device);
 }
 
