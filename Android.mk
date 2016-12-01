@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-ifeq ($(TARGET_DEVICE),kingdom_row)
+ifeq ($(TARGET_DEVICE),kingdom)
 
 LOCAL_PATH := $(call my-dir)
 
