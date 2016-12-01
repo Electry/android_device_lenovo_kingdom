@@ -89,11 +89,7 @@ int main()
         /* China */
         strncpy(device, "kingdomt", PROP_SIZE);
 
-        property_set("ro.build.product", device);
         property_set("ro.product.model", "K920 (CN)");
-        property_set("ro.product.device", device);
-        property_set("ro.product.name", device);
-
         property_set("ro.build.description",
             "kingdomt-user 5.0.2 LRX22G VIBEUI_V2.5_1627_5.1894.1_ST_K920 release-keys");
         property_set("ro.build.fingerprint",
@@ -104,11 +100,7 @@ set_variant_row:
         /* Rest of the World */
         strncpy(device, "kingdom_row", PROP_SIZE);
 
-        property_set("ro.build.product", device);
         property_set("ro.product.model", "K920 (ROW)");
-        property_set("ro.product.device", device);
-        property_set("ro.product.name", device);
-
         property_set("ro.build.description",
             "kingdom_row-user 5.0.2 LRX22G K920_S288_160224_ROW release-keys");
         property_set("ro.build.fingerprint",
@@ -119,6 +111,11 @@ set_variant_row:
                     hwid);
         goto set_variant_row;
     }
+
+    property_set("ro.build.product", device);
+    property_set("ro.product.device", device);
+    property_set("ro.product.name", device);
+    property_set("ro.product.realdevice", device);
 
     KLOG_INFO(LOG_TAG, "Found hwid [%s] setting build properties for [%s] device\n",
                 hwid, device);
