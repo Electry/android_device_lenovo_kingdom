@@ -18,18 +18,14 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
-PRODUCT_NAME := cm_kingdom_row
-PRODUCT_DEVICE := kingdom_row
+PRODUCT_NAME := cm_kingdom
+PRODUCT_DEVICE := kingdom
 PRODUCT_BRAND := Lenovo
-PRODUCT_MODEL := K920
 PRODUCT_MANUFACTURER := Lenovo
+PRODUCT_MODEL := K920
 
 PRODUCT_GMS_CLIENTID_BASE := android-lenovo
 
-TARGET_VENDOR := lenovo
-TARGET_VENDOR_PRODUCT_NAME := kingdom_row
-TARGET_VENDOR_DEVICE_NAME := kingdom_row
-
-PRODUCT_BUILD_PROP_OVERRIDES += \
-    TARGET_DEVICE=kingdom_row \
-    PRODUCT_NAME=kingdom_row
+# Set via init library
+PRODUCT_SYSTEM_PROPERTY_BLACKLIST := \
+    ro.product.name

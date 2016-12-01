@@ -14,7 +14,10 @@
 # limitations under the License.
 #
 
-DEVICE_PATH := device/lenovo/kingdom_row
+DEVICE_PATH := device/lenovo/kingdom
+
+# Init
+TARGET_UNIFIED_DEVICE := true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := MSM8974
@@ -46,7 +49,7 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 BOARD_DTBTOOL_ARGS := -2
 TARGET_KERNEL_ARCH := arm
 TARGET_KERNEL_SOURCE := kernel/lenovo/msm8974
-TARGET_KERNEL_CONFIG := kingdom_row_defconfig
+TARGET_KERNEL_CONFIG := kingdom_defconfig
 TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
 
 # Encryption
