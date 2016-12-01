@@ -32,7 +32,18 @@ service sbinqseecomd /sbin/qseecomd
     group root
     seclabel u:r:recovery:s0
 
+service rmt_storage /sbin/rmt_storage
+    class core
+    user root
+    group system
+
 on fs
+    # HACK: In order to successfully read nv_hwid from NV
+    # during vendor_load_properties() we need to start adsp
+    # with rmt_storage service sooner
+    write /sys/kernel/boot_adsp/boot 1
+    start rmt_storage
+
     chmod 0664 /dev/qseecom
     chown system drmrpc /dev/qseecom
     chmod 0664 /dev/ion
