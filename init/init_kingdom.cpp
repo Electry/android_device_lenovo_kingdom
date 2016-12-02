@@ -96,8 +96,8 @@ void vendor_load_properties()
 
         property_set("ro.product.model", "K920 (CN)");
 
-        property_set("ro.telephony.default_network", "20,20");
-        property_set("persist.radio.multisim.config", "dsda");
+        //property_set("ro.telephony.default_network", "20,20");
+        //property_set("persist.radio.multisim.config", "dsda");
 
         property_set("ro.build.description",
             "kingdomt-user 5.0.2 LRX22G VIBEUI_V2.5_1627_5.1894.1_ST_K920 release-keys");
@@ -111,8 +111,8 @@ set_variant_row:
 
         property_set("ro.product.model", "K920 (ROW)");
 
-        property_set("ro.telephony.default_network", "20,1");
-        property_set("persist.radio.multisim.config", "dsds");
+        //property_set("ro.telephony.default_network", "20,1");
+        //property_set("persist.radio.multisim.config", "dsds");
 
         property_set("ro.build.description",
             "kingdom_row-user 5.0.2 LRX22G K920_S288_160224_ROW release-keys");
