@@ -93,10 +93,8 @@ void vendor_load_properties()
     if (strncmp(hwid, "0001", HWID_SIZE) == 0) {
         /* China */
         strncpy(device, "kingdomt", PROP_SIZE);
-
         property_set("ro.product.model", "K920 (CN)");
 
-        property_set("ro.telephony.default_network", "20,20");
         property_set("persist.radio.multisim.config", "dsda");
 
         property_set("ro.build.description",
@@ -108,10 +106,8 @@ void vendor_load_properties()
 set_variant_row:
         /* Rest of the World */
         strncpy(device, "kingdom_row", PROP_SIZE);
-
         property_set("ro.product.model", "K920 (ROW)");
 
-        property_set("ro.telephony.default_network", "20,1");
         property_set("persist.radio.multisim.config", "dsds");
 
         property_set("ro.build.description",
@@ -128,6 +124,9 @@ set_variant_row:
     property_set("ro.build.product", device);
     property_set("ro.product.device", device);
     property_set("ro.product.name", device);
+
+    // 1st SIM LTE+3G+2G, 2nd SIM 2G only
+    property_set("ro.telephony.default_network", "9,1");
 
     ERROR("%s: Found hwid [%s]\n", LOG_TAG, hwid);
     ERROR("%s: Setting build properties for [%s] device\n",
