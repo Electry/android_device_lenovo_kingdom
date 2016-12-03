@@ -111,6 +111,7 @@ etc/firmware/cpp_firmware_v1_2_0.fw
 
 # DRM
 bin/qseecomd
+lib/libdrmdecrypt.so
 vendor/lib/libQSEEComAPI.so
 vendor/lib/libdrmfs.so
 vendor/lib/libdrmtime.so
