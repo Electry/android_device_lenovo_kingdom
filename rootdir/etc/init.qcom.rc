@@ -239,6 +239,9 @@ on boot
     chmod 0664 /sys/class/graphics/fb0/sre
     chmod 0664 /sys/class/graphics/fb0/rgb
 
+    # Wifi firmware reload path
+    chown wifi wifi /sys/module/wlan/parameters/fwpath
+
     # Give PowerHAL power
     trigger enable-low-power
 
