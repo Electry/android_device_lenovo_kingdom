@@ -94,7 +94,7 @@ BOARD_HARDWARE_CLASS := \
     $(DEVICE_PATH)/cmhw
 
 # DT2W
-TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/touch/tp_dev/gesture_on"
+TARGET_TAP_TO_WAKE_NODE := "/sys/class/touchscreen/device/gesture"
 
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true

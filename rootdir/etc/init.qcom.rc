@@ -199,12 +199,12 @@ on boot
     chown system system /sys/class/leds/led:rgb_blue/blink
 
     # KeyDisabler
-    chown root system /sys/devices/virtual/touch/tp_dev/0dbutton
-    chmod 0660 /sys/devices/virtual/touch/tp_dev/0dbutton
+    chown root system /sys/class/touchscreen/device/0dbutton
+    chmod 0660 /sys/class/touchscreen/device/0dbutton
 
     # Tap2Wake
-    chown system system /sys/devices/virtual/touch/tp_dev/gesture_on
-    chmod 0660 /sys/devices/virtual/touch/tp_dev/gesture_on
+    chown system system /sys/class/touchscreen/device/gesture
+    chmod 0660 /sys/class/touchscreen/device/gesture
 
     # Vibrator
     chown system system /sys/class/timed_output/vibrator/enable
