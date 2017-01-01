@@ -1,5 +1,6 @@
 #
 # Copyright (C) 2016 The CyanogenMod Project
+#           (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -88,9 +89,7 @@ BOARD_GLOBAL_CFLAGS += \
     -DBOARD_CHARGING_CMDLINE_VALUE='"usb_cable"'
 
 # CM Hardware
-BOARD_USES_CYANOGEN_HARDWARE := true
 BOARD_HARDWARE_CLASS := \
-    hardware/cyanogen/cmhw \
     $(DEVICE_PATH)/cmhw
 
 # DT2W
