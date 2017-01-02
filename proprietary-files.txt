@@ -244,4 +244,4 @@ vendor/lib/mediadrm/libwvdrmengine.so
 
 # Wifi
 lib/libwcnss_qmi.so
-lib/libwpa_qmi_eap_proxy.so
+-lib/libwpa_qmi_eap_proxy.so
