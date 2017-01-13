@@ -92,6 +92,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     setup_fs
 
+# FlipFlap
+PRODUCT_PACKAGES += \
+    FlipFlap
+
 # FM
 PRODUCT_PACKAGES += \
     FMRadio \

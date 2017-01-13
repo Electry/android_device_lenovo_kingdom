@@ -309,11 +309,6 @@
     <integer name="config_autoBrightnessDarkeningLightDebounce">2000</integer>
     <integer name="config_autoBrightnessAmbientLightHorizon">5000</integer>
 
-    <!-- Indicate whether closing the lid causes the device to go to sleep and opening
-         it causes the device to wake up.
-         The default is false. -->
-    <bool name="config_lidControlsSleep">true</bool>
-
     <!-- Base "touch slop" value used by ViewConfiguration as a
          movement threshold where scrolling should begin. -->
     <dimen name="config_viewConfigurationTouchSlop">4dp</dimen>
