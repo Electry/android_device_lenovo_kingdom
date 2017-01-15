@@ -317,17 +317,6 @@ service charger /sbin/healthd -c
     critical
     seclabel u:r:healthd:s0
 
-service qbcharger /charger -m 1
-    disabled
-    oneshot
-    seclabel u:r:healthd:s0
-
-on property:sys.qbcharger.enable=true
-    start qbcharger
-
-on property:sys.qbcharger.enable=false
-    stop qbcharger
-
 service qcamerasvr /system/bin/mm-qcamera-daemon
     class main
     user camera
