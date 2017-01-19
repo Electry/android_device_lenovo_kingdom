@@ -18,35 +18,32 @@
 <resources>
     <!-- Camera Preferences Video Quality entries -->
     <string-array name="pref_video_quality_entries" translatable="false">
-        <item>4K UHD (2160p)</item>
-        <item>2.5K QHD (1440p)</item>
-        <item>2K (1440p) (4:3)</item>
+        <item>4k UHD (2160p)</item>
+        <item>QHD (1440p)</item>
         <item>FHD (1080p)</item>
         <item>HD (720p)</item>
-        <item>WVGA (480p) (15:10)</item>
+        <item>SD (480p) (15:10)</item>
         <item>VGA (480p) (4:3)</item>
-        <item>HVGA (320p) (4:3)</item>
         <item>QVGA (240p) (4:3)</item>
-        <item>QCIF (144p)</item>
     </string-array>
-    
+
     <string-array name="pref_video_quality_entryvalues" translatable="false">
         <item>3840x2160</item>
         <item>2560x1440</item>
-        <item>1920x1440</item>
+    <!--<item>1920x1440</item>-->
         <item>1920x1080</item>
         <item>1280x720</item>
     <!--<item>864x480</item>-->
     <!--<item>800x480</item>-->
         <item>720x480</item>
         <item>640x480</item>
-        <item>480x320</item>
+    <!--<item>480x320</item>-->
     <!--<item>352x288</item>-->
         <item>320x240</item>
-        <item>176x144</item>
+    <!--<item>176x144</item>-->
     </string-array>
 
-
+<?ignore
     <!-- Camera Preferences Picture Size entries -->
     <string-array name="pref_camera_picturesize_entries" translatable="false">
         <item>16.0 MP</item>
@@ -97,4 +94,5 @@
     <!--<item>320x240</item>-->   <!--  0.1MP   4:3  B&F -->
     <!--<item>176x144</item>-->   <!--  0.0MP 1.2:1  B&F -->
     </string-array>
+?>
 </resources>
