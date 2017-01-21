@@ -1,4 +1,5 @@
-# Copyright (C) 2016 The CyanogenMod Project
+#
+# Copyright (C) 2017 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +19,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit some common CM stuff.
 $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
-PRODUCT_NAME := cm_kingdom
+PRODUCT_NAME := lineage_kingdom
 PRODUCT_DEVICE := kingdom
 PRODUCT_BRAND := Lenovo
 PRODUCT_MANUFACTURER := Lenovo
