@@ -1,5 +1,5 @@
 /*
-   Copyright (c) 2016, The CyanogenMod Project
+   Copyright (c) 2017, The LineageOS Project
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -36,7 +36,7 @@
 #include "log.h"
 #include "util.h"
 
-#define LOG_TAG	"init_kingdom"
+#define LOG_TAG         "init_kingdom"
 
 #define HWID_PATH       "/sys/class/lenovo/nv/nv_hwid"
 #define HWID_SIZE       4
@@ -90,6 +90,8 @@ void vendor_load_properties()
         goto set_variant_row;
     }
 
+    ERROR("%s: Found hwid [%s]\n", LOG_TAG, hwid);
+
     if (strncmp(hwid, "0001", HWID_SIZE) == 0) {
         /* China */
         strncpy(device, "kingdomt", PROP_SIZE);
@@ -125,10 +127,9 @@ set_variant_row:
     property_set("ro.product.device", device);
     property_set("ro.product.name", device);
 
-    // 1st SIM LTE+3G+2G, 2nd SIM 2G only
-    property_set("ro.telephony.default_network", "9,1");
+    // LTE+3G+2G on both SIMs
+    property_set("ro.telephony.default_network", "9,9");
 
-    ERROR("%s: Found hwid [%s]\n", LOG_TAG, hwid);
     ERROR("%s: Setting build properties for [%s] device\n",
             LOG_TAG, device);
 }
