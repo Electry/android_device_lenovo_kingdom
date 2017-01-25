@@ -188,8 +188,8 @@ vendor/lib/libsmemlog.so
 vendor/lib/libsystem_health_mon.so
 
 # Radio
-priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
-app/shutdownlistener/shutdownlistener.apk
+-priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
+-app/shutdownlistener/shutdownlistener.apk
 bin/diag_mdlog
 bin/netmgrd
 bin/qmuxd
@@ -230,7 +230,7 @@ vendor/lib/libthermalclient.so
 vendor/lib/libthermalioctl.so
 
 # Time services
-app/TimeService/TimeService.apk
+-app/TimeService/TimeService.apk
 bin/time_daemon
 vendor/lib/libtime_genoff.so
 vendor/lib/libTimeService.so
