@@ -40,30 +40,37 @@ on enable-low-power
     write /sys/module/msm_thermal/core_control/enabled 0
 
     # Apply common values
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu2/cpufreq/scaling_governor "interactive"
     write /sys/devices/system/cpu/cpu3/cpufreq/scaling_governor "interactive"
+    write /sys/devices/system/cpu/cpu1/online 0
+    write /sys/devices/system/cpu/cpu2/online 0
+    write /sys/devices/system/cpu/cpu3/online 0
     write /sys/devices/system/cpu/cpufreq/interactive/above_hispeed_delay "20000 1400000:40000 1700000:20000"
     write /sys/devices/system/cpu/cpufreq/interactive/timer_rate 30000
 
     # Apply Balanced profile
     write /sys/devices/system/cpu/cpufreq/interactive/boost 0
-    write /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration 80000
+    write /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration 200000
     write /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load 95
     write /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq 1497600
     write /sys/devices/system/cpu/cpufreq/interactive/io_is_busy 1
     write /sys/devices/system/cpu/cpufreq/interactive/min_sample_time 40000
     write /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor 100000
     write /sys/devices/system/cpu/cpufreq/interactive/target_loads "70 1497600:90 1958400:93 2265600:96"
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2457600
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 300000
+    write /sys/kernel/cpufreq_limit/limited_max_freq 2457600
+    write /sys/kernel/cpufreq_limit/limited_min_freq 300000
     write /sys/module/cpu_boost/parameters/input_boost_freq 1497600
     write /sys/module/cpu_boost/parameters/input_boost_ms 40
     write /sys/class/kgsl/kgsl-3d0/max_gpuclk 578000000
 
     # Let PowerHAL handle this
     chown root system /sys/devices/system/cpu/cpufreq/interactive/boost
+    chown root system /sys/devices/system/cpu/cpufreq/interactive/boostpulse
     chown root system /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration
     chown root system /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
     chown root system /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
@@ -71,10 +78,13 @@ on enable-low-power
     chown root system /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
     chown root system /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
     chown root system /sys/devices/system/cpu/cpufreq/interactive/target_loads
+    chown root system /sys/kernel/cpufreq_limit/limited_max_freq
+    chown root system /sys/kernel/cpufreq_limit/limited_min_freq
     chown root system /sys/module/cpu_boost/parameters/input_boost_freq
     chown root system /sys/module/cpu_boost/parameters/input_boost_ms
     chown root system /sys/class/kgsl/kgsl-3d0/max_gpuclk
     chmod 664 /sys/devices/system/cpu/cpufreq/interactive/boost
+    chmod 664 /sys/devices/system/cpu/cpufreq/interactive/boostpulse
     chmod 664 /sys/devices/system/cpu/cpufreq/interactive/boostpulse_duration
     chmod 664 /sys/devices/system/cpu/cpufreq/interactive/go_hispeed_load
     chmod 664 /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
@@ -82,10 +92,11 @@ on enable-low-power
     chmod 664 /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
     chmod 664 /sys/devices/system/cpu/cpufreq/interactive/sampling_down_factor
     chmod 664 /sys/devices/system/cpu/cpufreq/interactive/target_loads
+    chmod 664 /sys/kernel/cpufreq_limit/limited_max_freq
+    chmod 664 /sys/kernel/cpufreq_limit/limited_min_freq
     chmod 664 /sys/module/cpu_boost/parameters/input_boost_freq
     chmod 664 /sys/module/cpu_boost/parameters/input_boost_ms
     chmod 664 /sys/class/kgsl/kgsl-3d0/max_gpuclk
-
 
     chown root system /sys/devices/system/cpu/cpu1/online
     chown root system /sys/devices/system/cpu/cpu2/online

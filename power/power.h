@@ -24,9 +24,8 @@ enum {
 };
 
 typedef struct governor_settings {
-    int is_interactive;
+    int boost_allow;
     /* interactive */
-    int boost;
     int boostpulse_duration;
     int go_hispeed_load;
     int go_hispeed_load_off;
@@ -44,14 +43,14 @@ typedef struct governor_settings {
     /* cpuboost */
     int input_boost_freq;
     int input_boost_ms;
-    /* gpu */
+    /* kgsl */
     int max_gpuclk;
 } power_profile;
 
 static power_profile profiles[PROFILE_MAX] = {
     [PROFILE_POWER_SAVE] = {
+        .boost_allow =            0,
         /* interactive */
-        .boost =                  0,
         .boostpulse_duration =    0,
         .go_hispeed_load =        95,
         .go_hispeed_load_off =    95,
@@ -69,13 +68,13 @@ static power_profile profiles[PROFILE_MAX] = {
         /* cpuboost */
         .input_boost_freq =       0,
         .input_boost_ms =         0,
-        /* gpu */
+        /* kgsl */
         .max_gpuclk =             389000000,
     },
     [PROFILE_BALANCED] = {
+        .boost_allow =            1,
         /* interactive */
-        .boost =                  0,
-        .boostpulse_duration =    80000,
+        .boostpulse_duration =    200000,
         .go_hispeed_load =        95,
         .go_hispeed_load_off =    95,
         .hispeed_freq =           1497600,
@@ -92,15 +91,13 @@ static power_profile profiles[PROFILE_MAX] = {
         /* cpuboost */
         .input_boost_freq =       1497600,
         .input_boost_ms =         40,
-        /* gpu */
+        /* kgsl */
         .max_gpuclk =             578000000,
     },
     [PROFILE_HIGH_PERFORMANCE] = {
+        .boost_allow =            1,
         /* interactive */
-        .boost =                  1,
-        /* The CPU is already boosted, set duration to zero
-         * to avoid unneccessary writes to boostpulse */
-        .boostpulse_duration =    0,
+        .boostpulse_duration =    1000000,
         .go_hispeed_load =        75,
         .go_hispeed_load_off =    75,
         .hispeed_freq =           1958400,
@@ -117,13 +114,13 @@ static power_profile profiles[PROFILE_MAX] = {
         /* cpuboost */
         .input_boost_freq =       1728000,
         .input_boost_ms =         60,
-        /* gpu */
+        /* kgsl */
         .max_gpuclk =             578000000,
     },
     [PROFILE_BIAS_POWER_SAVE] = {
+        .boost_allow =            1,
         /* interactive */
-        .boost =                  0,
-        .boostpulse_duration =    60000,
+        .boostpulse_duration =    100000,
         .go_hispeed_load =        95,
         .go_hispeed_load_off =    95,
         .hispeed_freq =           960000,
@@ -141,13 +138,13 @@ static power_profile profiles[PROFILE_MAX] = {
         /* cpuboost */
         .input_boost_freq =       1190400,
         .input_boost_ms =         40,
-        /* gpu */
+        /* kgsl */
         .max_gpuclk =             578000000,
     },
     [PROFILE_BIAS_PERFORMANCE] = {
+        .boost_allow =            1,
         /* interactive */
-        .boost =                  0,
-        .boostpulse_duration =    120000,
+        .boostpulse_duration =    500000,
         .go_hispeed_load =        90,
         .go_hispeed_load_off =    90,
         .hispeed_freq =           1574400,
@@ -164,7 +161,7 @@ static power_profile profiles[PROFILE_MAX] = {
         /* cpuboost */
         .input_boost_freq =       1574400,
         .input_boost_ms =         60,
-        /* gpu */
+        /* kgsl */
         .max_gpuclk =             578000000,
     },
 };
