@@ -199,8 +199,9 @@ TARGET_USES_WCNSS_MAC_ADDR_REV   := true
 CONFIG_EAP_PROXY                 := qmi
 CONFIG_EAP_PROXY_DUAL_SIM        := true
 
+# DEX Pre-optimization
 ifeq ($(HOST_OS),linux)
-  ifeq ($(call match-word-in-list,$(TARGET_BUILD_VARIANT),user),true)
+  ifneq ($(TARGET_BUILD_VARIANT),eng)
     ifeq ($(WITH_DEXPREOPT),)
       WITH_DEXPREOPT := true
     endif
