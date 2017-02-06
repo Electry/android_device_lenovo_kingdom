@@ -159,7 +159,6 @@ vendor/firmware/libpn547_fw.so
 
 # Perf
 bin/mpdecision
-vendor/lib/libqti-perfd-client.so
 
 # Postprocessing
 vendor/bin/mm-pp-daemon
