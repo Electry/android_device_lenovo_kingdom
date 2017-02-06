@@ -15,9 +15,6 @@
 # limitations under the License.
 #
 
-# Build type
-CM_BUILDTYPE := NIGHTLY
-
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay vendor/extra/overlays/phone-1080p
 
