@@ -237,8 +237,7 @@ PRODUCT_PACKAGES += \
     init.qcom.power.rc \
     init.qcom.usb.rc \
     init.recovery.qcom.rc \
-    init.qcom.bt.sh \
-    init.qcom.fm.sh
+    init.qcom.bt.sh
 
 # Thermal
 PRODUCT_COPY_FILES += \
