@@ -119,9 +119,6 @@ vendor/lib/librpmb.so
 vendor/lib/libsecureui.so
 vendor/lib/libssd.so
 
-# FM Radio
-bin/fm_qsoc_patches
-
 # GPS
 lib/libloc_api_v02.so
 lib/libloc_ds_api.so
