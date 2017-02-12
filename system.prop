@@ -52,7 +52,6 @@ persist.gps.qc_nlp_in_use=0
 ro.gps.agps_provider=1
 
 # Performance
-ro.qualcomm.perf.cores_online=1
 ro.vendor.extension_library=libqti-perfd-client.so
 
 # RIL & Data
