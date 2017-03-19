@@ -24,6 +24,7 @@
 #include <sys/stat.h>
 
 #include <utils/Log.h>
+#include <cutils/properties.h>
 
 #include "power.h"
 
@@ -34,6 +35,11 @@
 #define CPUBOOST_PATH        "/sys/module/cpu_boost/parameters/"
 #define KGSL_PATH            "/sys/class/kgsl/kgsl-3d0/"
 
+#define PROFILE_PROP         "persist.sys.perf.profile"
+
+#define PROP_SIZE            64
+#define BUF_SIZE             80
+
 static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 static int boostpulse_fd = -1;
 static int boost_fd = -1;
@@ -41,7 +47,7 @@ static int current_power_profile = PROFILE_BALANCED;
 
 static int sysfs_write_str(char *path, char *s)
 {
-    char buf[80];
+    char buf[BUF_SIZE];
     int len;
     int ret = 0;
     int fd;
@@ -67,7 +73,7 @@ static int sysfs_write_str(char *path, char *s)
 
 static int sysfs_write_int(char *path, int value)
 {
-    char buf[80];
+    char buf[BUF_SIZE];
     snprintf(buf, sizeof(buf), "%d", value);
     return sysfs_write_str(path, buf);
 }
@@ -101,7 +107,7 @@ static bool is_interactive(void)
  */
 static void boost(bool on)
 {
-    char buf[80];
+    char buf[BUF_SIZE];
     int len;
 
     pthread_mutex_lock(&lock);
@@ -125,7 +131,7 @@ static void boost(bool on)
  */
 static void boostpulse()
 {
-    char buf[80];
+    char buf[BUF_SIZE];
     int len;
 
     pthread_mutex_lock(&lock);
@@ -145,7 +151,7 @@ static void boostpulse()
     pthread_mutex_unlock(&lock);
 }
 
-static void set_interactive(__attribute__((unused)) struct power_module *module,
+static void set_interactive(struct power_module *module __unused,
                             int on)
 {
     if (!is_interactive())
@@ -184,6 +190,8 @@ static void set_interactive(__attribute__((unused)) struct power_module *module,
 
 static void set_power_profile(int profile)
 {
+    char tmp_str[PROP_SIZE];
+
     if (!is_profile_valid(profile)) {
         ALOGE("%s: unknown profile: %d", __func__, profile);
         return;
@@ -192,6 +200,10 @@ static void set_power_profile(int profile)
     ALOGI("%s: setting profile: %d", __func__, profile);
 
     pthread_mutex_lock(&lock);
+
+    // Update persist property
+    snprintf(tmp_str, sizeof(tmp_str), "%d", profile);
+    property_set(PROFILE_PROP, tmp_str);
 
     /* interactive */
     sysfs_write_int(INTERACTIVE_PATH "boostpulse_duration",
@@ -229,12 +241,21 @@ static void set_power_profile(int profile)
     pthread_mutex_unlock(&lock);
 }
 
-static void power_init(__attribute__((unused)) struct power_module *module)
+static void power_init(struct power_module *module __unused)
 {
+    char tmp_str[PROP_SIZE];
+    int profile;
+
     ALOGI("%s", __func__);
+
+    // Read persist property
+    property_get(PROFILE_PROP, tmp_str, "1");
+    sscanf(tmp_str, "%d", &profile);
+
+    set_power_profile(profile);
 }
 
-static void power_hint(__attribute__((unused)) struct power_module *module,
+static void power_hint(struct power_module *module __unused,
                        power_hint_t hint, void *data)
 {
     if (!is_interactive())
@@ -307,7 +328,7 @@ static void set_feature(struct power_module *module __unused,
     }
 }
 
-static int get_feature(__attribute__((unused)) struct power_module *module,
+static int get_feature(struct power_module *module __unused,
                        feature_t feature)
 {
     if (feature == POWER_FEATURE_SUPPORTED_PROFILES) {

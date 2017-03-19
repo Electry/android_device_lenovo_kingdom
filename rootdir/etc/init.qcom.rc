@@ -236,6 +236,9 @@ on boot
     chmod 0664 /sys/class/graphics/fb0/sre
     chmod 0664 /sys/class/graphics/fb0/rgb
 
+    # Give PowerHAL power
+    trigger enable-low-power
+
 service rmt_storage /system/bin/rmt_storage
     class core
     user root
