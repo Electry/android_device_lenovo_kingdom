@@ -249,24 +249,23 @@ static void power_hint(__attribute__((unused)) struct power_module *module,
         break;
 
     case POWER_HINT_LOW_POWER:
-        ALOGV("POWER_HINT_LOW_POWER: %d", (*(int32_t *)data));
+        ALOGV("POWER_HINT_LOW_POWER: %d", data ? *(int32_t *)data : 0);
         /* handled by the framework */
         break;
 
     case POWER_HINT_SUSTAINED_PERFORMANCE: // boost
-        ALOGV("POWER_HINT_SUSTAINED_PERFORMANCE: %d",
-                (*(int32_t *)data));
+        ALOGV("POWER_HINT_SUSTAINED_PERFORMANCE: %d", data ? *(int32_t *)data : 0);
         //if (!profiles[current_power_profile].boost_allow)
         //    break;
         //boost((*(bool *)data));
         break;
 
     case POWER_HINT_VR_MODE:
-        ALOGV("POWER_HINT_VR_MODE: %d", (*(int32_t *)data));
+        ALOGV("POWER_HINT_VR_MODE: %d", data ? *(int32_t *)data : 0);
         break;
 
     case POWER_HINT_DISABLE_TOUCH:
-        ALOGV("POWER_HINT_DISABLE_TOUCH: %d", (*(int32_t *)data));
+        ALOGV("POWER_HINT_DISABLE_TOUCH: %d", data ? *(int32_t *)data : 0);
         break;
 
     case POWER_HINT_CPU_BOOST:
