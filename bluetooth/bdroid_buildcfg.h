@@ -26,8 +26,4 @@
 #define BTA_SKIP_BLE_READ_REMOTE_FEAT TRUE
 #define BTA_BLE_SKIP_CONN_UPD  TRUE
 
-
-/* Defined if the kernel does not have support for CLOCK_BOOTTIME_ALARM */
-#define KERNEL_MISSING_CLOCK_BOOTTIME_ALARM TRUE
-
 #endif
