@@ -16,7 +16,10 @@
 #
 
 # Overlays
-DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay vendor/extra/overlays/phone-1080p
+DEVICE_PACKAGE_OVERLAYS += \
+    $(LOCAL_PATH)/overlay \
+    $(LOCAL_PATH)/overlay-lineage \
+    vendor/extra/overlays/phone-1080p
 
 # Haters gonna hate..
 PRODUCT_CHARACTERISTICS := nosdcard
