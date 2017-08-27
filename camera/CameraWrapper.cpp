@@ -1,5 +1,6 @@
 /*
  * Copyright (C) 2016, The CyanogenMod Project
+ *               2017, The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -226,6 +227,13 @@ static int camera_store_meta_data_in_buffers(struct camera_device *device,
     return VENDOR_CALL(device, store_meta_data_in_buffers, enable);
 }
 
+static bool camera_is4k(CameraParameters2 &params) {
+    int video_width, video_height;
+    params.getVideoSize(&video_width, &video_height);
+
+    return video_width * video_height == 3840*2160;
+}
+
 static int camera_start_recording(struct camera_device *device)
 {
     ALOGV("%s->%08X->%08X", __FUNCTION__, (uintptr_t)device,
@@ -233,6 +241,18 @@ static int camera_start_recording(struct camera_device *device)
 
     if (!device)
         return EINVAL;
+
+    CameraParameters2 params;
+    params.unflatten(String8(camera_get_parameters(device)));
+
+    if (CAMERA_ID(device) == BACK_CAMERA_ID && camera_is4k(params)) {
+        ALOGI("4k video: Forcing nv12-venus preview format");
+
+        params.set("preview-size", "3840x2160");
+        params.set("preview-format", "nv12-venus");
+    }
+
+    camera_set_parameters(device, strdup(params.flatten().string()));
 
     return VENDOR_CALL(device, start_recording);
 }
