@@ -1,5 +1,5 @@
 /*
-   Copyright (c) 2017, The LineageOS Project
+   Copyright (c) 2017-2018, The LineageOS Project
 
    Redistribution and use in source and binary forms, with or without
    modification, are permitted provided that the following conditions are
@@ -27,26 +27,27 @@
    IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
 #define _REALLY_INCLUDE_SYS__SYSTEM_PROPERTIES_H_
 #include <sys/_system_properties.h>
 
+#include <android-base/strings.h>
+#include <android-base/file.h>
+#include <android-base/logging.h>
+
 #include "vendor_init.h"
 #include "property_service.h"
-#include "log.h"
-#include "util.h"
+
+using android::base::Trim;
+using android::base::ReadFileToString;
+using android::init::property_set;
 
 #define LOG_TAG         "init_kingdom"
 
 #define HWID_PATH       "/sys/class/lenovo/nv/nv_hwid"
-#define HWID_SIZE       4
 
-#define RETRY_MS	500
-#define RETRY_COUNT	20
+#define RETRY_MS        500
+#define RETRY_COUNT     20
 
-#define PROP_SIZE	64
 
 void property_override(char const prop[], char const value[])
 {
@@ -59,55 +60,29 @@ void property_override(char const prop[], char const value[])
         __system_property_add(prop, strlen(prop), value, strlen(value));
 }
 
-static int read_file2(const char *fname, char *data, int max_size)
-{
-    int fd, rc;
-
-    if (max_size < 1)
-        return 0;
-
-    fd = open(fname, O_RDONLY);
-    if (fd < 0) {
-        ERROR("%s: Failed to open '%s'\n", LOG_TAG, fname);
-        return 0;
-    }
-
-    rc = read(fd, data, max_size - 1);
-    if ((rc > 0) && (rc < max_size))
-        data[rc] = '\0';
-    else
-        data[0] = '\0';
-    close(fd);
-
-    return 1;
-}
-
 void vendor_load_properties()
 {
-    char hwid[HWID_SIZE];
-    char device[PROP_SIZE];
+    std::string hwid;
+    std::string device;
 
     int retry = RETRY_COUNT;
-    int rc = read_file2(HWID_PATH, hwid, HWID_SIZE + 1);
 
-    while (retry && (!rc || strlen(hwid) == 0)) {
+    while (retry && (!ReadFileToString(HWID_PATH, &hwid) || !hwid.length())) {
         retry--;
-        ERROR("%s: Waiting for nv_hwid...\n", LOG_TAG);
+        LOG(INFO) << LOG_TAG << ": Waiting for nv_hwid...";
         usleep(RETRY_MS * 1000);
-        rc = read_file2(HWID_PATH, hwid, HWID_SIZE + 1);
     }
 
     if (!retry) {
-        ERROR("%s: Failed to read hwid [%s], defaulting to ROW variant\n",
-                LOG_TAG, hwid);
+        LOG(ERROR) << LOG_TAG << ": Failed to read hwid";
         goto set_variant_row;
     }
 
-    ERROR("%s: Found hwid [%s]\n", LOG_TAG, hwid);
+    LOG(INFO) << LOG_TAG << ": Found hwid=" << hwid;
 
-    if (strncmp(hwid, "0001", HWID_SIZE) == 0) {
+    if (Trim(hwid) == "0001") {
         /* China */
-        strncpy(device, "kingdomt", PROP_SIZE);
+        device = "kingdomt";
         property_override("ro.product.model", "K920 (CN)");
 
         property_set("persist.radio.multisim.config", "dsda");
@@ -117,10 +92,10 @@ void vendor_load_properties()
         property_override("ro.build.fingerprint",
             "Lenovo/kingdomt/kingdomt:5.0.2/LRX22G/VIBEUI_V2.5_1627_5.1894.1_ST_K920:user/release-keys");
 
-    } else if (strncmp(hwid, "0100", HWID_SIZE) == 0) {
+    } else if (Trim(hwid) == "0100") {
 set_variant_row:
         /* Rest of the World */
-        strncpy(device, "kingdom_row", PROP_SIZE);
+        device = "kingdom_row";
         property_override("ro.product.model", "K920 (ROW)");
 
         property_set("persist.radio.multisim.config", "dsds");
@@ -131,19 +106,17 @@ set_variant_row:
             "Lenovo/kingdom_row/kingdom_row:5.0.2/LRX22G/K920_S288_160224_ROW:user/release-keys");
 
     } else {
-        ERROR("%s: Unknown hwid [%s], defaulting to ROW variant\n",
-                LOG_TAG, hwid);
+        LOG(ERROR) << LOG_TAG << ": Unknown hwid=" << hwid;
         goto set_variant_row;
     }
 
-    property_override("ro.build.product", device);
-    property_override("ro.product.device", device);
-    property_override("ro.product.name", device);
+    property_override("ro.build.product", device.c_str());
+    property_override("ro.product.device", device.c_str());
+    property_override("ro.product.name", device.c_str());
 
     // LTE+3G+2G on both SIMs
     property_set("ro.telephony.default_network", "9,9");
 
-    ERROR("%s: Setting build properties for [%s] device\n",
-            LOG_TAG, device);
+    LOG(INFO) << LOG_TAG << ": Build properties set for " << device << " device";
 }
 

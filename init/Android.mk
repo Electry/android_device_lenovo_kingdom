@@ -24,6 +24,9 @@ LOCAL_SRC_FILES := \
 LOCAL_C_INCLUDES := \
     system/core/init
 
+LOCAL_STATIC_LIBRARIES := \
+    libbase
+
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libinit_kingdom
 
