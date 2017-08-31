@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <audio_platform_info>
   <acdb_ids>
-    <!-- voice recorder (dmic6) -->
-    <device name="SND_DEVICE_IN_HANDSET_MIC" acdb_id="50"/>
-    <!-- loudspeaker call mic (dmic6) -->
-    <device name="SND_DEVICE_IN_VOICE_SPEAKER_MIC" acdb_id="42"/>
-    <!-- camcorder (dmic1) -->
-    <device name="SND_DEVICE_IN_CAMCORDER_MIC" acdb_id="52"/>
+    <device name="SND_DEVICE_IN_VOICE_SPEAKER_MIC" acdb_id="42"/>   <!-- voice-speaker-mic -->
+
+    <device name="SND_DEVICE_OUT_VOIP_HANDSET" acdb_id="7" />       <!-- voice-handset -->
+    <device name="SND_DEVICE_OUT_VOIP_SPEAKER" acdb_id="14" />      <!-- voice-speaker -->
+    <device name="SND_DEVICE_OUT_VOIP_HEADPHONES" acdb_id="10" />   <!-- voice-headphones -->
+
+    <device name="SND_DEVICE_IN_VOIP_HANDSET_MIC" acdb_id="41" />   <!-- dmic-endfire -->
+    <device name="SND_DEVICE_IN_VOIP_SPEAKER_MIC" acdb_id="42" />   <!-- voice-speaker-mic -->
+    <device name="SND_DEVICE_IN_VOIP_HEADSET_MIC" acdb_id="8" />    <!-- voice-headset-mic -->
+
+    <device name="SND_DEVICE_IN_CAMCORDER_MIC" acdb_id="52"/>       <!-- camcorder-mic -->
+    <device name="SND_DEVICE_IN_HANDSET_MIC" acdb_id="50"/>         <!-- handset-mic -->
   </acdb_ids>
 
   <backend_names>
-    <!-- tfa9890 -->
+    <!-- TFA9890 -->
     <device name="SND_DEVICE_OUT_SPEAKER" backend="smartpa" />
     <device name="SND_DEVICE_OUT_SPEAKER_REVERSE" backend="smartpa" />
     <device name="SND_DEVICE_OUT_SPEAKER_AND_HEADPHONES" backend="smartpa-and-headphones" />
@@ -19,7 +25,12 @@
   </backend_names>
 
   <device_names>
-    <!-- voice recorder (dmic6) -->
-    <device name="SND_DEVICE_IN_HANDSET_MIC" alias="handset-audio-mic" />
+    <device name="SND_DEVICE_OUT_VOIP_HANDSET" alias="voice-handset" />
+    <device name="SND_DEVICE_OUT_VOIP_SPEAKER" alias="voice-speaker" />
+    <device name="SND_DEVICE_OUT_VOIP_HEADPHONES" alias="voice-headphones" />
+
+    <device name="SND_DEVICE_IN_VOIP_HANDSET_MIC" alias="dmic-endfire" />
+    <device name="SND_DEVICE_IN_VOIP_SPEAKER_MIC" alias="voice-speaker-mic" />
+    <device name="SND_DEVICE_IN_VOIP_HEADSET_MIC" alias="voice-headset-mic" />
   </device_names>
 </audio_platform_info>
