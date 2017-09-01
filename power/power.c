@@ -37,7 +37,6 @@
 
 #define PROFILE_PROP         "persist.sys.perf.profile"
 
-#define PROP_SIZE            64
 #define BUF_SIZE             80
 
 static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
@@ -190,7 +189,7 @@ static void set_interactive(struct power_module *module __unused,
 
 static void set_power_profile(int profile)
 {
-    char tmp_str[PROP_SIZE];
+    char tmp_str[PROPERTY_VALUE_MAX];
 
     if (!is_profile_valid(profile)) {
         ALOGE("%s: unknown profile: %d", __func__, profile);
@@ -243,7 +242,7 @@ static void set_power_profile(int profile)
 
 static void power_init(struct power_module *module __unused)
 {
-    char tmp_str[PROP_SIZE];
+    char tmp_str[PROPERTY_VALUE_MAX];
     int profile;
 
     ALOGI("%s", __func__);
