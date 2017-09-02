@@ -47,7 +47,8 @@ BOARD_KERNEL_IMAGE_NAME := zImage
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom \
 			androidboot.bootdevice=msm_sdcc.1 \
-			ehci-hcd.park=3
+			ehci-hcd.park=3 \
+			androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 BOARD_DTBTOOL_ARGS := -2
@@ -181,8 +182,8 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 
-BOARD_SEPOLICY_DIRS += \
-    $(DEVICE_PATH)/sepolicy
+#BOARD_SEPOLICY_DIRS += \
+#    $(DEVICE_PATH)/sepolicy
 
 # Snapdragon LLVM
 TARGET_USE_SDCLANG := true
@@ -204,8 +205,8 @@ TARGET_USES_QCOM_WCNSS_QMI       := true
 TARGET_USES_WCNSS_MAC_ADDR_REV   := true
 
 # Wifi - EAP-SIM
-CONFIG_EAP_PROXY                 := qmi
-CONFIG_EAP_PROXY_DUAL_SIM        := true
+#CONFIG_EAP_PROXY                 := qmi
+#CONFIG_EAP_PROXY_DUAL_SIM        := true
 
 # DEX Pre-optimization
 ifeq ($(HOST_OS),linux)
