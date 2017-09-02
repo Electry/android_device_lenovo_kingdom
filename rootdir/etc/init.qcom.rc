@@ -29,6 +29,9 @@ on init
     symlink /sdcard /storage/sdcard0
 
 on fs
+    wait /dev/block/platform/${ro.boot.bootdevice}
+    symlink /dev/block/platform/${ro.boot.bootdevice} /dev/block/bootdevice
+
     mount_all ./fstab.qcom
 
     # HACK: In order to successfully read nv_hwid from NV
