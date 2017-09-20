@@ -264,12 +264,10 @@ etc/firmware/wcnss.b08
 etc/firmware/wcnss.b09
 etc/firmware/wcnss.mdt
 
-# Widevine
+# Widevine - from angler - OPR6.170623.017 factory image
 vendor/lib/drm/libdrmwvmplugin.so
-vendor/lib/libWVStreamControlAPI_L1.so
-vendor/lib/libwvdrm_L1.so
 vendor/lib/libwvm.so
-vendor/lib/mediadrm/libwvdrmengine.so
+vendor/lib/mediadrm/libwvdrmengine.so|66ba66d047044f92eb0eada1faf6a5799ded90ab
 
 # Wifi
 lib/libwcnss_qmi.so
