@@ -264,8 +264,7 @@ PRODUCT_PACKAGES += \
     init.qcom.rc \
     init.qcom.power.rc \
     init.qcom.usb.rc \
-    init.recovery.qcom.rc \
-    init.qcom.bt.sh
+    init.recovery.qcom.rc
 
 # RenderScript
 PRODUCT_PACKAGES += \
