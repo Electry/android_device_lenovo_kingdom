@@ -1,5 +1,5 @@
 #
-# Copyright 2017 The LineageOS Project
+# Copyright 2017-2018 The LineageOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -34,6 +34,7 @@ LOCAL_SHARED_LIBRARIES := \
 
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_MODULE_TAGS := optional
-LOCAL_MODULE := audio_amplifier.msm8974
+LOCAL_MODULE := audio_amplifier.$(TARGET_BOARD_PLATFORM)
+LOCAL_PROPRIETARY_MODULE := true
 
 include $(BUILD_SHARED_LIBRARY)
