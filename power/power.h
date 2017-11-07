@@ -54,22 +54,22 @@ static power_profile profiles[PROFILE_MAX] = {
         .boostpulse_duration =    0,
         .go_hispeed_load =        95,
         .go_hispeed_load_off =    95,
-        .hispeed_freq =           729600,
-        .hispeed_freq_off =       729600,
+        .hispeed_freq =           960000,
+        .hispeed_freq_off =       960000,
         .io_is_busy =             0,
         .min_sample_time =        60000,
         .sampling_down_factor =   100000,
         .target_loads =           "95",
         .target_loads_off =       "95",
         /* cpufreq */
-        .scaling_max_freq =       1267200,
+        .scaling_max_freq =       1574400,
         .scaling_min_freq =       300000,
         .scaling_min_freq_off =   300000,
         /* cpuboost */
         .input_boost_freq =       0,
         .input_boost_ms =         0,
         /* kgsl */
-        .max_gpuclk =             389000000,
+        .max_gpuclk =             462400000,
     },
     [PROFILE_BALANCED] = {
         .boost_allow =            1,
