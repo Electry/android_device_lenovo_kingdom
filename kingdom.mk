@@ -230,7 +230,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.nfc@1.0-impl \
     android.hardware.nfc@1.0-service \
-    nfc_nci.pn54x.default \
+    nfc_nci.msm8974 \
     com.android.nfc_extras \
     NfcNci \
     Tag
