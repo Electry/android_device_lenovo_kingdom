@@ -89,9 +89,9 @@ GREEN_LED_PATH := "/sys/class/leds/led:rgb_green/brightness"
 BLUE_LED_PATH := "/sys/class/leds/led:rgb_blue/brightness"
 BLINK_PATH := "/sys/class/leds/led:rgb_red/blink"
 
-# CM Hardware
+# Lineage Hardware
 BOARD_HARDWARE_CLASS := \
-    $(DEVICE_PATH)/cmhw
+    $(DEVICE_PATH)/lineagehw
 
 # DT2W
 TARGET_TAP_TO_WAKE_NODE := "/sys/class/touchscreen/device/gesture"
