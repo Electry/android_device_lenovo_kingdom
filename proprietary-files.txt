@@ -1,5 +1,5 @@
 # ADSP
-bin/adsprpcd
+vendor/bin/adsprpcd
 vendor/lib/libadsprpc.so
 vendor/lib/libfastcvadsp_stub.so
 vendor/lib/libfastcvopt.so
@@ -9,8 +9,8 @@ vendor/lib/rfsa/adsp/libfastcvadsp.so
 vendor/lib/rfsa/adsp/libfastcvadsp_skel.so
 
 # Bluetooth
-bin/btnvtool
-bin/hci_qcomm_init
+vendor/bin/btnvtool
+vendor/bin/hci_qcomm_init
 vendor/lib/libbtnv.so
 
 # Audio
@@ -36,7 +36,7 @@ etc/tfa98xx/Lenovo_LOUD_BT.eq
 vendor/lib/libtfa98xx.so
 
 # Camera
-bin/mm-qcamera-daemon
+vendor/bin/mm-qcamera-daemon
 lib/hw/camera.vendor.msm8974.so
 lib/libmmcamera_interface.so
 lib/libmmjpeg_interface.so
@@ -110,7 +110,7 @@ etc/firmware/cpp_firmware_v1_1_6.fw
 etc/firmware/cpp_firmware_v1_2_0.fw
 
 # DRM
-bin/qseecomd
+vendor/bin/qseecomd
 lib/libdrmdecrypt.so
 vendor/lib/libQSEEComAPI.so
 vendor/lib/libdrmfs.so
@@ -176,7 +176,7 @@ etc/firmware/venus.mdt
 vendor/firmware/libpn547_fw.so
 
 # Perf
-bin/mpdecision
+vendor/bin/mpdecision
 vendor/lib/libqti-perfd-client.so
 
 # Postprocessing
@@ -186,7 +186,7 @@ vendor/lib/libmm-abl.so
 vendor/lib/libmm-abl-oem.so
 
 # Qualcomm framework
-bin/irsc_util
+vendor/bin/irsc_util
 vendor/lib/libdiag.so
 vendor/lib/libdsi_netctrl.so
 vendor/lib/libdsutils.so
@@ -208,12 +208,12 @@ vendor/lib/libsystem_health_mon.so
 # Radio
 -priv-app/qcrilmsgtunnel/qcrilmsgtunnel.apk
 -app/shutdownlistener/shutdownlistener.apk
-bin/diag_mdlog
-bin/netmgrd
-bin/qmuxd
-bin/radish
-bin/rfs_access
-bin/rmt_storage
+vendor/bin/diag_mdlog
+vendor/bin/netmgrd
+vendor/bin/qmuxd
+vendor/bin/radish
+vendor/bin/rfs_access
+vendor/bin/rmt_storage
 etc/data/dsi_config.xml
 etc/data/netmgr_config.xml
 etc/permissions/qcnvitems.xml
@@ -232,7 +232,7 @@ vendor/lib/libril-qcril-hook-oem.so
 vendor/lib/libxml.so
 
 # Sensors
-bin/sensors.qcom
+vendor/bin/sensors.qcom
 etc/sensor_def_qcomdev.conf
 vendor/lib/hw/activity_recognition.msm8974.so
 vendor/lib/hw/sensors.msm8974.so
@@ -249,7 +249,7 @@ vendor/lib/libthermalioctl.so
 
 # Time services
 -app/TimeService/TimeService.apk
-bin/time_daemon
+vendor/bin/time_daemon
 vendor/lib/libtime_genoff.so
 vendor/lib/libTimeService.so
 
