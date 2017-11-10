@@ -233,29 +233,29 @@ on boot
     # Give PowerHAL power
     trigger enable-low-power
 
-service rmt_storage /system/bin/rmt_storage
+service rmt_storage /vendor/bin/rmt_storage
     class core
     user root
     group system
 
-service rfs_access /system/bin/rfs_access
+service rfs_access /vendor/bin/rfs_access
     class core
     user system
     group system net_raw
 
 # QMUX must be in multiple groups to support external process connections
-service qmuxd /system/bin/qmuxd
+service qmuxd /vendor/bin/qmuxd
     class main
     user radio
     group radio audio bluetooth gps diag oem_2950
 
-service netmgrd /system/bin/netmgrd
+service netmgrd /vendor/bin/netmgrd
     class main
     user root
     group radio
 
 # QCOM sensor
-service sensors /system/bin/sensors.qcom
+service sensors /vendor/bin/sensors.qcom
     class late_start
     user root
     group root
@@ -268,7 +268,7 @@ on property:ro.data.large_tcp_window_size=true
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
 
-service irsc_util /system/bin/irsc_util "/vendor/etc/sec_config"
+service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
     class main
     user root
     oneshot
@@ -290,7 +290,7 @@ service wpa_supplicant /vendor/bin/hw/wpa_supplicant \
     disabled
     oneshot
 
-service qseecomd /system/bin/qseecomd
+service qseecomd /vendor/bin/qseecomd
     class core
     user root
     group root
@@ -300,18 +300,18 @@ service charger /sbin/healthd -c
     critical
     seclabel u:r:healthd:s0
 
-service qcamerasvr /system/bin/mm-qcamera-daemon
+service qcamerasvr /vendor/bin/mm-qcamera-daemon
     class main
     user camera
     group camera system inet input graphics
 
-service mpdecision /system/bin/mpdecision --avg_comp
+service mpdecision /vendor/bin/mpdecision --avg_comp
     class main
     user root
     group system
     disabled
 
-service thermal-engine /system/vendor/bin/thermal-engine
+service thermal-engine /vendor/bin/thermal-engine
     class main
     user root
     group root
@@ -319,7 +319,7 @@ service thermal-engine /system/vendor/bin/thermal-engine
     socket thermal-recv-client stream 0660 system system
     socket thermal-recv-passive-client stream 0666 system system
 
-service time_daemon /system/bin/time_daemon
+service time_daemon /vendor/bin/time_daemon
     class late_start
     user root
     group root
@@ -328,7 +328,7 @@ on property:vold.decrypt=trigger_restart_framework
     start config_bt_addr
     start wcnss-service
 
-service config_bt_addr /system/bin/btnvtool -O
+service config_bt_addr /vendor/bin/btnvtool -O
     class core
     user bluetooth
     group bluetooth radio
@@ -348,7 +348,7 @@ on property:bluetooth.hciattach=true
 on property:bluetooth.hciattach=false
     setprop bluetooth.status off
 
-service adsprpcd /system/bin/adsprpcd
+service adsprpcd /vendor/bin/adsprpcd
     class main
     user media
     group media
@@ -364,7 +364,7 @@ service wcnss-service /vendor/bin/wcnss_service
     group system wifi diag radio oem_2950
     oneshot
 
-service ppd /system/vendor/bin/mm-pp-daemon
+service ppd /vendor/bin/mm-pp-daemon
     class late_start
     disabled
     user system
@@ -378,14 +378,14 @@ on property:init.svc.surfaceflinger=running
     start ppd
 
 # diag logging
-service diag_mdlog_start /system/bin/diag_mdlog
+service diag_mdlog_start /vendor/bin/diag_mdlog
     class late_start
     user shell
     group system diag sdcard_rw sdcard_r media_rw oem_2950
     disabled
     oneshot
 
-service diag_mdlog_stop /system/bin/diag_mdlog -k
+service diag_mdlog_stop /vendor/bin/diag_mdlog -k
     class late_start
     user shell
     group system diag sdcard_rw sdcard_r media_rw oem_2950
