@@ -37,10 +37,10 @@ vendor/lib/libtfa98xx.so
 
 # Camera
 vendor/bin/mm-qcamera-daemon
-lib/hw/camera.vendor.msm8974.so
-lib/libmmcamera_interface.so
-lib/libmmjpeg_interface.so
-lib/libqomx_core.so
+vendor/lib/hw/camera.vendor.msm8974.so
+vendor/lib/libmmcamera_interface.so
+vendor/lib/libmmjpeg_interface.so
+vendor/lib/libqomx_core.so
 vendor/lib/libjpegdhw.so
 vendor/lib/libjpegehw.so
 vendor/lib/libmmcamera2_c2d_module.so
@@ -81,10 +81,10 @@ vendor/lib/libactuator_onsemi_lc898112_camcorder.so
 vendor/lib/libactuator_onsemi_lc898112_camera.so
 
 # Camera ArcSoft
-lib/libarcsoft_flawless_face.so
-lib/libarcsoft_hdr.so
-lib/libarcsoft_night_shot.so
-lib/libarcsoft_panorama_burstcapture.so
+vendor/lib/libarcsoft_flawless_face.so
+vendor/lib/libarcsoft_hdr.so
+vendor/lib/libarcsoft_night_shot.so
+vendor/lib/libarcsoft_panorama_burstcapture.so
 
 # Camera Chromatix
 vendor/lib/libchromatix_ov5693_common.so
