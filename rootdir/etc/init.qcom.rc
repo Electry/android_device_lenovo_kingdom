@@ -253,7 +253,7 @@ service rfs_access /system/bin/rfs_access
 service qmuxd /system/bin/qmuxd
     class main
     user radio
-    group radio audio bluetooth gps diag
+    group radio audio bluetooth gps diag oem_2950
 
 service netmgrd /system/bin/netmgrd
     class main
@@ -357,7 +357,7 @@ service config_bt_addr /system/bin/btnvtool -O
 service hciattach /system/bin/sh /system/etc/init.qcom.bt.sh
     class late_start
     user bluetooth
-    group bluetooth net_bt_admin diag radio
+    group bluetooth net_bt_admin diag radio oem_2950
     disabled
     oneshot
     seclabel u:r:bluetooth_loader:s0
@@ -381,7 +381,7 @@ service audiod /system/bin/audiod
 service wcnss-service /system/bin/wcnss_service
     class main
     user system
-    group system wifi diag radio
+    group system wifi diag radio oem_2950
     oneshot
 
 service ppd /system/vendor/bin/mm-pp-daemon
@@ -401,14 +401,14 @@ on property:init.svc.surfaceflinger=running
 service diag_mdlog_start /system/bin/diag_mdlog
     class late_start
     user shell
-    group system diag sdcard_rw sdcard_r media_rw
+    group system diag sdcard_rw sdcard_r media_rw oem_2950
     disabled
     oneshot
 
 service diag_mdlog_stop /system/bin/diag_mdlog -k
     class late_start
     user shell
-    group system diag sdcard_rw sdcard_r media_rw
+    group system diag sdcard_rw sdcard_r media_rw oem_2950
     disabled
     oneshot
 
