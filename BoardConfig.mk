@@ -103,6 +103,7 @@ TARGET_TAP_TO_WAKE_NODE := "/sys/class/touchscreen/device/gesture"
 
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
+TARGET_LEGACY_HW_DISK_ENCRYPTION := true
 
 # Filesystem
 BOARD_FLASH_BLOCK_SIZE                  := 131072
