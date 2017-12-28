@@ -49,7 +49,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-service \
     android.hardware.audio.effect@2.0-service \
-    audiod \
     audio.a2dp.default \
     audio_amplifier.msm8974 \
     audio_policy.msm8974 \
