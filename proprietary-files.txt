@@ -26,16 +26,16 @@ vendor/lib/soundfx/libqcreverb.so
 vendor/lib/soundfx/libqcvirt.so
 
 # Audio (tfa9890)
-etc/tfa98xx/Lenovo.speaker
-etc/tfa98xx/TFA9890_N1B12_N1C3_v2.config
-etc/tfa98xx/TFA9890_N1C3_1_7_1.patch
-etc/tfa98xx/coldboot.patch
-etc/tfa98xx/Lenovo_HQ.preset
-etc/tfa98xx/Lenovo_LOUD.preset
-etc/tfa98xx/Lenovo_LOUD_BT.preset
-etc/tfa98xx/Lenovo_HQ.eq
-etc/tfa98xx/Lenovo_LOUD.eq
-etc/tfa98xx/Lenovo_LOUD_BT.eq
+vendor/etc/tfa98xx/Lenovo.speaker
+vendor/etc/tfa98xx/TFA9890_N1B12_N1C3_v2.config
+vendor/etc/tfa98xx/TFA9890_N1C3_1_7_1.patch
+vendor/etc/tfa98xx/coldboot.patch
+vendor/etc/tfa98xx/Lenovo_HQ.preset
+vendor/etc/tfa98xx/Lenovo_LOUD.preset
+vendor/etc/tfa98xx/Lenovo_LOUD_BT.preset
+vendor/etc/tfa98xx/Lenovo_HQ.eq
+vendor/etc/tfa98xx/Lenovo_LOUD.eq
+vendor/etc/tfa98xx/Lenovo_LOUD_BT.eq
 vendor/lib/libtfa98xx.so
 
 # Camera
