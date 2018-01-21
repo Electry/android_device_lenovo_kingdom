@@ -58,6 +58,9 @@ static int g_sRate = 44100;
 static int g_CalibrationStatus = 0;
 static int g_EQSwitch = 0;
 
+void tfa9890_SpeakerOn(void);
+void tfa9890_SpeakerOff(void);
+
 /* *INDENT-OFF* */
 regdef_t regdefs[] = {
         { 0x00, 0x081d, 0xfeff, "statusreg"}, //ignore MTP busy bit
@@ -1090,10 +1093,3 @@ void tfa9890_setSamplerate(int sRate)
     }
     ALOGI("%s -",__func__);
 }
-
-EXPORT_SYMBOL(tfa9890_init);
-EXPORT_SYMBOL(tfa9890_deinit);
-EXPORT_SYMBOL(tfa9890_EQset);
-EXPORT_SYMBOL(tfa9890_SpeakerOff);
-EXPORT_SYMBOL(tfa9890_SpeakerOn);
-EXPORT_SYMBOL(tfa9890_setSamplerate);
