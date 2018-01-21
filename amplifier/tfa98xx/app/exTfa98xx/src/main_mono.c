@@ -28,7 +28,7 @@
 #define LOCATION_FILES "../../../../settings/"
 #else
 // cwd = linux dir
-#define LOCATION_FILES "/etc/tfa98xx/"
+#define LOCATION_FILES "/vendor/etc/tfa98xx/"
 #endif
 
 /* the base speaker file, containing tCoef */
@@ -466,20 +466,20 @@ int EQset_Impl(int mode)
 	if (handle != -1) {
 	    switch(mode){
 	        case 0:{//normal
-	            setPreset(handle,"/etc/tfa98xx/Lenovo_HQ.preset");
-	            setEQ(handle,"/etc/tfa98xx/Lenovo_HQ.eq");
+	            setPreset(handle,"/vendor/etc/tfa98xx/Lenovo_HQ.preset");
+	            setEQ(handle,"/vendor/etc/tfa98xx/Lenovo_HQ.eq");
 	            ALOGI("[%s] set normal preset and eq.", __func__);
 	            break;
 	        }
 			case 1:{//incall
-			    setPreset(handle,"/etc/tfa98xx/Lenovo_LOUD.preset");
-	            setEQ(handle,"/etc/tfa98xx/Lenovo_LOUD.eq");
+			    setPreset(handle,"/vendor/etc/tfa98xx/Lenovo_LOUD.preset");
+	            setEQ(handle,"/vendor/etc/tfa98xx/Lenovo_LOUD.eq");
 	            ALOGI("[%s] set incall preset and eq.", __func__);
 				break;
 			}
 			case 2:{//incall brightness
-			    setPreset(handle,"/etc/tfa98xx/Lenovo_LOUD_BT.preset");
-	            setEQ(handle,"/etc/tfa98xx/Lenovo_LOUD_BT.eq");
+			    setPreset(handle,"/vendor/etc/tfa98xx/Lenovo_LOUD_BT.preset");
+	            setEQ(handle,"/vendor/etc/tfa98xx/Lenovo_LOUD_BT.eq");
 	            ALOGI("[%s] set incall preset and eq.", __func__);
 				break;
 			}
