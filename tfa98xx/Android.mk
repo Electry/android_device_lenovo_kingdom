@@ -88,7 +88,7 @@ LOCAL_SRC_FILES := \
     app/exTfa98xx/src/common.c
 
 LOCAL_MODULE := libtfa98xx
-LOCAL_SHARED_LIBRARIES := libcutils libutils
+LOCAL_SHARED_LIBRARIES := libcutils libutils liblog
 LOCAL_STATIC_LIBRARIES := libtfasrv libtfa libtfahal
 LOCAL_MODULE_TAGS := optional
 LOCAL_PRELINK_MODULE := false
@@ -111,7 +111,7 @@ LOCAL_SRC_FILES := \
     app/exTfa98xx/src/common.c
 
 LOCAL_MODULE := climax_init
-LOCAL_SHARED_LIBRARIES:= libcutils libutils
+LOCAL_SHARED_LIBRARIES:= libcutils libutils liblog
 LOCAL_STATIC_LIBRARIES:= libtfasrv libtfa libtfahal
 LOCAL_MODULE_TAGS := optional
 LOCAL_PRELINK_MODULE := false
