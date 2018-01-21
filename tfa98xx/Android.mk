@@ -92,6 +92,7 @@ LOCAL_SHARED_LIBRARIES := libcutils libutils
 LOCAL_STATIC_LIBRARIES := libtfasrv libtfa libtfahal
 LOCAL_MODULE_TAGS := optional
 LOCAL_PRELINK_MODULE := false
+LOCAL_PROPRIETARY_MODULE := true
 
 include $(BUILD_SHARED_LIBRARY)
 
