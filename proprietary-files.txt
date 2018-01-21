@@ -36,7 +36,6 @@ vendor/etc/tfa98xx/Lenovo_LOUD_BT.preset
 vendor/etc/tfa98xx/Lenovo_HQ.eq
 vendor/etc/tfa98xx/Lenovo_LOUD.eq
 vendor/etc/tfa98xx/Lenovo_LOUD_BT.eq
-vendor/lib/libtfa98xx.so
 
 # Camera
 vendor/bin/mm-qcamera-daemon
