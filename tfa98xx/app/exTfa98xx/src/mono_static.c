@@ -103,4 +103,3 @@ void read_tfa98xx_id(int *id)
 	ALOGD("TFA98xx ID=%#x",*id);
 	err = Tfa98xx_Close(handle);
 }
-EXPORT_SYMBOL(read_tfa98xx_id);
