@@ -28,7 +28,7 @@
 #define LOCATION_FILES "../../../../settings/"
 #else
 // cwd = linux dir
-#define LOCATION_FILES "/etc/tfa98xx/"
+#define LOCATION_FILES "/vendor/etc/tfa98xx/"
 #endif
 
 
