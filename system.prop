@@ -63,7 +63,7 @@ ro.data.large_tcp_window_size=true
 persist.data.netmgrd.qos.enable=true
 persist.data.tcpackprio.enable=true
 
-rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
+rild.libpath=/vendor/lib/libril-qc-qmi-1.so
 persist.radio.add_power_save=1
 persist.radio.apm_sim_not_pwdn=1
 ro.ril.em_redial_vt_failover=true
