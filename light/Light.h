@@ -30,7 +30,35 @@ namespace V2_0 {
 namespace implementation {
 
 struct Light : public ILight {
-    Light(std::ofstream&& backlight, std::ofstream&& indicator);
+    Light(std::ofstream&& backlight,
+          // Brightness
+          std::ofstream&& redLed,
+          std::ofstream&& greenLed,
+          std::ofstream&& blueLed,
+          // DutyPcts
+          std::ofstream&& redDutyPcts,
+          std::ofstream&& greenDutyPcts,
+          std::ofstream&& blueDutyPcts,
+          // StartIdx
+          std::ofstream&& redStartIdx,
+          std::ofstream&& greenStartIdx,
+          std::ofstream&& blueStartIdx,
+          // PauseLo
+          std::ofstream&& redPauseLo,
+          std::ofstream&& greenPauseLo,
+          std::ofstream&& bluePauseLo,
+          // PauseHi
+          std::ofstream&& redPauseHi,
+          std::ofstream&& greenPauseHi,
+          std::ofstream&& bluePauseHi,
+          // RampStepMs
+          std::ofstream&& redRampStepMs,
+          std::ofstream&& greenRampStepMs,
+          std::ofstream&& blueRampStepMs,
+          // Blink
+          std::ofstream&& redBlink,
+          std::ofstream&& greenBlink,
+          std::ofstream&& blueBlink);
 
     // Methods from ::android::hardware::light::V2_0::ILight follow.
     Return<Status> setLight(Type type, const LightState& state)  override;
@@ -45,7 +73,34 @@ private:
     void setSpeakerLightLocked(const LightState& state);
 
     std::ofstream mBacklight;
-    std::ofstream mIndicator;
+    // Brightness
+    std::ofstream mRedLed;
+    std::ofstream mGreenLed;
+    std::ofstream mBlueLed;
+    // DutyPcts
+    std::ofstream mRedDutyPcts;
+    std::ofstream mGreenDutyPcts;
+    std::ofstream mBlueDutyPcts;
+    // StartIdx
+    std::ofstream mRedStartIdx;
+    std::ofstream mGreenStartIdx;
+    std::ofstream mBlueStartIdx;
+    // PauseLo
+    std::ofstream mRedPauseLo;
+    std::ofstream mGreenPauseLo;
+    std::ofstream mBluePauseLo;
+    // PauseHi
+    std::ofstream mRedPauseHi;
+    std::ofstream mGreenPauseHi;
+    std::ofstream mBluePauseHi;
+    // RampStepMs
+    std::ofstream mRedRampStepMs;
+    std::ofstream mGreenRampStepMs;
+    std::ofstream mBlueRampStepMs;
+    // Blink
+    std::ofstream mRedBlink;
+    std::ofstream mGreenBlink;
+    std::ofstream mBlueBlink;
 
     LightState mAttentionState;
     LightState mBatteryState;
