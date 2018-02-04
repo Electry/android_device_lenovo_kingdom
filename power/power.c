@@ -312,3 +312,8 @@ void set_feature(feature_t feature, int state)
         break;
     }
 }
+
+int get_number_of_profiles()
+{
+    return PROFILE_MAX;
+}
