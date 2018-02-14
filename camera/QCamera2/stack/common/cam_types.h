@@ -72,8 +72,8 @@
   } \
 })
 
-#define MAX_ZOOMS_CNT 79
-#define MAX_SIZES_CNT 24
+#define MAX_ZOOMS_CNT 49
+#define MAX_SIZES_CNT 33
 #define MAX_EXP_BRACKETING_LENGTH 32
 #define MAX_ROI 5
 #define MAX_STREAM_NUM_IN_BUNDLE 4
@@ -848,11 +848,13 @@ typedef struct {
     int settled;
     uint32_t exp_index;
     uint32_t line_count;
+    char lenovo_unk[4];
 } cam_ae_params_t;
 
 typedef struct {
     int32_t cct_value;
     int32_t decision;
+    char lenovo_unk[12];
 } cam_awb_params_t;
 
 typedef struct {
@@ -1009,6 +1011,7 @@ typedef enum {
     CAM_INTF_PARM_HDR_NEED_1X, /* if HDR needs 1x output */ /* 40 */
     CAM_INTF_PARM_VIDEO_HDR,
     CAM_INTF_PARM_SNAPSHOT_HDR,
+    LENOVO_UNK_CHANGE_EXP, // QCameraParameters::notifyChangeExp()
     CAM_INTF_PARM_ROTATION,
     CAM_INTF_PARM_SCALE,
     CAM_INTF_PARM_VT, /* indicating if it's a Video Call Apllication */
@@ -1175,6 +1178,10 @@ typedef enum {
     CAM_INTF_PARM_FOCUS_BRACKETING,
     CAM_INTF_PARM_FLASH_BRACKETING,
     CAM_INTF_PARM_GET_IMG_PROP,
+
+    // Lenovo additions
+    CAM_INTF_PARM_FORCE_3A,
+    CAM_INTF_PARM_ZSL_ENHANCEMENT,
 
     CAM_INTF_PARM_MAX
 } cam_intf_parm_type_t;
