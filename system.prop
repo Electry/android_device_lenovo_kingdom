@@ -36,11 +36,9 @@ ro.qualcomm.bluetooth.nap=true
 ro.qualcomm.bluetooth.opp=true
 ro.qualcomm.bluetooth.pbap=true
 
-# Camera & Media
+# Camera
 camera2.portability.force_api=1
 camera.cts.test=0
-media.stagefright.legacyencoder=true
-media.stagefright.less-secure=true
 
 # Display & Graphics
 ro.sf.lcd_density=480
