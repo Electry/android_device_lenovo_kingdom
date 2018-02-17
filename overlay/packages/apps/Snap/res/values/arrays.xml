@@ -18,6 +18,7 @@
 <resources>
     <!-- Camera Preferences Video Quality entries -->
     <string-array name="pref_video_quality_entries" translatable="false">
+        <item>4k DCI (2160p)</item>
         <item>4k UHD (2160p)</item>
         <item>QHD (1440p)</item>
         <item>FHD (1080p)</item>
@@ -28,6 +29,7 @@
     </string-array>
 
     <string-array name="pref_video_quality_entryvalues" translatable="false">
+        <item>4096x2160</item>
         <item>3840x2160</item>
         <item>2560x1440</item>
     <!--<item>1920x1440</item>-->
