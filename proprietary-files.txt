@@ -75,12 +75,6 @@ vendor/lib/libqomx_jpegenc.so
 vendor/lib/libactuator_onsemi_lc898112_camcorder.so
 vendor/lib/libactuator_onsemi_lc898112_camera.so
 
-# Camera ArcSoft
-vendor/lib/libarcsoft_flawless_face.so
-vendor/lib/libarcsoft_hdr.so
-vendor/lib/libarcsoft_night_shot.so
-vendor/lib/libarcsoft_panorama_burstcapture.so
-
 # Camera Chromatix
 vendor/lib/libchromatix_ov5693_common.so
 vendor/lib/libchromatix_ov5693_default_video.so
