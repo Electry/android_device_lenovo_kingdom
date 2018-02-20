@@ -13,8 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+COMMON_PATH := $(call my-dir)
+include $(call first-makefiles-under, $(COMMON_PATH))
 
-LOCAL_PATH := $(call my-dir)
+LOCAL_PATH := $(COMMON_PATH)
 
 include $(CLEAR_VARS)
 
@@ -30,7 +32,7 @@ LOCAL_ADDITIONAL_DEPENDENCIES += \
      $(TARGET_OUT_INTERMEDIATES)/KERNEL_OBJ/usr
 
 LOCAL_SHARED_LIBRARIES := \
-     liblog libutils libcutils libdl
+     liblog libutils libcutils libdl libtfa98xx
 
 LOCAL_MODULE_RELATIVE_PATH := hw
 LOCAL_MODULE_TAGS := optional
