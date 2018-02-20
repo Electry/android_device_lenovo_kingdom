@@ -81,8 +81,8 @@ TARGET_SCREEN_WIDTH := 1440
 
 # Camera
 PRODUCT_PACKAGES += \
-    android.hardware.camera.provider@2.4-impl-legacy \
-    camera.device@1.0-impl-legacy \
+    android.hardware.camera.provider@2.4-impl \
+    camera.device@1.0-impl \
     camera.msm8974 \
     Snap
 
