@@ -47,7 +47,8 @@ BOARD_KERNEL_IMAGE_NAME := zImage
 BOARD_KERNEL_PAGESIZE := 2048
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom \
 			androidboot.bootdevice=msm_sdcc.1 \
-			ehci-hcd.park=3
+			ehci-hcd.park=3 \
+                        androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 BOARD_DTBTOOL_ARGS := -2
