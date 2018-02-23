@@ -265,8 +265,7 @@ PRODUCT_COPY_FILES += \
 
 # Power
 PRODUCT_PACKAGES += \
-    android.hardware.power@1.0-impl \
-    power.msm8974
+    android.hardware.power@1.0-service.kingdom
 
 # Ramdisk
 PRODUCT_PACKAGES += \

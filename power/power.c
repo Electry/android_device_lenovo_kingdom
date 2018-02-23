@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 The LineageOS Project
+ * Copyright (C) 2017-2018 The LineageOS Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@
 #include <string.h>
 #include <sys/stat.h>
 
-#include <utils/Log.h>
+#include <log/log.h>
 #include <cutils/properties.h>
 
 #include "power.h"
@@ -39,7 +39,6 @@
 
 #define BUF_SIZE             80
 
-static pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
 static int boostpulse_fd = -1;
 static int boost_fd = -1;
 static int current_power_profile = PROFILE_BALANCED;
@@ -109,7 +108,6 @@ static void boost(bool on)
     char buf[BUF_SIZE];
     int len;
 
-    pthread_mutex_lock(&lock);
     if (sysfs_open_w(INTERACTIVE_PATH "boost", &boost_fd) >= 0) {
         snprintf(buf, sizeof(buf), "%d", on);
 
@@ -122,7 +120,6 @@ static void boost(bool on)
             boost_fd = -1;
         }
     }
-    pthread_mutex_unlock(&lock);
 }
 
 /*
@@ -133,7 +130,6 @@ static void boostpulse()
     char buf[BUF_SIZE];
     int len;
 
-    pthread_mutex_lock(&lock);
     if (sysfs_open_w(INTERACTIVE_PATH "boostpulse",
             &boostpulse_fd) >= 0) {
         snprintf(buf, sizeof(buf), "%d", 1);
@@ -147,18 +143,14 @@ static void boostpulse()
             boostpulse_fd = -1;
         }
     }
-    pthread_mutex_unlock(&lock);
 }
 
-static void set_interactive(struct power_module *module __unused,
-                            int on)
+void set_interactive(int on)
 {
     if (!is_interactive())
         return;
 
     ALOGI("%s: setting interactive: %d", __func__, on);
-
-    pthread_mutex_lock(&lock);
 
     if (on) {
         /* interactive */
@@ -183,8 +175,6 @@ static void set_interactive(struct power_module *module __unused,
         sysfs_write_int(CPUFREQ_LIMIT_PATH "limited_min_freq",
                         profiles[current_power_profile].scaling_min_freq_off);
     }
-
-    pthread_mutex_unlock(&lock);
 }
 
 static void set_power_profile(int profile)
@@ -197,8 +187,6 @@ static void set_power_profile(int profile)
     }
 
     ALOGI("%s: setting profile: %d", __func__, profile);
-
-    pthread_mutex_lock(&lock);
 
     // Update persist property
     snprintf(tmp_str, sizeof(tmp_str), "%d", profile);
@@ -237,10 +225,9 @@ static void set_power_profile(int profile)
                     profiles[profile].max_gpuclk);
 
     current_power_profile = profile;
-    pthread_mutex_unlock(&lock);
 }
 
-static void power_init(struct power_module *module __unused)
+void power_init(void)
 {
     char tmp_str[PROPERTY_VALUE_MAX];
     int profile;
@@ -251,11 +238,11 @@ static void power_init(struct power_module *module __unused)
     property_get(PROFILE_PROP, tmp_str, "1");
     sscanf(tmp_str, "%d", &profile);
 
+    ALOGI("%s: Setting profile %d based on " PROFILE_PROP, __func__, profile);
     set_power_profile(profile);
 }
 
-static void power_hint(struct power_module *module __unused,
-                       power_hint_t hint, void *data)
+void power_hint(power_hint_t hint, void *data)
 {
     if (!is_interactive())
         return;
@@ -314,8 +301,7 @@ static void power_hint(struct power_module *module __unused,
     }
 }
 
-static void set_feature(struct power_module *module __unused,
-                        feature_t feature, int state)
+void set_feature(feature_t feature, int state)
 {
     switch (feature) {
     case POWER_FEATURE_DOUBLE_TAP_TO_WAKE:
@@ -326,69 +312,3 @@ static void set_feature(struct power_module *module __unused,
         break;
     }
 }
-
-static int get_feature(struct power_module *module __unused,
-                       feature_t feature)
-{
-    if (feature == POWER_FEATURE_SUPPORTED_PROFILES) {
-        return PROFILE_MAX;
-    }
-
-    return -1;
-}
-
-static int power_open(const hw_module_t* module, const char* name,
-                    hw_device_t** device)
-{
-    ALOGD("%s: enter; name=%s", __FUNCTION__, name);
-
-    if (strcmp(name, POWER_HARDWARE_MODULE_ID)) {
-        return -EINVAL;
-    }
-
-    power_module_t *dev = (power_module_t *)calloc(1,
-            sizeof(power_module_t));
-
-    if (!dev) {
-        ALOGD("%s: failed to allocate memory", __FUNCTION__);
-        return -ENOMEM;
-    }
-
-    dev->common.tag = HARDWARE_MODULE_TAG;
-    dev->common.module_api_version = POWER_MODULE_API_VERSION_0_3;
-    dev->common.hal_api_version = HARDWARE_HAL_API_VERSION;
-
-    dev->init = power_init;
-    dev->setInteractive = set_interactive;
-    dev->powerHint = power_hint;
-    dev->getFeature = get_feature;
-    dev->setFeature = set_feature;
-
-    *device = (hw_device_t*)dev;
-
-    ALOGD("%s: exit", __FUNCTION__);
-
-    return 0;
-}
-
-static struct hw_module_methods_t power_module_methods = {
-    .open = power_open,
-};
-
-struct power_module HAL_MODULE_INFO_SYM = {
-    .common = {
-        .tag = HARDWARE_MODULE_TAG,
-        .module_api_version = POWER_MODULE_API_VERSION_0_3,
-        .hal_api_version = HARDWARE_HAL_API_VERSION,
-        .id = POWER_HARDWARE_MODULE_ID,
-        .name = "K920 Power HAL",
-        .author = "The LineageOS Project",
-        .methods = &power_module_methods,
-    },
-
-    .init = power_init,
-    .setInteractive = set_interactive,
-    .powerHint = power_hint,
-    .getFeature = get_feature,
-    .setFeature = set_feature
-};
