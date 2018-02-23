@@ -51,7 +51,9 @@ TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
 
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
+TARGET_LEGACY_HW_DISK_ENCRYPTION := true
 TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
+TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 
 # Filesystem
 BOARD_FLASH_BLOCK_SIZE                  := 131072
@@ -68,9 +70,6 @@ BOARD_OEMIMAGE_PARTITION_SIZE           := 134217728
 
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
-
-# Keymaster
-TARGET_KEYMASTER_WAIT_FOR_QSEE := true
 
 # Recovery (TWRP)
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/fstab.twrp
