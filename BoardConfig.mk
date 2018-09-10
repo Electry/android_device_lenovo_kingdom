@@ -100,6 +100,7 @@ TARGET_TAP_TO_WAKE_NODE := "/sys/class/touchscreen/device/gesture"
 
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
+TARGET_CRYPTFS_HW_PATH := vendor/qcom/opensource/cryptfs_hw
 TARGET_LEGACY_HW_DISK_ENCRYPTION := true
 
 # Filesystem
@@ -178,8 +179,18 @@ BOARD_USES_QCOM_HARDWARE := true
 # Radio
 TARGET_RIL_VARIANT := caf
 
-# Recovery
+# Recovery (TWRP)
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.recovery
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+DEVICE_RESOLUTION := 1440x2560
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+RECOVERY_VARIANT := twrp
+RECOVERY_SDCARD_ON_DATA := true
+BOARD_HAS_NO_REAL_SDCARD := true
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_FB2PNG := true
+TW_MAX_BRIGHTNESS := 255
+TW_BRIGHTNESS_PATH := /sys/class/leds/lcd-backlight/brightness
 
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
