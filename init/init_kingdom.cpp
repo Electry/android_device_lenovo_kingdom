@@ -89,26 +89,26 @@ void vendor_load_properties()
     if (Trim(hwid) == "0001") {
         /* China */
         device = "kingdomt";
-        property_override("ro.product.model", "K920 (CN)");
+        property_override_dual("ro.product.model", "ro.vendor.product.model", "K920 (CN)");
 
         property_set("persist.radio.multisim.config", "dsda");
 
         property_override("ro.build.description",
             "kingdomt-user 5.0.2 LRX22G VIBEUI_V2.5_1627_5.1894.1_ST_K920 release-keys");
-        property_override("ro.build.fingerprint",
+        property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint",
             "Lenovo/kingdomt/kingdomt:5.0.2/LRX22G/VIBEUI_V2.5_1627_5.1894.1_ST_K920:user/release-keys");
 
     } else if (Trim(hwid) == "0100") {
 set_variant_row:
         /* Rest of the World */
         device = "kingdom_row";
-        property_override("ro.product.model", "K920 (ROW)");
+        property_override_dual("ro.product.model", "ro.vendor.product.model", "K920 (ROW)");
 
         property_set("persist.radio.multisim.config", "dsds");
 
         property_override("ro.build.description",
             "kingdom_row-user 5.0.2 LRX22G K920_S288_160224_ROW release-keys");
-        property_override("ro.build.fingerprint",
+        property_override_dual("ro.build.fingerprint", "ro.vendor.build.fingerprint",
             "Lenovo/kingdom_row/kingdom_row:5.0.2/LRX22G/K920_S288_160224_ROW:user/release-keys");
 
     } else {
@@ -117,7 +117,7 @@ set_variant_row:
     }
 
     property_override("ro.build.product", device.c_str());
-    property_override("ro.product.device", device.c_str());
+    property_override_dual("ro.product.device", "ro.vendor.product.device", device.c_str());
     property_override("ro.product.name", device.c_str());
 
     // LTE+3G+2G on both SIMs
