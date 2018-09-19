@@ -54,6 +54,9 @@ debug.hwui.use_buffer_age=false
 persist.gps.qc_nlp_in_use=0
 ro.gps.agps_provider=1
 
+# OTA
+lineage.updater.uri=https://frantisheq.github.io/ota.frantisheq.ml/v1/kingdom/unofficial/index.json
+
 # Performance
 ro.vendor.extension_library=libqti-perfd-client.so
 

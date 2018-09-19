@@ -248,3 +248,6 @@
 /sys/devices/virtual/input/input* rept_z 0660 system input
 /sys/devices/virtual/input/input* test 0660 system input
 /sys/devices/virtual/input/input* value 0660 system input
+
+# Factory reset protection
+/dev/block/platform/msm_sdcc.1/by-name/frp 0644 system system

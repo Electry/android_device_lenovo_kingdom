@@ -75,7 +75,6 @@ PRODUCT_PACKAGES += \
     libbt-vendor
 
 # Boot animation
-TARGET_BOOTANIMATION_HALF_RES := true
 TARGET_SCREEN_HEIGHT := 2560
 TARGET_SCREEN_WIDTH := 1440
 
@@ -92,8 +91,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapgrowthlimit=192m \
     dalvik.vm.heapsize=512m
 
-$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-3072-dalvik-heap.mk)
-$(call inherit-product-if-exists, frameworks/native/build/phone-xxhdpi-3072-hwui-memory.mk)
+$(call inherit-product-if-exists, frameworks/native/build/phone-xxxhdpi-3072-dalvik-heap.mk)
 
 # Data
 PRODUCT_PACKAGES += \
@@ -101,9 +99,9 @@ PRODUCT_PACKAGES += \
 
 # Display
 PRODUCT_AAPT_CONFIG := normal
-PRODUCT_AAPT_PREF_CONFIG := xxhdpi
+PRODUCT_AAPT_PREF_CONFIG := xxxhdpi
 # A list of dpis to select prebuilt apk, in precedence order.
-PRODUCT_AAPT_PREBUILT_DPI := xxhdpi xhdpi hdpi
+PRODUCT_AAPT_PREBUILT_DPI := xxxhdpi xxhdpi xhdpi hdpi
 
 # Doze
 PRODUCT_PACKAGES += \
@@ -153,10 +151,6 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm8974 \
     memtrack.msm8974 \
     liboverlay
-
-# HIDL
-DEVICE_MANIFEST_FILE := \
-    $(LOCAL_PATH)/manifest.xml
 
 # IPC Security config
 PRODUCT_COPY_FILES += \
@@ -269,6 +263,8 @@ PRODUCT_PACKAGES += \
 
 # Ramdisk
 PRODUCT_PACKAGES += \
+    init.qcom.bt.sh \
+    init.qcom-common.rc \
     ueventd.qcom.rc \
     fstab.qcom \
     init.qcom.rc \

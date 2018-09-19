@@ -45,10 +45,11 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_IMAGE_NAME := zImage
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom \
-			androidboot.bootdevice=msm_sdcc.1 \
+BOARD_KERNEL_CMDLINE := console=tty60,115200,n8 androidboot.hardware=qcom \
+                        user_debug=31 msm_rtb.filter=0x3b7 androidboot.bootdevice=msm_sdcc.1 \
 			ehci-hcd.park=3 \
-                        androidboot.selinux=permissive
+			vmalloc=480M \
+			androidboot.selinux=permissive
 BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 BOARD_DTBTOOL_ARGS := -2
@@ -66,6 +67,7 @@ BOARD_USES_ALSA_AUDIO := true
 AUDIO_FEATURE_ENABLED_MULTI_VOICE_SESSIONS := true
 AUDIO_FEATURE_ENABLED_HWDEP_CAL := true
 AUDIO_FEATURE_ENABLED_LOW_LATENCY_CAPTURE := true
+AUDIO_FEATURE_LOW_LATENCY_PRIMARY := true
 
 # Binder
 TARGET_USES_64_BIT_BINDER := true
@@ -93,9 +95,10 @@ BLINK_PATH := "/sys/class/leds/led:rgb_red/blink"
 
 # Lineage Hardware
 BOARD_HARDWARE_CLASS := \
+    hardware/lineage/lineagehw \
     $(DEVICE_PATH)/lineagehw
 
-# DT2W
+# Tap to wake
 TARGET_TAP_TO_WAKE_NODE := "/sys/class/touchscreen/device/gesture"
 
 # Encryption
@@ -121,6 +124,7 @@ TARGET_USERIMAGES_USE_F2FS := true
 
 TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 
+# Use mke2fs instead of make_ext4fs
 TARGET_USES_MKE2FS := true
 
 # FM
@@ -155,6 +159,10 @@ MAX_EGL_CACHE_KEY_SIZE := 12*1024
 # of the device.
 MAX_EGL_CACHE_SIZE := 2048*1024
 
+# HIDL
+DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
+DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
+
 # Init
 TARGET_INIT_VENDOR_LIB := libinit_kingdom
 TARGET_RECOVERY_DEVICE_MODULES := libinit_kingdom
@@ -173,6 +181,11 @@ BOARD_NFC_CHIPSET := pn547
 BOARD_NFC_DEVICE := /dev/pn547
 BOARD_NFC_HAL_SUFFIX := $(TARGET_BOARD_PLATFORM)
 
+# Power
+TARGET_HAS_LEGACY_POWER_STATS := true
+TARGET_HAS_NO_WIFI_STATS := true
+TARGET_USES_INTERACTION_BOOST := true
+
 # QCOM hardware
 BOARD_USES_QCOM_HARDWARE := true
 
@@ -180,7 +193,7 @@ BOARD_USES_QCOM_HARDWARE := true
 TARGET_RIL_VARIANT := caf
 
 # Recovery (TWRP)
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.recovery
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/rootdir/etc/fstab.qcom
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 DEVICE_RESOLUTION := 1440x2560
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
@@ -218,15 +231,18 @@ TARGET_USES_WCNSS_CTRL           := true
 TARGET_USES_QCOM_WCNSS_QMI       := true
 TARGET_USES_WCNSS_MAC_ADDR_REV   := true
 
-# Wifi - EAP-SIM
-#CONFIG_EAP_PROXY                 := qmi
-#CONFIG_EAP_PROXY_DUAL_SIM        := true
+# Media
+TARGET_USES_MEDIA_EXTENSIONS := true
+
+# Added to indicate that protobuf-c is supported in this build
+PROTOBUF_SUPPORTED := true
 
 # DEX Pre-optimization
 ifeq ($(HOST_OS),linux)
-  ifneq ($(TARGET_BUILD_VARIANT),eng)
+  ifeq ($(TARGET_BUILD_VARIANT),eng)
     ifeq ($(WITH_DEXPREOPT),)
       WITH_DEXPREOPT := true
+      WITH_DEXPREOPT_BOOT_IMG_AND_SYSTEM_SERVER_ONLY := true
     endif
   endif
 endif
