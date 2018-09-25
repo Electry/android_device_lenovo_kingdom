@@ -54,8 +54,8 @@ BOARD_KERNEL_SEPARATED_DT := true
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
 BOARD_DTBTOOL_ARGS := -2
 TARGET_KERNEL_ARCH := arm
-TARGET_KERNEL_SOURCE := kernel/lenovo/msm8974
-TARGET_KERNEL_CONFIG := kingdom_defconfig
+TARGET_KERNEL_SOURCE := kernel/cyanogen/msm8974
+TARGET_KERNEL_CONFIG := lineageos_k920_defconfig
 
 # ANT+
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
